@@ -52,11 +52,11 @@
   endcapture
 
   capture mobile_menu
-    content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'mobile'
+    content_for 'block', type: '_header-menu', id: 'header-menu-mobile', variant: 'mobile'
   endcapture
 
   capture navigation_bar
-    content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'navigation_bar', transparent: transparent
+    content_for 'block', type: '_header-menu', id: 'header-menu-navigation-bar', variant: 'navigation_bar', transparent: transparent
   endcapture
 
   capture actions
@@ -283,11 +283,33 @@
   }
 
   body:has(> #header-group > header) {
-    --header-height: 60px;
+    --header-height: 64px;
   }
 
   body:has(> #header-group:empty) {
     --header-group-height: 0px;
+  }
+
+  /* FalconGene Custom Styling - Modern header with backdrop blur */
+  .header-section {
+    background: transparent;
+  }
+
+  .header {
+    background: rgba(13, 27, 42, 0);
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  .header[data-sticky-state='active'],
+  .header[data-scroll-direction='down'],
+  .header:has([aria-expanded='true']) {
+    background: rgba(13, 27, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header__row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .header[transparent] {
@@ -318,13 +340,15 @@
     &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
-      --header-bg-color: unset;
+      --header-bg-color: rgba(13, 27, 42, 0.7);
       --color-foreground: inherit;
       --color-foreground-rgb: inherit;
       --color-background: inherit;
       --color-background-rgb: inherit;
       --color-border: inherit;
       --color-border-rgb: inherit;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
 
       .header__row {
         /* Faster transition for "in" animation */
@@ -446,7 +470,7 @@
 
   .header__column--left,
   .header__column--center {
-    gap: var(--gap-xl);
+    gap: 20rem;
     grid-area: left;
   }
 
