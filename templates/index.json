@@ -103,6 +103,77 @@
         "color_scheme": ""
       }
     },
+    "stats_cards_4EUj9f": {
+      "type": "stats-cards",
+      "blocks": {
+        "stat_card_h3hzBr": {
+          "type": "stat_card",
+          "settings": {
+            "image": "shopify://shop_images/test.jpg",
+            "icon": "chart",
+            "number": "%99.8",
+            "label": "DOĞRULUK ORANI",
+            "show_badges": false
+          }
+        },
+        "stat_card_pKbxBY": {
+          "type": "stat_card",
+          "settings": {
+            "image": "shopify://shop_images/variant.jpg",
+            "icon": "microscope",
+            "number": "10+",
+            "label": "FARKLI TEST ÇEŞİDİ",
+            "show_badges": false
+          }
+        },
+        "stat_card_WPJ9yG": {
+          "type": "stat_card",
+          "settings": {
+            "image": "shopify://shop_images/labPhoto.avif",
+            "icon": "dna",
+            "number": "150+",
+            "label": "GEN ANALİZİ",
+            "show_badges": false
+          }
+        },
+        "stat_card_6tRipc": {
+          "type": "stat_card",
+          "settings": {
+            "image": "shopify://shop_images/labAnalysisPhoto.avif",
+            "icon": "flask",
+            "number": "200+",
+            "label": "VARYANT ANALİZİ",
+            "show_badges": true
+          }
+        }
+      },
+      "block_order": [
+        "stat_card_h3hzBr",
+        "stat_card_pKbxBY",
+        "stat_card_WPJ9yG",
+        "stat_card_6tRipc"
+      ],
+      "name": "Rakamlarla Keşfet",
+      "settings": {
+        "badge_text": "GÜVENİLİR VERİLER",
+        "heading": "FalconGene'i <em>Rakamlarla</em> Keşfedin",
+        "description": "<p>Bilimsel mükemmelliğimizin ve teknolojik üstünlüğümüzün kanıtı olan bu rakamlarla tanışın. Her bir rakam, size sunduğumuz hizmetin arkasındaki gücü temsil eder.</p>",
+        "primary_button_text": "Testleri İncele",
+        "primary_button_link": "",
+        "secondary_button_text": "Daha Fazla Bilgi",
+        "secondary_button_link": "",
+        "show_certification": true,
+        "certification_text": "Sertifikalı Lab",
+        "background_type": "gradient",
+        "background_color": "#0d1b2a",
+        "gradient_start_color": "#1a3a52",
+        "gradient_end_color": "#0d1b2a",
+        "gradient_angle": 135,
+        "color_scheme": "",
+        "heading_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -286,7 +357,7 @@
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
         "columns_gap": 8,
-        "rows_gap": 24,
+        "rows_gap": 73,
         "icons_style": "arrow",
         "icons_shape": "none",
         "section_width": "page-width",
@@ -301,6 +372,7 @@
   "order": [
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
+    "stats_cards_4EUj9f",
     "product_list_fa6P9H"
   ]
 }
