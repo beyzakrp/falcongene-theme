@@ -162,7 +162,7 @@
         "primary_button_link": "",
         "secondary_button_text": "Daha Fazla Bilgi",
         "secondary_button_link": "",
-        "show_certification": true,
+        "show_certification": false,
         "certification_text": "Sertifikalı Lab",
         "background_type": "gradient",
         "background_color": "#0d1b2a",
@@ -170,8 +170,8 @@
         "gradient_end_color": "#0d1b2a",
         "gradient_angle": 135,
         "color_scheme": "",
-        "heading_color": "#FFFFFF",
-        "text_color": "#FFFFFF"
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff"
       }
     },
     "product_list_fa6P9H": {
