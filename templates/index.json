@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>Genetiğini Anla, Yaşamını Şekillendir.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -38,11 +38,37 @@
           },
           "blocks": {}
         },
+        "text_eDQp86": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Kapsamlı DNA analiziyle intoleranslarından spor potansiyeline, cilt sağlığından metabolizma yapına kadar tüm biyolojik yol haritanı ortaya çıkarıyoruz</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "button_H9gpTf": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
+            "label": "Hemen Satın Al",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-secondary",
@@ -56,6 +82,7 @@
       },
       "block_order": [
         "text_YLPk4p",
+        "text_eDQp86",
         "button_H9gpTf"
       ],
       "name": "t:names.hero",
@@ -156,7 +183,7 @@
       "name": "Rakamlarla Keşfet",
       "settings": {
         "badge_text": "GÜVENİLİR VERİLER",
-        "heading": "FalconGene'i <em>Rakamlarla</em> Keşfedin",
+        "heading": "Falcongene'i <em>Rakamlarla</em> Keşfedin",
         "description": "<p>Bilimsel mükemmelliğimizin ve teknolojik üstünlüğümüzün kanıtı olan bu rakamlarla tanışın. Her bir rakam, size sunduğumuz hizmetin arkasındaki gücü temsil eder.</p>",
         "primary_button_text": "Testleri İncele",
         "primary_button_link": "",
