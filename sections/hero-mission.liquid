@@ -1,0 +1,362 @@
+{% liquid
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign description = section.settings.description
+  assign button_text = section.settings.button_text
+  assign button_link = section.settings.button_link
+  assign background_color = section.settings.background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+%}
+
+<div class="hero-mission section section--full-width spacing-style color-{{ section.settings.color_scheme }}">
+  <div class="hero-mission__container">
+    <!-- DNA Icon - Top Left -->
+    <div class="hero-mission__icon hero-mission__icon--top-left">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
+        <circle cx="40" cy="40" r="30" fill="currentColor" opacity="0.3"/>
+        <circle cx="35" cy="35" r="8" fill="currentColor"/>
+        <circle cx="45" cy="45" r="6" fill="currentColor"/>
+        <circle cx="40" cy="25" r="4" fill="currentColor" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <!-- DNA Icon - Top Right -->
+    <div class="hero-mission__icon hero-mission__icon--top-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
+        <circle cx="50" cy="30" r="6" fill="currentColor"/>
+        <circle cx="45" cy="50" r="8" fill="currentColor" opacity="0.7"/>
+        <circle cx="55" cy="70" r="5" fill="currentColor"/>
+        <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- DNA Icon - Bottom Left -->
+    <div class="hero-mission__icon hero-mission__icon--bottom-left">
+      <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="43" stroke="currentColor" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
+        <circle cx="45" cy="45" r="28" fill="currentColor" opacity="0.2"/>
+        <circle cx="40" cy="40" r="7" fill="currentColor"/>
+        <circle cx="50" cy="50" r="5" fill="currentColor"/>
+        <circle cx="45" cy="60" r="6" fill="currentColor" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- DNA Icon - Bottom Right -->
+    <div class="hero-mission__icon hero-mission__icon--bottom-right">
+      <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="35" cy="35" r="33" stroke="currentColor" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
+        <circle cx="35" cy="35" r="22" fill="currentColor" opacity="0.25"/>
+        <circle cx="30" cy="30" r="5" fill="currentColor"/>
+        <circle cx="40" cy="40" r="6" fill="currentColor"/>
+        <circle cx="35" cy="20" r="4" fill="currentColor" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <!-- DNA Network Icon - Center Right -->
+    <div class="hero-mission__icon hero-mission__icon--center-right">
+      <svg width="85" height="85" viewBox="0 0 85 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="42.5" cy="42.5" r="40" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="42.5" cy="42.5" r="25" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+        <circle cx="30" cy="30" r="5" fill="currentColor"/>
+        <circle cx="55" cy="30" r="4" fill="currentColor" opacity="0.8"/>
+        <circle cx="30" cy="55" r="6" fill="currentColor"/>
+        <circle cx="55" cy="55" r="5" fill="currentColor" opacity="0.7"/>
+        <line x1="30" y1="30" x2="55" y2="55" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        <line x1="55" y1="30" x2="30" y2="55" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- Main Content -->
+    <div class="hero-mission__content">
+      {% if subheading != blank %}
+        <div class="hero-mission__badge">
+          {{ subheading }}
+        </div>
+      {% endif %}
+
+      {% if heading != blank %}
+        <h1 class="hero-mission__heading h1">
+          {{ heading }}
+        </h1>
+      {% endif %}
+
+      {% if description != blank %}
+        <div class="hero-mission__description">
+          {{ description }}
+        </div>
+      {% endif %}
+
+      {% if button_text != blank and button_link != blank %}
+        <div class="hero-mission__button-wrapper">
+          <a href="{{ button_link }}" class="hero-mission__button button button--primary">
+            {{ button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hero-mission {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 50%, #ADD8E6 100%);
+  }
+
+  .hero-mission__container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    padding: var(--padding-2xl) var(--padding-xl);
+    text-align: center;
+    z-index: 2;
+
+    @media screen and (min-width: 750px) {
+      padding: var(--padding-3xl) var(--padding-2xl);
+    }
+  }
+
+  /* DNA Icons Positioning */
+  .hero-mission__icon {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero-mission__icon svg {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  .hero-mission__icon--top-left {
+    top: 10%;
+    left: 5%;
+    color: #4A90E2;
+    animation-delay: 0s;
+  }
+
+  .hero-mission__icon--top-right {
+    top: 5%;
+    right: 8%;
+    color: #5DADE2;
+    animation-delay: 1s;
+  }
+
+  .hero-mission__icon--bottom-left {
+    bottom: 15%;
+    left: 8%;
+    color: #6BB6FF;
+    animation-delay: 2s;
+  }
+
+  .hero-mission__icon--bottom-right {
+    bottom: 10%;
+    right: 5%;
+    color: #0D1B2A;
+    animation-delay: 3s;
+  }
+
+  .hero-mission__icon--center-right {
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    color: #1E3A5F;
+    animation-delay: 1.5s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-10px) rotate(2deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-10px) rotate(-2deg);
+    }
+  }
+
+  /* Hide icons on mobile for cleaner look */
+  @media screen and (max-width: 749px) {
+    .hero-mission__icon {
+      opacity: 0.3;
+    }
+    
+    .hero-mission__icon svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* Content Styles */
+  .hero-mission__content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-mission__badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(13, 27, 42, 0.1);
+    border: 1px solid rgba(13, 27, 42, 0.2);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #0D1B2A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--margin-lg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .hero-mission__heading {
+    margin: 0 0 var(--margin-lg);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #0D1B2A;
+  }
+
+  .hero-mission__heading em,
+  .hero-mission__heading i {
+    color: #4A90E2;
+    font-style: normal;
+    position: relative;
+  }
+
+  .hero-mission__heading em::after,
+  .hero-mission__heading i::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4A90E2, transparent);
+    border-radius: 2px;
+  }
+
+  .hero-mission__description {
+    max-width: 800px;
+    margin: 0 auto var(--margin-2xl);
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+    color: rgba(13, 27, 42, 0.8);
+  }
+
+  .hero-mission__button-wrapper {
+    margin-top: var(--margin-xl);
+  }
+
+  .hero-mission__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: #0D1B2A;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(13, 27, 42, 0.2);
+
+    &:hover {
+      background: #1A2F4A;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(13, 27, 42, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 749px) {
+    .hero-mission {
+      min-height: 500px;
+    }
+
+    .hero-mission__heading {
+      margin-bottom: var(--margin-md);
+    }
+
+    .hero-mission__description {
+      margin-bottom: var(--margin-lg);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Misyon",
+  "tag": "section",
+  "class": "section-hero-mission",
+  "settings": [
+    {
+      "type": "header",
+      "content": "İçerik"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Üst Başlık (Badge)",
+      "default": "BİZİM MİSYONUMUZ"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Ana Başlık",
+      "default": "Neden FalconGene? <em>Genetiğe Ayrıcalıklı</em> ve <em>Bilimsel Bir Yaklaşım</em>",
+      "info": "Vurgulamak istediğiniz kelimeleri <em></em> etiketleri arasına alın"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Açıklama",
+      "default": "<p>FalconGene, genetik test hizmetlerinde kalite, hız ve kapsamlılığı bir araya getirerek fark yaratır. Bizim için bu üç ilke, sadece birer pazarlama vaadi değil, tüm operasyonumuzun temelini oluşturan standartlardır. Sürecin her aşamasında en son teknolojiyi, detaylı biyoinformatik analizleri ve uluslararası standartları temel alıyoruz.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Buton Metni",
+      "default": "Genetik Yolculuğunu Başlat"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Buton Linki",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Renk Ayarları"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Renk Şeması",
+      "default": "primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Misyon"
+    }
+  ]
+}
+{% endschema %}
