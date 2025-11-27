@@ -6,9 +6,25 @@
   assign primary_button_link = section.settings.primary_button_link
   assign secondary_button_text = section.settings.secondary_button_text
   assign secondary_button_link = section.settings.secondary_button_link
+  assign text_color = section.settings.text_color
+  assign heading_color = section.settings.heading_color
+  assign bg_type = section.settings.background_type
+  assign bg_color = section.settings.background_color
+  assign gradient_start = section.settings.gradient_start_color
+  assign gradient_end = section.settings.gradient_end_color
+  assign gradient_angle = section.settings.gradient_angle
+
+  if bg_type == 'solid'
+    assign background_style = 'background: ' | append: bg_color | append: ';'
+  else
+    assign background_style = 'background: linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: gradient_start | append: ' 0%, ' | append: gradient_end | append: ' 100%);'
+  endif
 %}
 
-<div class="stats-cards section section--full-width spacing-style color-{{ section.settings.color_scheme }}">
+<div class="stats-cards section section--full-width spacing-style color-{{ section.settings.color_scheme }}" 
+  data-text-color="{{ text_color }}" 
+  data-heading-color="{{ heading_color }}"
+  style="--custom-text-color: {{ text_color }}; --custom-heading-color: {{ heading_color }}; {{ background_style }}">
   <div class="stats-cards__container">
     <div class="stats-cards__content">
       <!-- Badge -->
@@ -156,6 +172,15 @@
     @media screen and (min-width: 750px) {
       padding: var(--padding-4xl) 0;
     }
+  }
+
+  .stats-cards[data-heading-color] .stats-cards__heading {
+    color: var(--custom-heading-color);
+  }
+
+  .stats-cards[data-text-color] .stats-cards__description,
+  .stats-cards[data-text-color] .stats-cards__badge {
+    color: var(--custom-text-color);
   }
 
   /* Decorative background elements */
@@ -548,6 +573,54 @@
     },
     {
       "type": "header",
+      "content": "Arka Plan Ayarları"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Arka Plan Tipi",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Tek Renk"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "gradient"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arka Plan Rengi (Tek Renk)",
+      "default": "#0d1b2a"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start_color",
+      "label": "Gradient Başlangıç Rengi",
+      "default": "#1a3a52"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end_color",
+      "label": "Gradient Bitiş Rengi",
+      "default": "#0d1b2a"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Gradient Açısı",
+      "min": 0,
+      "max": 360,
+      "step": 15,
+      "unit": "°",
+      "default": 135
+    },
+    {
+      "type": "header",
       "content": "Renk Ayarları"
     },
     {
@@ -555,6 +628,18 @@
       "id": "color_scheme",
       "label": "Renk Şeması",
       "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Başlık Rengi",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#FFFFFF"
     }
   ],
   "blocks": [
