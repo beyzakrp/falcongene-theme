@@ -346,6 +346,9 @@
         "text_7riiJk",
         "accordion_kGeKaA"
       ],
+      "custom_css": [
+        "p {width: 100%; max-width: max-content;}"
+      ],
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",
