@@ -374,6 +374,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "all",
@@ -394,12 +395,118 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "divider_nN8t8A": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "",
+        "section_width": "full-width",
+        "thickness": 1,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 48
+      }
+    },
+    "product_cards_W7XWMg": {
+      "type": "product-cards",
+      "blocks": {
+        "product_card_K8qDYy": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1555243896-c709bfa0b564.jpg",
+            "card_color": "#10b981",
+            "title": "Nutrigenetik Testi",
+            "subtitle": "Beslenme Genetiği",
+            "description": "DNA'nızın beslenere verdiği tepkileri keşfedin. Vitamin metabolizması, kilo yönetimi ve diyet uyumluluğunuzu öğrenin.",
+            "feature_1": "Vitamin ve mineral metabolizması",
+            "feature_2": "Karbonhidrat ve yağ işleme",
+            "feature_3": "Kafein, laktoz, glüten duyarlılığı",
+            "feature_4": "Kişiselleştirilmiş diyet önerileri",
+            "primary_button_text": "Detayları İncele",
+            "primary_button_link": "",
+            "secondary_button_text": "Satın Al",
+            "secondary_button_link": ""
+          }
+        },
+        "product_card_reaz6i": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1551184451-76b762941ad6.jpg",
+            "card_color": "#ec4899",
+            "title": "Cilt Genetiği Testi",
+            "subtitle": "Dermatogenetik",
+            "description": "Cildinizin yaşlanma hızı, güneş hassasiyeti ve antioksidan ihtiyaçlarını genetik düzeyde anlayın.",
+            "feature_1": "Güneşe hassasiyet analizi",
+            "feature_2": "Antioksidan savunma kapasitesi",
+            "feature_3": "Kolagen üretimi ve yaşlanma",
+            "feature_4": "Kolajen üretimi ve yaşlanma",
+            "primary_button_text": "Detayları İncele",
+            "primary_button_link": "",
+            "secondary_button_text": "Satın Al",
+            "secondary_button_link": ""
+          }
+        },
+        "product_card_UX39qh": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1728486144678-95cb7c5f7463.jpg",
+            "card_color": "#6366f1",
+            "title": "Spor Genetiği Testi",
+            "subtitle": "Performans Analizi",
+            "description": "Kas yapınızı, enerji metabolizmanızı ve sakatlanma risklerinizi öğrenerek antrenman planınızı optimize edin.",
+            "feature_1": "Kas yapısı ve performans tipi",
+            "feature_2": "VO2 max ve enerji metabolizması",
+            "feature_3": "Sakatlanma risk analizi",
+            "feature_4": "Kalp sağlığı biyobelirteçleri",
+            "primary_button_text": "Detayları İncele",
+            "primary_button_link": "",
+            "secondary_button_text": "Satın Al",
+            "secondary_button_link": ""
+          }
+        },
+        "product_card_Aaq4eG": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/photo-1676291920753-dd019397927a.jpg",
+            "card_color": "#f97316",
+            "title": "Gıda İntolerans Testi",
+            "subtitle": "Besin Duyarlılık Haritası",
+            "description": "400+ gıda ve çevresel faktöre karşı gecikmelitip hassasiyetlerinizi tespit edin.",
+            "feature_1": "400+ gıda hassasiyet analizi",
+            "feature_2": "Tüm besin grupları taraması",
+            "feature_3": "Çevresel intolerans testi",
+            "feature_4": "Uzman diyetisyen danışmanlığı",
+            "primary_button_text": "Satın Al",
+            "primary_button_link": "shopify://products/basic-gen-analiz-testi",
+            "secondary_button_text": "Detayları İncele",
+            "secondary_button_link": "shopify://products/basic-gen-analiz-testi"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_K8qDYy",
+        "product_card_reaz6i",
+        "product_card_UX39qh",
+        "product_card_Aaq4eG"
+      ],
+      "name": "Ürün Kartları",
+      "settings": {
+        "badge_text": "Test Paketlerimiz",
+        "heading": "Genetik <em>Potansiyelinizi</em> Keşfedin",
+        "description": "<p>Sağlığınızı daha iyi yönetmenize, potansiyelinizi en üst düzeye çıkarmanıza yardımcı olan bilimsel temelli test paketlerimiz</p>",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
     "stats_cards_4EUj9f",
-    "product_list_fa6P9H"
+    "product_list_fa6P9H",
+    "divider_nN8t8A",
+    "product_cards_W7XWMg"
   ]
 }
