@@ -1,0 +1,558 @@
+{% comment %}
+  Info Cards Grid - Reusable component for displaying information cards
+  Use cases: Lab history, technology, stats, references, features, etc.
+{% endcomment %}
+
+<style>
+  .info-cards-grid {
+    padding: {{ section.settings.section_padding }}px 20px;
+    background: {{ section.settings.background_color }};
+  }
+
+  .info-cards-grid__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .info-cards-grid__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .info-cards-grid__title {
+    font-size: 48px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 16px;
+  }
+
+  .info-cards-grid__subtitle {
+    font-size: 18px;
+    color: {{ section.settings.subtitle_color }};
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .info-cards-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .info-card {
+    background: {{ section.settings.card_background }};
+    border-radius: 16px;
+    padding: 40px;
+    transition: all 0.3s ease;
+    border: 1px solid {{ section.settings.card_border_color }};
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .info-card__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .info-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-card__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .info-card__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.card_title_color }};
+    margin: 0;
+  }
+
+  .info-card__content {
+    color: {{ section.settings.card_text_color }};
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .info-card__content p {
+    margin-bottom: 16px;
+  }
+
+  .info-card__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-card__content strong,
+  .info-card__content b {
+    color: {{ section.settings.card_title_color }};
+    font-weight: 600;
+  }
+
+  .info-card__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .info-card__stat {
+    text-align: center;
+  }
+
+  .info-card__stat-value {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .info-card__stat-label {
+    font-size: 14px;
+    opacity: 0.7;
+    display: block;
+  }
+
+  .info-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-card__list-item {
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .info-card__list-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-card__list-item::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .info-cards-grid {
+      padding: 60px 20px;
+    }
+
+    .info-cards-grid__title {
+      font-size: 32px;
+    }
+
+    .info-cards-grid__subtitle {
+      font-size: 16px;
+    }
+
+    .info-cards-grid__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .info-card {
+      padding: 28px;
+    }
+
+    .info-card__title {
+      font-size: 20px;
+    }
+
+    .info-card__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .info-card__stat-value {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<section class="info-cards-grid">
+  <div class="info-cards-grid__container">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="info-cards-grid__header">
+        {% if section.settings.title != blank %}
+          <h2 class="info-cards-grid__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="info-cards-grid__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="info-cards-grid__grid">
+      {% for block in section.blocks %}
+        <div class="info-card" {{ block.shopify_attributes }}>
+          <div class="info-card__header">
+            <div class="info-card__icon" style="background: {{ block.settings.icon_background }}; color: {{ block.settings.icon_color }};">
+              {% case block.settings.icon %}
+                {% when 'history' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                {% when 'technology' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                {% when 'stats' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                {% when 'partners' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                {% when 'certificate' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                {% when 'lab' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+              {% endcase %}
+            </div>
+            <h3 class="info-card__title">{{ block.settings.title }}</h3>
+          </div>
+
+          <div class="info-card__content">
+            {{ block.settings.content }}
+
+            {% comment %} Stats Grid (optional) {% endcomment %}
+            {% if block.settings.show_stats %}
+              <div class="info-card__stats">
+                {% if block.settings.stat_1_value != blank %}
+                  <div class="info-card__stat">
+                    <span class="info-card__stat-value" style="color: {{ block.settings.icon_color }};">
+                      {{ block.settings.stat_1_value }}
+                    </span>
+                    <span class="info-card__stat-label">{{ block.settings.stat_1_label }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.stat_2_value != blank %}
+                  <div class="info-card__stat">
+                    <span class="info-card__stat-value" style="color: {{ block.settings.icon_color }};">
+                      {{ block.settings.stat_2_value }}
+                    </span>
+                    <span class="info-card__stat-label">{{ block.settings.stat_2_label }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.stat_3_value != blank %}
+                  <div class="info-card__stat">
+                    <span class="info-card__stat-value" style="color: {{ block.settings.icon_color }};">
+                      {{ block.settings.stat_3_value }}
+                    </span>
+                    <span class="info-card__stat-label">{{ block.settings.stat_3_label }}</span>
+                  </div>
+                {% endif %}
+                {% if block.settings.stat_4_value != blank %}
+                  <div class="info-card__stat">
+                    <span class="info-card__stat-value" style="color: {{ block.settings.icon_color }};">
+                      {{ block.settings.stat_4_value }}
+                    </span>
+                    <span class="info-card__stat-label">{{ block.settings.stat_4_label }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% comment %} List Items (optional) {% endcomment %}
+            {% if block.settings.list_items != blank %}
+              <ul class="info-card__list">
+                {% assign items = block.settings.list_items | split: '||' %}
+                {% for item in items %}
+                  <li class="info-card__list-item" style="--bullet-color: {{ block.settings.icon_color }};">
+                    <style>
+                      .info-card__list-item::before {
+                        background: var(--bullet-color);
+                      }
+                    </style>
+                    {{ item }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bilgi Kartları Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bölüm Ayarları"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Bölüm Padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Başlık"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "Laboratuvarımız: GENOKS"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "2008 yılından bu yana genetik araştırmaları alanında faaliyet gösteren, Türkiye'nin önde gelen genetik test laboratuvarlarından biri olan GENOKS ile işbirliği yapıyoruz."
+    },
+    {
+      "type": "header",
+      "content": "Renkler"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Başlık Rengi",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Alt Başlık Rengi",
+      "default": "#6b7280"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Kart Arkaplan",
+      "default": "#f8fafc"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Kart Kenarlık Rengi",
+      "default": "#e2e8f0"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Kart Başlık Rengi",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Kart Metin Rengi",
+      "default": "#4b5563"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_card",
+      "name": "Bilgi Kartı",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "İkon",
+          "options": [
+            { "value": "history", "label": "Tarih / Saat" },
+            { "value": "technology", "label": "Teknoloji / Ampul" },
+            { "value": "stats", "label": "İstatistik / Grafik" },
+            { "value": "partners", "label": "Ortaklar / İnsanlar" },
+            { "value": "certificate", "label": "Sertifika / Onay" },
+            { "value": "lab", "label": "Laboratuvar" }
+          ],
+          "default": "history"
+        },
+        {
+          "type": "color",
+          "id": "icon_background",
+          "label": "İkon Arkaplan Rengi",
+          "default": "#dbeafe"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "İkon Rengi",
+          "default": "#3b82f6"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Kart Başlığı",
+          "default": "Laboratuvar Tarihçesi"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Kart İçeriği",
+          "default": "<p>Kart içeriğinizi buraya yazın. <strong>Kalın metinler</strong> için strong etiketi kullanabilirsiniz.</p>"
+        },
+        {
+          "type": "header",
+          "content": "İstatistikler (Opsiyonel)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stats",
+          "label": "İstatistikleri Göster",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "stat_1_value",
+          "label": "İstatistik 1 - Değer",
+          "default": "80.000+"
+        },
+        {
+          "type": "text",
+          "id": "stat_1_label",
+          "label": "İstatistik 1 - Etiket",
+          "default": "NGS Test"
+        },
+        {
+          "type": "text",
+          "id": "stat_2_value",
+          "label": "İstatistik 2 - Değer",
+          "default": "20 Yıl"
+        },
+        {
+          "type": "text",
+          "id": "stat_2_label",
+          "label": "İstatistik 2 - Etiket",
+          "default": "Tecrübe"
+        },
+        {
+          "type": "text",
+          "id": "stat_3_value",
+          "label": "İstatistik 3 - Değer"
+        },
+        {
+          "type": "text",
+          "id": "stat_3_label",
+          "label": "İstatistik 3 - Etiket"
+        },
+        {
+          "type": "text",
+          "id": "stat_4_value",
+          "label": "İstatistik 4 - Değer"
+        },
+        {
+          "type": "text",
+          "id": "stat_4_label",
+          "label": "İstatistik 4 - Etiket"
+        },
+        {
+          "type": "header",
+          "content": "Liste (Opsiyonel)"
+        },
+        {
+          "type": "textarea",
+          "id": "list_items",
+          "label": "Liste Öğeleri",
+          "info": "Her öğeyi || ile ayırın. Örnek: Non-İnvaziv Prenatal Tarama (NIPT)||Tüm Genom/Ekzom Dizileme||Kanser Genetiği",
+          "placeholder": "Öğe 1||Öğe 2||Öğe 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bilgi Kartları Grid",
+      "blocks": [
+        {
+          "type": "info_card",
+          "settings": {
+            "icon": "history",
+            "icon_background": "#dbeafe",
+            "icon_color": "#3b82f6",
+            "title": "Laboratuvar Tarihçesi",
+            "content": "<p>Çalışmalarına <strong>2008 yılında AR-GE laboratuvarı</strong> olarak başlayan GENOKS, 2008-2010 yılları arasında moleküler ve genetik araştırmalarında kullanılmak üzere PCR ve RT-PCR tabanlı tanı kitleri ve DNA izolasyon kitleri üretmiştir.</p><p>Faaliyete geçtiği 2008 yılından bu yana gerçekleştirdiği yatırımlar sayesinde <strong>toplamda 1,100 m² laboratuvar ve ofis alanına</strong> sahip olan GENOKS, yurt içinde ve yurt dışında, alanında uzman <strong>70'i aşkın çalışanıyla</strong> hizmet vermeye devam etmektedir.</p>"
+          }
+        },
+        {
+          "type": "info_card",
+          "settings": {
+            "icon": "technology",
+            "icon_background": "#fed7aa",
+            "icon_color": "#f97316",
+            "title": "Teknolojik Öncülük",
+            "content": "<p>Yapmış olduğu teknoloji transferleri ile <strong>Yeni Nesil Dizileme teknolojisini</strong> kullanarak <strong>Türkiye'de ilk kez NIPT testini</strong> rutin olarak çalışmaya başlayan Genetik Hastalıklar Değerlendirme Merkezi.</p>",
+            "show_stats": false,
+            "list_items": "Non-İnvaziv Prenatal Tarama (NIPT)||Tüm Genom/Ekzom Dizileme||Kanser Genetiği||Spor Genetiği & Farmakogenetik"
+          }
+        },
+        {
+          "type": "info_card",
+          "settings": {
+            "icon": "stats",
+            "icon_background": "#d1fae5",
+            "icon_color": "#10b981",
+            "title": "Deneyim ve Başarılar",
+            "content": "<p>Yıllara dayanan deneyimimiz ve sürekli gelişen teknolojimizle genetik test alanında Türkiye'nin öncü kurumlarından biri olarak hizmet veriyoruz.</p>",
+            "show_stats": true,
+            "stat_1_value": "80.000+",
+            "stat_1_label": "NGS Test",
+            "stat_2_value": "20 Yıl",
+            "stat_2_label": "Tecrübe",
+            "stat_3_value": "500+",
+            "stat_3_label": "Hastane",
+            "stat_4_value": "3000+",
+            "stat_4_label": "Doktor"
+          }
+        },
+        {
+          "type": "info_card",
+          "settings": {
+            "icon": "partners",
+            "icon_background": "#e0e7ff",
+            "icon_color": "#6366f1",
+            "title": "Referanslar & İşbirlikleri",
+            "content": "<p>Uluslararası ve ulusal düzeyde saygın kuruluşlarla stratejik işbirlikleri geliştirerek genetik test hizmetlerimizi sürekli iyileştiriyoruz.</p>",
+            "show_stats": false,
+            "list_items": "Active Chemical Technology Organisation||Azerbaycan Milli Elmler Akademiyası||Life Science||Bosphorus Genomics"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

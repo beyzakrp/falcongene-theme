@@ -1,0 +1,548 @@
+{% comment %}
+  Certifications Grid - Professional certification and accreditation display
+  Reusable component for ISO, quality standards, awards, etc.
+{% endcomment %}
+
+<style>
+  .certifications-grid {
+    padding: {{ section.settings.section_padding }}px 20px;
+    background: {{ section.settings.background_color }};
+  }
+
+  .certifications-grid__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .certifications-grid__header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .certifications-grid__title {
+    font-size: 48px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 16px;
+  }
+
+  .certifications-grid__subtitle {
+    font-size: 18px;
+    color: {{ section.settings.subtitle_color }};
+    max-width: 800px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+  }
+
+  .certifications-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .certification-card {
+    background: {{ section.settings.card_background }};
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid {{ section.settings.card_border_color }};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .certification-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    border-color: {{ section.settings.card_hover_border }};
+  }
+
+  .certification-card__icon-wrapper {
+    width: 96px;
+    height: 96px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .certification-card:hover .certification-card__icon-wrapper {
+    transform: scale(1.05);
+  }
+
+  .certification-card__icon-wrapper svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .certification-card__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: {{ section.settings.card_title_color }};
+    margin-bottom: 12px;
+  }
+
+  .certification-card__description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: {{ section.settings.card_text_color }};
+    margin: 0;
+  }
+
+  .certifications-grid__footer {
+    background: {{ section.settings.footer_background }};
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 2px solid {{ section.settings.footer_border_color }};
+  }
+
+  .certifications-grid__footer-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ section.settings.footer_title_color }};
+    margin-bottom: 16px;
+  }
+
+  .certifications-grid__footer-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: {{ section.settings.footer_text_color }};
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .certifications-grid__footer-text strong {
+    color: {{ section.settings.footer_title_color }};
+    font-weight: 600;
+  }
+
+  /* Icon Styles */
+  .cert-icon--dna {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #d97706;
+  }
+
+  .cert-icon--quality {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #059669;
+  }
+
+  .cert-icon--security {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #2563eb;
+  }
+
+  .cert-icon--environment {
+    background: linear-gradient(135deg, #d1fae5 0%, #6ee7b7 100%);
+    color: #047857;
+  }
+
+  .cert-icon--medical {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    color: #db2777;
+  }
+
+  .cert-icon--star {
+    background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+    color: #9333ea;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .certifications-grid {
+      padding: 60px 20px;
+    }
+
+    .certifications-grid__title {
+      font-size: 32px;
+    }
+
+    .certifications-grid__subtitle {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .certifications-grid__cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .certification-card {
+      padding: 32px 24px;
+    }
+
+    .certification-card__icon-wrapper {
+      width: 80px;
+      height: 80px;
+    }
+
+    .certification-card__icon-wrapper svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .certification-card__title {
+      font-size: 20px;
+    }
+
+    .certifications-grid__footer {
+      padding: 32px 24px;
+    }
+
+    .certifications-grid__footer-title {
+      font-size: 24px;
+    }
+
+    .certifications-grid__footer-text {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .certifications-grid__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .certifications-grid__cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+<section class="certifications-grid">
+  <div class="certifications-grid__container">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="certifications-grid__header">
+        {% if section.settings.title != blank %}
+          <h2 class="certifications-grid__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="certifications-grid__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="certifications-grid__cards">
+      {% for block in section.blocks %}
+        <div class="certification-card" {{ block.shopify_attributes }}>
+          <div class="certification-card__icon-wrapper cert-icon--{{ block.settings.icon_style }}" 
+               style="background: {{ block.settings.custom_icon_bg }}; color: {{ block.settings.custom_icon_color }};">
+            {% case block.settings.icon %}
+              {% when 'dna' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              {% when 'check-shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              {% when 'lock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              {% when 'leaf' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              {% when 'medical' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+              {% when 'certificate' %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+            {% endcase %}
+          </div>
+          
+          <h3 class="certification-card__title">{{ block.settings.title }}</h3>
+          <p class="certification-card__description">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_footer %}
+      <div class="certifications-grid__footer">
+        {% if section.settings.footer_title != blank %}
+          <h3 class="certifications-grid__footer-title">{{ section.settings.footer_title }}</h3>
+        {% endif %}
+        {% if section.settings.footer_text != blank %}
+          <div class="certifications-grid__footer-text">
+            {{ section.settings.footer_text }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sertifikalar Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bölüm Ayarları"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Bölüm Padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Başlık"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "Sertifikalar ve Akreditasyonlar"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Uluslararası standartlarda kaliteli ve güvenilir hizmet sunmak için sahip olduğumuz sertifikalar ve akreditasyonlar"
+    },
+    {
+      "type": "header",
+      "content": "Renkler"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Başlık Rengi",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Alt Başlık Rengi",
+      "default": "#6b7280"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Kart Arkaplan",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Kart Kenarlık",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border",
+      "label": "Kart Hover Kenarlık",
+      "default": "#d1d5db"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Kart Başlık Rengi",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Kart Metin Rengi",
+      "default": "#6b7280"
+    },
+    {
+      "type": "header",
+      "content": "Alt Kısım (Kalite Güvencesi)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer",
+      "label": "Alt Kısmı Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "footer_title",
+      "label": "Alt Kısım Başlık",
+      "default": "Kalite Güvencemiz"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Alt Kısım Metin",
+      "default": "<p>Tüm bu uluslararası standart ve sertifikalarla, genetik test hizmetlerimizin <strong>en yüksek kalite, güvenlik ve güvenilirlik</strong> standartlarında sunulduğunu garanti ediyoruz. 80.000'den fazla başarılı NGS test deneyimimiz ve sürekli kalite kontrol süreçlerimizle size en doğru sonuçları sunuyoruz.</p>"
+    },
+    {
+      "type": "color",
+      "id": "footer_background",
+      "label": "Alt Kısım Arkaplan",
+      "default": "#eff6ff"
+    },
+    {
+      "type": "color",
+      "id": "footer_border_color",
+      "label": "Alt Kısım Kenarlık",
+      "default": "#bfdbfe"
+    },
+    {
+      "type": "color",
+      "id": "footer_title_color",
+      "label": "Alt Kısım Başlık Rengi",
+      "default": "#1e40af"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Alt Kısım Metin Rengi",
+      "default": "#1e3a8a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Sertifika",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "İkon Tipi",
+          "options": [
+            { "value": "dna", "label": "DNA / Laboratuvar" },
+            { "value": "check-shield", "label": "Kalkan ile Onay" },
+            { "value": "lock", "label": "Güvenlik / Kilit" },
+            { "value": "leaf", "label": "Çevre / Yıldız" },
+            { "value": "medical", "label": "Tıbbi / Kalp" },
+            { "value": "star", "label": "Yıldız / Mükemmellik" },
+            { "value": "certificate", "label": "Sertifika Rozeti" }
+          ],
+          "default": "certificate"
+        },
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "İkon Renk Stili",
+          "options": [
+            { "value": "dna", "label": "Sarı/Turuncu (DNA)" },
+            { "value": "quality", "label": "Yeşil (Kalite)" },
+            { "value": "security", "label": "Mavi (Güvenlik)" },
+            { "value": "environment", "label": "Koyu Yeşil (Çevre)" },
+            { "value": "medical", "label": "Pembe (Tıbbi)" },
+            { "value": "star", "label": "Mor (Mükemmellik)" }
+          ],
+          "default": "quality",
+          "info": "Önceden tanımlı renk şemaları"
+        },
+        {
+          "type": "color",
+          "id": "custom_icon_bg",
+          "label": "Özel İkon Arkaplan (Opsiyonel)",
+          "info": "Boş bırakırsanız yukarıdaki stil kullanılır"
+        },
+        {
+          "type": "color",
+          "id": "custom_icon_color",
+          "label": "Özel İkon Rengi (Opsiyonel)",
+          "info": "Boş bırakırsanız yukarıdaki stil kullanılır"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Sertifika Adı",
+          "default": "ISO 45001:2018"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Açıklama",
+          "default": "İş sağlığı ve güvenliği yönetim sistemi standardı"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sertifikalar Grid",
+      "blocks": [
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "dna",
+            "icon_style": "dna",
+            "title": "EMQN Sertifikası",
+            "description": "NIPT ve Kalıtsal Yeni Nesil DNA Dizileme hizmetlerinde Avrupa Moleküler Genetik Kalite Ağı sertifikası"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "check-shield",
+            "icon_style": "quality",
+            "title": "ISO 45001:2018",
+            "description": "İş sağlığı ve güvenliği yönetim sistemi standardı - çalışan güvenliği için uluslararası sertifika"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "lock",
+            "icon_style": "security",
+            "title": "ISO 27001:2022",
+            "description": "Bilgi güvenliği yönetim standardı - tüm mali ve gizli bilgilerin korunması"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "leaf",
+            "icon_style": "environment",
+            "title": "ISO 14001:2015",
+            "description": "Çevre yönetim sistemi standardı - çevreye duyarlı ve sürdürülebilir işletme sertifikası"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "medical",
+            "icon_style": "medical",
+            "title": "ISO 13485:2016",
+            "description": "Tıbbi cihazlar için kalite yönetim sistemi - tıbbi cihaz sektörüne özel standart"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "star",
+            "icon_style": "star",
+            "title": "ISO 9001:2015",
+            "description": "Kalite yönetim sistemi - müşteri memnuniyeti ve sürekli iyileştirme standardı"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
