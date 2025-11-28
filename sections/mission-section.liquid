@@ -1,0 +1,360 @@
+{% comment %}
+  Mission Section - Two Column Layout with Text and Image
+{% endcomment %}
+
+<style>
+  .mission-section {
+    padding: 80px 20px;
+    background: {{ section.settings.background_color }};
+  }
+
+  .mission-section__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .mission-section__content {
+    padding-right: 40px;
+  }
+
+  .mission-section__heading {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: {{ section.settings.heading_color }};
+    line-height: 1.2;
+  }
+
+  .mission-section__text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 24px;
+  }
+
+  .mission-section__text strong {
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .mission-section__highlight {
+    background: {{ section.settings.highlight_bg }};
+    border-left: 4px solid {{ section.settings.highlight_border }};
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin-top: 32px;
+  }
+
+  .mission-section__highlight-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: {{ section.settings.highlight_text_color }};
+    margin: 0;
+  }
+
+  .mission-section__image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .mission-section__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mission-section__overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .mission-section__overlay-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .mission-section__icon {
+    width: 48px;
+    height: 48px;
+    background: {{ section.settings.icon_bg }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mission-section__icon svg {
+    width: 24px;
+    height: 24px;
+    color: {{ section.settings.icon_color }};
+  }
+
+  .mission-section__overlay-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .mission-section__overlay-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a5568;
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .mission-section__container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .mission-section__content {
+      padding-right: 0;
+    }
+
+    .mission-section__heading {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mission-section {
+      padding: 60px 20px;
+    }
+
+    .mission-section__heading {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    .mission-section__text {
+      font-size: 16px;
+    }
+
+    .mission-section__overlay {
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 24px;
+    }
+
+    .mission-section__overlay-title {
+      font-size: 20px;
+    }
+
+    .mission-section__overlay-text {
+      font-size: 14px;
+    }
+
+    .mission-section__icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .mission-section__icon svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+
+<section class="mission-section">
+  <div class="mission-section__container">
+    <div class="mission-section__content">
+      <h2 class="mission-section__heading">{{ section.settings.heading }}</h2>
+      
+      {% if section.settings.paragraph_1 != blank %}
+        <p class="mission-section__text">{{ section.settings.paragraph_1 }}</p>
+      {% endif %}
+
+      {% if section.settings.paragraph_2 != blank %}
+        <p class="mission-section__text">{{ section.settings.paragraph_2 }}</p>
+      {% endif %}
+
+      {% if section.settings.paragraph_3 != blank %}
+        <p class="mission-section__text">{{ section.settings.paragraph_3 }}</p>
+      {% endif %}
+
+      {% if section.settings.highlight_text != blank %}
+        <div class="mission-section__highlight">
+          <p class="mission-section__highlight-text">{{ section.settings.highlight_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mission-section__image-wrapper">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: 
+           class: 'mission-section__image',
+           loading: 'lazy',
+           alt: section.settings.image.alt | default: section.settings.heading
+        }}
+      {% else %}
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 100%; height: 100%;"></div>
+      {% endif %}
+
+      {% if section.settings.overlay_title != blank %}
+        <div class="mission-section__overlay">
+          <div class="mission-section__overlay-header">
+            <div class="mission-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3 class="mission-section__overlay-title">{{ section.settings.overlay_title }}</h3>
+          </div>
+          {% if section.settings.overlay_text != blank %}
+            <p class="mission-section__overlay-text">{{ section.settings.overlay_text }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Misyon Bölümü",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Renkler"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Başlık Rengi",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#4a5568"
+    },
+    {
+      "type": "header",
+      "content": "İçerik"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Ana Başlık",
+      "default": "Misyonumuz"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_1",
+      "label": "1. Paragraf",
+      "default": "<p>FalconGene, genetik yatkınlık testleri alanında <strong>en güncel bilimsel ve teknolojik yöntemleri</strong> kullanarak, bireylerin genetik yapısını anlamalarına ve sağlıklı yaşam seçimleri yapmalarına yardımcı olmayı misyon edinmiştir.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_2",
+      "label": "2. Paragraf",
+      "default": "<p>FalconGene, Türkiye genelindeki saygın laboratuvarlarla stratejik işbirlikleri sayesinde, anlaşılabilir ve güvenilir genetik test sonuçları sunarak <strong>müşteri memnuniyetini en üst düzeye</strong> çıkarmayı amaçlamaktadır.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_3",
+      "label": "3. Paragraf",
+      "default": "<p>Etik değerlere bağlı kalarak, genetik veri güvenliğini en üst seviyede sağlamak ve kişiye özel genetik danışmanlık ile bireylerin genetik potansiyellerini maksimize etmelerine destek olmayı misyonun temel taşlarından biri olarak belirlemektedir.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Vurgulu Kutu"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg",
+      "label": "Vurgulu Kutu Arkaplan",
+      "default": "#e8f5e9"
+    },
+    {
+      "type": "color",
+      "id": "highlight_border",
+      "label": "Vurgulu Kutu Kenarlık",
+      "default": "#4caf50"
+    },
+    {
+      "type": "color",
+      "id": "highlight_text_color",
+      "label": "Vurgulu Kutu Metin Rengi",
+      "default": "#2e7d32"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight_text",
+      "label": "Vurgulu Kutu Metni",
+      "default": "<p>FalconGene, ilerideki dönemlerde sektördeki yenilikleri takip ederek, teknolojik gelişmeleri benimseyip sürekli kendisini güncelleyerek, istihdam yaratma misyonunu sürdürmeyi ve genetik test hizmetlerinde <strong>dünya genelinde öncü bir konum</strong> elde etmeyi amaçlamaktadır.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Görsel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bölüm Görseli"
+    },
+    {
+      "type": "header",
+      "content": "Görsel Üzeri Kutu"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg",
+      "label": "İkon Arkaplan Rengi",
+      "default": "#fff4e6"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "İkon Rengi",
+      "default": "#ff9800"
+    },
+    {
+      "type": "text",
+      "id": "overlay_title",
+      "label": "Overlay Başlık",
+      "default": "Yenilikçi Çözümler"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_text",
+      "label": "Overlay Metin",
+      "default": "1,100 m² laboratuvar alanında, son teknoloji NGS cihazları ile 70+ uzman çalışanımızla genetik analizler gerçekleştiriyoruz"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Misyon Bölümü"
+    }
+  ]
+}
+{% endschema %}
