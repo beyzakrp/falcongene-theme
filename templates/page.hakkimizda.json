@@ -37,16 +37,10 @@
             "padding-inline-end": 0
           },
           "blocks": {}
-        },
-        "page-content": {
-          "type": "page-content",
-          "settings": {},
-          "blocks": {}
         }
       },
       "block_order": [
-        "heading",
-        "page-content"
+        "heading"
       ],
       "settings": {
         "content_direction": "column",
@@ -55,9 +49,32 @@
         "padding-block-start": 40,
         "padding-block-end": 40
       }
+    },
+    "mission_section_dVB8qw": {
+      "type": "mission-section",
+      "name": "Misyon Bölümü",
+      "settings": {
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a5568",
+        "heading": "Misyonumuz",
+        "paragraph_1": "<p>FalconGene, genetik yatkınlık testleri alanında <strong>en güncel bilimsel ve teknolojik yöntemleri</strong> kullanarak, bireylerin genetik yapısını anlamalarına ve sağlıklı yaşam seçimleri yapmalarına yardımcı olmayı misyon edinmiştir.</p>",
+        "paragraph_2": "<p>FalconGene, Türkiye genelindeki saygın laboratuvarlarla stratejik işbirlikleri sayesinde, anlaşılabilir ve güvenilir genetik test sonuçları sunarak <strong>müşteri memnuniyetini en üst düzeye</strong> çıkarmayı amaçlamaktadır.</p>",
+        "paragraph_3": "<p>Etik değerlere bağlı kalarak, genetik veri güvenliğini en üst seviyede sağlamak ve kişiye özel genetik danışmanlık ile bireylerin genetik potansiyellerini maksimize etmelerine destek olmayı misyonun temel taşlarından biri olarak belirlemektedir.</p>",
+        "highlight_bg": "#e8f5e9",
+        "highlight_border": "#4caf50",
+        "highlight_text_color": "#2e7d32",
+        "highlight_text": "<p>FalconGene, ilerideki dönemlerde sektördeki yenilikleri takip ederek, teknolojik gelişmeleri benimseyip sürekli kendisini güncelleyerek, istihdam yaratma misyonunu sürdürmeyi ve genetik test hizmetlerinde <strong>dünya genelinde öncü bir konum</strong> elde etmeyi amaçlamaktadır.</p>",
+        "image": "shopify://shop_images/labPhoto.avif",
+        "icon_bg": "#fff4e6",
+        "icon_color": "#ff9800",
+        "overlay_title": "Yenilikçi Çözümler",
+        "overlay_text": "1,100 m² laboratuvar alanında, son teknoloji NGS cihazları ile 70+ uzman çalışanımızla genetik analizler gerçekleştiriyoruz"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "mission_section_dVB8qw"
   ]
 }
