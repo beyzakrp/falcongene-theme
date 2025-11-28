@@ -90,7 +90,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h3>Frequently asked questions</h3>",
+            "text": "<h4>Swap (Tükürük Kiti) Uygulama</h4>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
@@ -134,7 +134,7 @@
             "accordion_row_BrFtHz": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?",
+                "heading": "Kutudan Çıkan Swab (Tükürük Kiti) Nasıl Kullanılır?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -143,12 +143,12 @@
                 "text_VTAnya": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>Swap kullanımı oldukça basittir. Öncelikle ellerinizi iyice yıkayın. Swab çubuğunu ağzınızın iç yan yüzeyine dokundurup dairesel hareketlerle dudak içi ve yanak içi bölgelerinizi ovalayın. Çubuğun ucu tükürükle iyice ıslanmalıdır. Bu aşamada dikkatli olun; doğru uygulama, sonuçların güvenilirliği için kritik öneme sahiptir. Detaylı anlatım için kutu içerisinde yer alan broşüre göz atabilir veya tarafınıza iletilen eğitim videosunu izleyebilirsiniz. Uygulamaya başlamadan önce Aydınlatılmış Onam Formu’nu dikkatlice okuyun ve formda belirtilen koşulları sağladığınızdan emin olun.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "custom",
+                    "font": "var(--font-subheading--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
