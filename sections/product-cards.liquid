@@ -1,0 +1,564 @@
+{% liquid
+  assign badge_text = section.settings.badge_text
+  assign heading = section.settings.heading
+  assign description = section.settings.description
+%}
+
+<div class="product-cards section section--full-width spacing-style color-{{ section.settings.color_scheme }}">
+  <div class="product-cards__container">
+    <!-- Header -->
+    <div class="product-cards__header">
+      {% if badge_text != blank %}
+        <div class="product-cards__badge">
+          {{ badge_text }}
+        </div>
+      {% endif %}
+
+      {% if heading != blank %}
+        <h2 class="product-cards__heading h1">
+          {{ heading }}
+        </h2>
+      {% endif %}
+
+      {% if description != blank %}
+        <div class="product-cards__description">
+          {{ description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Cards Grid -->
+    <div class="product-cards__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'product_card' %}
+            <div class="product-card" style="--card-bg-color: {{ block.settings.card_color }};" {{ block.shopify_attributes }}>
+              <div class="product-card__inner">
+                <!-- Background Image -->
+                {% if block.settings.image != blank %}
+                  <div class="product-card__image-bg">
+                    {{
+                      block.settings.image
+                      | image_url: width: 600
+                      | image_tag: loading: 'lazy', class: 'product-card__bg-img'
+                    }}
+                  </div>
+                {% endif %}
+
+                <!-- Content -->
+                <div class="product-card__content">
+                  <!-- Title and Subtitle -->
+                  <div class="product-card__header">
+                    {% if block.settings.title != blank %}
+                      <h3 class="product-card__title">{{ block.settings.title }}</h3>
+                    {% endif %}
+                    {% if block.settings.subtitle != blank %}
+                      <p class="product-card__subtitle">{{ block.settings.subtitle }}</p>
+                    {% endif %}
+                  </div>
+
+                  <!-- Description -->
+                  {% if block.settings.description != blank %}
+                    <div class="product-card__description">
+                      {{ block.settings.description }}
+                    </div>
+                  {% endif %}
+
+                  <!-- Features List -->
+                  {% if block.settings.feature_1 != blank or block.settings.feature_2 != blank or block.settings.feature_3 != blank or block.settings.feature_4 != blank %}
+                    <ul class="product-card__features">
+                      {% if block.settings.feature_1 != blank %}
+                        <li class="product-card__feature">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          {{ block.settings.feature_1 }}
+                        </li>
+                      {% endif %}
+                      {% if block.settings.feature_2 != blank %}
+                        <li class="product-card__feature">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          {{ block.settings.feature_2 }}
+                        </li>
+                      {% endif %}
+                      {% if block.settings.feature_3 != blank %}
+                        <li class="product-card__feature">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          {{ block.settings.feature_3 }}
+                        </li>
+                      {% endif %}
+                      {% if block.settings.feature_4 != blank %}
+                        <li class="product-card__feature">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          {{ block.settings.feature_4 }}
+                        </li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+
+                  <!-- Buttons -->
+                  <div class="product-card__buttons">
+                    {% if block.settings.primary_button_text != blank and block.settings.primary_button_link != blank %}
+                      <a href="{{ block.settings.primary_button_link }}" class="product-card__button product-card__button--primary">
+                        {{ block.settings.primary_button_text }}
+                      </a>
+                    {% endif %}
+                    {% if block.settings.secondary_button_text != blank and block.settings.secondary_button_link != blank %}
+                      <a href="{{ block.settings.secondary_button_link }}" class="product-card__button product-card__button--secondary">
+                        {{ block.settings.secondary_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .product-cards {
+    background: var(--color-background);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-cards__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--padding-xl);
+  }
+
+  /* Header */
+  .product-cards__header {
+    text-align: center;
+    margin-bottom: var(--margin-3xl);
+  }
+
+  .product-cards__badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: #4A90E2;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--margin-lg);
+  }
+
+  .product-cards__heading {
+    margin: 0 0 var(--margin-lg);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .product-cards__heading em,
+  .product-cards__heading i {
+    color: #4A90E2;
+    font-style: normal;
+  }
+
+  .product-cards__description {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(var(--color-foreground-rgb), 0.8);
+  }
+
+  /* Grid */
+  .product-cards__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-xl);
+
+    @media screen and (min-width: 750px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width: 990px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Product Card */
+  .product-card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--card-bg-color, #4A90E2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .product-card__inner {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .product-card__image-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.15;
+  }
+
+  .product-card__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Content */
+  .product-card__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: var(--gap-lg);
+  }
+
+  .product-card__header {
+    margin-bottom: auto;
+  }
+
+  .product-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 var(--margin-2xs);
+    line-height: 1.3;
+  }
+
+  .product-card__subtitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  .product-card__description {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Features List */
+  .product-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  .product-card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-xs);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+
+    svg {
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  /* Buttons */
+  .product-card__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    margin-top: auto;
+    padding-top: var(--padding-lg);
+  }
+
+  .product-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .product-card__button--primary {
+    background: white;
+    color: var(--card-bg-color, #4A90E2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .product-card__button--secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 989px) {
+    .product-cards__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-cards__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card {
+      min-height: 500px;
+    }
+
+    .product-card__inner {
+      padding: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ürün Kartları",
+  "tag": "section",
+  "class": "section-product-cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Başlık Bölümü"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Üst Etiket",
+      "default": "Test Paketlerimiz"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Ana Başlık",
+      "default": "Genetik <em>Potansiyelinizi</em> Keşfedin",
+      "info": "Vurgulamak istediğiniz kelimeleri <em></em> ile sarın"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Açıklama",
+      "default": "<p>Sağlığınızı daha iyi yönetmenize, potansiyelinizi en üst düzeye çıkarmanıza yardımcı olan bilimsel temelli test paketlerimiz</p>"
+    },
+    {
+      "type": "header",
+      "content": "Renk Ayarları"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Renk Şeması",
+      "default": "primary"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Ürün Kartı",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Genel Bilgiler"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Arka Plan Görseli"
+        },
+        {
+          "type": "color",
+          "id": "card_color",
+          "label": "Kart Rengi",
+          "default": "#4A90E2"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Başlık",
+          "default": "Nutrigenetik Testi"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Alt Başlık",
+          "default": "Beslenme Genetiği"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Açıklama",
+          "default": "DNA'nızın beslenere verdiği tepkileri keşfedin. Vitamin metabolizması, kilo yönetimi ve diyet uyumluluğunuzu öğrenin."
+        },
+        {
+          "type": "header",
+          "content": "Özellikler (En fazla 4)"
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "label": "Özellik 1",
+          "default": "Vitamin ve mineral metabolizması"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "label": "Özellik 2",
+          "default": "Karbonhidrat ve yağ işleme"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Özellik 3",
+          "default": "Kafein, laktoz, glüten duyarlılığı"
+        },
+        {
+          "type": "text",
+          "id": "feature_4",
+          "label": "Özellik 4",
+          "default": "Kişiselleştirilmiş diyet önerileri"
+        },
+        {
+          "type": "header",
+          "content": "Butonlar"
+        },
+        {
+          "type": "text",
+          "id": "primary_button_text",
+          "label": "Ana Buton Metni",
+          "default": "Detayları İncele"
+        },
+        {
+          "type": "url",
+          "id": "primary_button_link",
+          "label": "Ana Buton Linki"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_text",
+          "label": "İkinci Buton Metni",
+          "default": "Satın Al"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link",
+          "label": "İkinci Buton Linki"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ürün Kartları",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "card_color": "#10B981",
+            "title": "Nutrigenetik Testi",
+            "subtitle": "Beslenme Genetiği",
+            "description": "DNA'nızın beslenere verdiği tepkileri keşfedin. Vitamin metabolizması, kilo yönetimi ve diyet uyumluluğunuzu öğrenin.",
+            "feature_1": "Vitamin ve mineral metabolizması",
+            "feature_2": "Karbonhidrat ve yağ işleme",
+            "feature_3": "Kafein, laktoz, glüten duyarlılığı",
+            "feature_4": "Kişiselleştirilmiş diyet önerileri",
+            "primary_button_text": "Detayları İncele",
+            "secondary_button_text": "Satın Al"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "card_color": "#EC4899",
+            "title": "Cilt Genetiği Testi",
+            "subtitle": "Dermatogenetik",
+            "description": "Cildinizin yaşlanma hızı, güneş hassasiyeti ve antioksidan ihtiyaçlarını genetik düzeyde anlayın.",
+            "feature_1": "Güneşe hassasiyet analizi",
+            "feature_2": "Antioksidan savunma kapasitesi",
+            "feature_3": "Kolagen üretimi ve yaşlanma",
+            "feature_4": "Kolajen üretimi ve yaşlanma",
+            "primary_button_text": "Detayları İncele",
+            "secondary_button_text": "Satın Al"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "card_color": "#6366F1",
+            "title": "Spor Genetiği Testi",
+            "subtitle": "Performans Analizi",
+            "description": "Kas yapınızı, enerji metabolizmanızı ve sakatlanma risklerinizi öğrenerek antrenman planınızı optimize edin.",
+            "feature_1": "Kas yapısı ve performans tipi",
+            "feature_2": "VO2 max ve enerji metabolizması",
+            "feature_3": "Sakatlanma risk analizi",
+            "feature_4": "Kalp sağlığı biyobelirteçleri",
+            "primary_button_text": "Detayları İncele",
+            "secondary_button_text": "Satın Al"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "card_color": "#F97316",
+            "title": "Gıda İntolerans Testi",
+            "subtitle": "Besin Duyarlılık Haritası",
+            "description": "400+ gıda ve çevresel faktöre karşı gecikmelitip hassasiyetlerinizi tespit edin.",
+            "feature_1": "400+ gıda hassasiyet analizi",
+            "feature_2": "Tüm besin grupları taraması",
+            "feature_3": "Çevresel intolerans testi",
+            "feature_4": "Uzman diyetisyen danışmanlığı",
+            "primary_button_text": "Detayları İncele",
+            "secondary_button_text": "Satın Al"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
