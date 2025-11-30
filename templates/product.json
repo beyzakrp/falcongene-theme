@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -15,16 +16,16 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
-            "media_columns": "two",
+            "media_presentation": "carousel",
+            "media_columns": "one",
             "image_gap": 4,
             "large_first_image": false,
-            "icons_style": "none",
+            "icons_style": "arrows_large",
             "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
+            "slideshow_mobile_controls_style": "hint",
             "thumbnail_position": "right",
             "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
             "media_radius": 0,
@@ -70,7 +71,6 @@
               "type": "group",
               "name": "Header",
               "settings": {
-                "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
@@ -98,6 +98,9 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -188,6 +191,7 @@
               "settings": {
                 "stacking": true,
                 "show_pickup_availability": false,
+                "gift_card_form": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -253,6 +257,9 @@
           ]
         }
       },
+      "custom_css": [
+        "{margin-top: 3rem;}"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
