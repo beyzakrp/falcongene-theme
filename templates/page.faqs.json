@@ -173,7 +173,7 @@
             "accordion_row_QRm84Q": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are any purchases final sale?",
+                "heading": "Kit İçeriği ve Kullanımı",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -182,12 +182,12 @@
                 "text_LpYPmF": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "text": "<p>Kit; 2 adet swab çubuğu, 2 adet numune tüpü, 1 bilgilendirici broşür, 2 adet onam formu ve numunenin gönderimi için 1 kargo poşeti içerir. Öncelikle onam formunu okuyup imzalayın. Daha sonra broşürdeki talimatlara uyarak swab çubuğunu dudak ve yanak içi bölgelerinizde gezdirip tükürük örneğinizi alın. Swabı numune tüpüne yerleştirip tüpü sıkıca kapatın. Numuneyi ve imzalı onam formunu kargo poşetine koyarak belirtilen adrese gönderin.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -213,7 +213,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "When will I get my order?",
+                "heading": "Numune alırken dikkat edilmesi gerekenler nelerdir?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -223,12 +223,12 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                    "text": "<p>Numune almadan önce besin ve tütün ürünleri tüketmeyin, diş fırçalamak gibi ağız florasını etkileyebilecek davranışlardan kaçının. Ellerinizi ve ağzınızı temiz tutun. Swap çubuğunun ağzınıza temas ettiğinden ve yeterli miktarda tükürük örneği aldığınızdan emin olun. Onam formunun bir kopyasını saklayın ve numuneyi gönderirken tüm adımların doğru uygulandığını kontrol edin. Broşürde bu adımlar detaylı şekilde açıklanmaktadır.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -254,7 +254,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "Where are your products manufactured?",
+                "heading": "Numune alma sırasında rahatsızlık olur mu?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -264,12 +264,12 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
+                    "text": "<p>Swab kullanımı ağrısız ve kolaydır. Bazı kişilerde swabın ağza teması hafif bir rahatsızlık hissi yaratabilir ancak bu geçicidir.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -295,7 +295,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "How much does shipping cost?",
+                "heading": "Özel hazırlık gerekir mi?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -305,12 +305,12 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>",
+                    "text": "<p>Numune almadan önce özel bir hazırlık yapmanız gerekmez. Sadece el ve ağız hijyeninize dikkat etmeniz, besin ve tütün ürünlerinden uzak durmanız ve ağız florasını etkileyebilecek uygulamalardan kaçınmanız yeterlidir.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -331,6 +331,211 @@
               "block_order": [
                 "text_BfUCmt"
               ]
+            },
+            "accordion_row_UDdV8x": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Sağlık uzmanı desteği gerekir mi?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_abwM49": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Hayır, numune almak için bir sağlık uzmanına ihtiyacınız yoktur. İşlem oldukça basit olup kendi başınıza kolayca uygulanabilir.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_abwM49"
+              ]
+            },
+            "accordion_row_Ct9ATN": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Numuneyi gönderme süreci nasıl oluyor?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_nH96c3": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Numunenizi mümkün olan en kısa sürede gönderin. Bunun için kit ile gönderilen kargo poşetini kullanarak anlaşmalı kargo firmasına teslim edebilirsiniz.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_nH96c3"
+              ]
+            },
+            "accordion_row_FbkaVm": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Sorun yaşarsam ne yapmalıyım?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_E4DNgW": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Numune alırken herhangi bir sorun yaşarsanız, kit ile birlikte verilen destek hattı veya iletişim bilgileri üzerinden bizimle iletişime geçebilirsiniz.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_E4DNgW"
+              ]
+            },
+            "accordion_row_UeWNMD": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Numune alma hatası durumunda ne yapılır?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_VwFrYp": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Bu tür durumlar için kitte 2 adet swab ve 2 adet tüp bulunmaktadır. İlk denemenizde hata yaparsanız, ikinci swabı ve tüpü kullanarak yeniden örnek alabilirsiniz. Gerekirse destek hattı ile iletişime geçerek yeni bir kit talep edebilirsiniz.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_VwFrYp"
+              ]
+            },
+            "accordion_row_AXaB4w": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Sonuçların Güvenilirliği",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_ALqAaw": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Bu tür durumlar için kitte 2 adet swab ve 2 adet tüp bulunmaktadır. İlk denemenizde hata yaparsanız, ikinci swabı ve tüpü kullanarak yeniden örnek alabilirsiniz. Gerekirse destek hattı ile iletişime geçerek yeni bir kit talep edebilirsiniz.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-accent--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_ALqAaw"
+              ]
             }
           },
           "block_order": [
@@ -338,7 +543,12 @@
             "accordion_row_QRm84Q",
             "accordion_row_k9WdPV",
             "accordion_row_HNRybd",
-            "accordion_row_yamP8r"
+            "accordion_row_yamP8r",
+            "accordion_row_UDdV8x",
+            "accordion_row_Ct9ATN",
+            "accordion_row_FbkaVm",
+            "accordion_row_UeWNMD",
+            "accordion_row_AXaB4w"
           ]
         }
       },
