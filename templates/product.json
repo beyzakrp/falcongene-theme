@@ -177,7 +177,7 @@
               "type": "variant-picker",
               "settings": {
                 "variant_style": "dropdowns",
-                "show_swatches": false,
+                "show_swatches": true,
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -278,7 +278,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h3>You may also like </h3>",
+            "text": "<h3>Diğer Ürünlerimiz</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -306,16 +306,16 @@
           "static": true,
           "settings": {
             "product_card_gap": 8,
-            "inherit_color_scheme": true,
+            "inherit_color_scheme": false,
             "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-end": 15,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
           },
           "blocks": {
             "product_card_gallery_DNizbJ": {
@@ -341,9 +341,9 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.25rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -365,7 +365,7 @@
                 "show_sale_price_first": true,
                 "show_installments": false,
                 "show_tax_info": false,
-                "type_preset": "h6",
+                "type_preset": "h4",
                 "width": "100%",
                 "alignment": "left",
                 "font": "var(--font-body--family)",
