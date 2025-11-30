@@ -425,10 +425,10 @@
             "feature_2": "Karbonhidrat ve yağ işleme",
             "feature_3": "Kafein, laktoz, glüten duyarlılığı",
             "feature_4": "Kişiselleştirilmiş diyet önerileri",
-            "primary_button_text": "Detayları İncele",
-            "primary_button_link": "",
-            "secondary_button_text": "Satın Al",
-            "secondary_button_link": ""
+            "primary_button_text": "Satın Al",
+            "primary_button_link": "shopify://products/spor-genetigi-yatkinlik-testi-copy-1",
+            "secondary_button_text": "Detayları İncele",
+            "secondary_button_link": "shopify://products/spor-genetigi-yatkinlik-testi-copy-1"
           }
         },
         "product_card_reaz6i": {
@@ -443,10 +443,10 @@
             "feature_2": "Antioksidan savunma kapasitesi",
             "feature_3": "Kolagen üretimi ve yaşlanma",
             "feature_4": "Kolajen üretimi ve yaşlanma",
-            "primary_button_text": "Detayları İncele",
-            "primary_button_link": "",
-            "secondary_button_text": "Satın Al",
-            "secondary_button_link": ""
+            "primary_button_text": "Satın Al",
+            "primary_button_link": "shopify://products/cilt-genetigi-yatkinlik-testi",
+            "secondary_button_text": "Detayları İncele",
+            "secondary_button_link": "shopify://products/cilt-genetigi-yatkinlik-testi"
           }
         },
         "product_card_UX39qh": {
@@ -461,10 +461,10 @@
             "feature_2": "VO2 max ve enerji metabolizması",
             "feature_3": "Sakatlanma risk analizi",
             "feature_4": "Kalp sağlığı biyobelirteçleri",
-            "primary_button_text": "Detayları İncele",
-            "primary_button_link": "",
-            "secondary_button_text": "Satın Al",
-            "secondary_button_link": ""
+            "primary_button_text": "Satın Al",
+            "primary_button_link": "shopify://products/cilt-genetigi-yatkinlik-testi-copy",
+            "secondary_button_text": "Detayları İncele",
+            "secondary_button_link": "shopify://products/cilt-genetigi-yatkinlik-testi-copy"
           }
         },
         "product_card_Aaq4eG": {
@@ -480,9 +480,9 @@
             "feature_3": "Çevresel intolerans testi",
             "feature_4": "Uzman diyetisyen danışmanlığı",
             "primary_button_text": "Satın Al",
-            "primary_button_link": "shopify://products/basic-gen-analiz-testi",
+            "primary_button_link": "shopify://products/spor-genetigi-yatkinlik-testi-copy",
             "secondary_button_text": "Detayları İncele",
-            "secondary_button_link": "shopify://products/basic-gen-analiz-testi"
+            "secondary_button_link": "shopify://products/spor-genetigi-yatkinlik-testi-copy"
           }
         }
       },
@@ -499,6 +499,20 @@
         "description": "<p>Sağlığınızı daha iyi yönetmenize, potansiyelinizi en üst düzeye çıkarmanıza yardımcı olan bilimsel temelli test paketlerimiz</p>",
         "color_scheme": ""
       }
+    },
+    "divider_nhi7AF": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 96,
+        "padding-block-end": 16
+      }
     }
   },
   "order": [
@@ -507,6 +521,7 @@
     "stats_cards_4EUj9f",
     "product_list_fa6P9H",
     "divider_nN8t8A",
-    "product_cards_W7XWMg"
+    "product_cards_W7XWMg",
+    "divider_nhi7AF"
   ]
 }
