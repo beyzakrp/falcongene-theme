@@ -52,6 +52,9 @@
     },
     "mission_section_dVB8qw": {
       "type": "mission-section",
+      "custom_css": [
+        ".mission-section {margin: 0 10rem}"
+      ],
       "name": "Misyon Bölümü",
       "settings": {
         "background_color": "#ffffff",
