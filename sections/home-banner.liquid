@@ -1,0 +1,692 @@
+{% comment %}
+  Home Banner - Hero section with custom fonts and responsive images
+{% endcomment %}
+
+<style>
+  @font-face {
+    font-family: 'Garamond Premier Pro Italic';
+    src: url('https://cdn.shopify.com/s/files/1/0484/1429/4167/files/Garamond_Premier_Pro_Italic.ttf?v=1764160060') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Aesthet Nova Medium';
+    src: url('https://cdn.shopify.com/s/files/1/0484/1429/4167/files/fonnts.com-Aesthet-Nova-Medium.otf?v=1764160662') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+</style>
+
+<style>
+  .home-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: {{ section.settings.min_height_desktop }}px;
+    overflow: hidden;
+    background: {{ section.settings.background_color }};
+  }
+
+  .home-banner__image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .home-banner__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-banner__image--mobile {
+    display: none;
+  }
+
+  .home-banner__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+  }
+
+  .home-banner__content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    max-width: 600px;
+    padding: 40px;
+  }
+
+  .home-banner__content--left {
+    left: {{ section.settings.content_position_left }}%;
+  }
+
+  .home-banner__content--center {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .home-banner__content--right {
+    right: {{ section.settings.content_position_right }}%;
+    left: auto;
+  }
+
+  .home-banner__badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: {{ section.settings.badge_background }};
+    color: {{ section.settings.badge_color }};
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .home-banner__title {
+    font-family: {{ section.settings.title_font }}, sans-serif;
+    font-size: {{ section.settings.title_size_desktop }}px;
+    font-weight: {{ section.settings.title_weight }};
+    color: {{ section.settings.title_color }};
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .home-banner__subtitle {
+    font-family: {{ section.settings.subtitle_font }}, serif;
+    font-size: {{ section.settings.subtitle_size_desktop }}px;
+    font-style: italic;
+    color: {{ section.settings.subtitle_color }};
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  .home-banner__description {
+    font-size: 18px;
+    color: {{ section.settings.text_color }};
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .home-banner__buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .home-banner__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .home-banner__button--primary {
+    background: {{ section.settings.primary_button_bg }};
+    color: {{ section.settings.primary_button_color }};
+    border-color: {{ section.settings.primary_button_bg }};
+  }
+
+  .home-banner__button--primary:hover {
+    background: transparent;
+    color: {{ section.settings.primary_button_bg }};
+    border-color: {{ section.settings.primary_button_bg }};
+  }
+
+  .home-banner__button--secondary {
+    background: transparent;
+    color: {{ section.settings.secondary_button_color }};
+    border-color: {{ section.settings.secondary_button_color }};
+  }
+
+  .home-banner__button--secondary:hover {
+    background: {{ section.settings.secondary_button_color }};
+    color: {{ section.settings.secondary_button_hover_color }};
+  }
+
+  /* Mobile Gradient Overlay */
+  .home-banner__mobile-gradient {
+    display: none;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 1008px) {
+    .home-banner {
+      min-height: {{ section.settings.min_height_mobile }}px;
+    }
+
+    .home-banner__image--desktop {
+      display: none;
+    }
+
+    .home-banner__image--mobile {
+      display: block;
+    }
+
+    .home-banner__mobile-gradient {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .home-banner__content {
+      position: absolute;
+      bottom: 40px;
+      top: auto;
+      left: 20px;
+      right: 20px;
+      transform: none;
+      max-width: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .home-banner__title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+
+    .home-banner__subtitle {
+      font-size: {{ section.settings.subtitle_size_mobile }}px;
+    }
+
+    .home-banner__description {
+      font-size: 16px;
+    }
+
+    .home-banner__buttons {
+      justify-content: center;
+    }
+
+    .home-banner__button {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    .home-banner__content--right {
+      right: calc(190px + (var(--horizontal-spacing-four-products-per-row) / 2));
+    }
+
+    .home-banner__content--left {
+      left: calc(190px + (var(--horizontal-spacing-four-products-per-row) / 2));
+    }
+  }
+
+  @media (min-width: 1250px) and (max-width: 1500px) {
+    .home-banner__content--right {
+      right: 10%;
+    }
+
+    .home-banner__content--left {
+      left: 10%;
+    }
+  }
+
+  @media (min-width: 1008px) and (max-width: 1250px) {
+    .home-banner__content--right {
+      right: 5%;
+    }
+
+    .home-banner__content--left {
+      left: 5%;
+    }
+  }
+
+  /* Hide empty images */
+  img:not([src]),
+  img[src=""] {
+    display: none;
+  }
+</style>
+
+<section id="section-{{ section.id }}" class="home-banner">
+  <div class="home-banner__image-container">
+    {% comment %} Desktop Image {% endcomment %}
+    {% if section.settings.image_desktop != blank %}
+      <img
+        id="home-banner-image-desktop"
+        class="home-banner__image home-banner__image--desktop"
+        src="{{ section.settings.image_desktop | image_url: width: 2400 }}"
+        srcset="{{ section.settings.image_desktop | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image_desktop | image_url: width: 1600 }} 1600w,
+                {{ section.settings.image_desktop | image_url: width: 2000 }} 2000w,
+                {{ section.settings.image_desktop | image_url: width: 2400 }} 2400w"
+        sizes="100vw"
+        alt="{{ section.settings.image_desktop.alt | default: section.settings.title }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {% endif %}
+
+    {% comment %} Mobile Image {% endcomment %}
+    {% if section.settings.image_mobile != blank %}
+      <img
+        id="home-banner-image-mobile"
+        class="home-banner__image home-banner__image--mobile"
+        src="{{ section.settings.image_mobile | image_url: width: 800 }}"
+        srcset="{{ section.settings.image_mobile | image_url: width: 400 }} 400w,
+                {{ section.settings.image_mobile | image_url: width: 600 }} 600w,
+                {{ section.settings.image_mobile | image_url: width: 800 }} 800w"
+        sizes="100vw"
+        alt="{{ section.settings.image_mobile.alt | default: section.settings.title }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {% endif %}
+
+    {% comment %} Overlay {% endcomment %}
+    {% if section.settings.show_overlay %}
+      <div class="home-banner__overlay"></div>
+    {% endif %}
+
+    {% comment %} Mobile Gradient {% endcomment %}
+    {% if section.settings.show_mobile_gradient %}
+      <div class="home-banner__mobile-gradient"></div>
+    {% endif %}
+
+    {% comment %} Content {% endcomment %}
+    <div class="home-banner__content home-banner__content--{{ section.settings.content_alignment }}">
+      {% if section.settings.badge_text != blank %}
+        <span class="home-banner__badge">{{ section.settings.badge_text }}</span>
+      {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h1 class="home-banner__title">{{ section.settings.title }}</h1>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <div class="home-banner__subtitle">{{ section.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="home-banner__description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      {% if section.settings.button_primary_text != blank or section.settings.button_secondary_text != blank %}
+        <div class="home-banner__buttons">
+          {% if section.settings.button_primary_text != blank %}
+            <a href="{{ section.settings.button_primary_link }}" class="home-banner__button home-banner__button--primary">
+              {{ section.settings.button_primary_text }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.button_secondary_text != blank %}
+            <a href="{{ section.settings.button_secondary_link }}" class="home-banner__button home-banner__button--secondary">
+              {{ section.settings.button_secondary_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if section.settings.mobile_click_link != blank %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileImage = document.getElementById('home-banner-image-mobile');
+      if (mobileImage && window.innerWidth <= 1008) {
+        mobileImage.style.cursor = 'pointer';
+        mobileImage.addEventListener('click', function() {
+          window.location.href = "{{ section.settings.mobile_click_link }}";
+        });
+      }
+    });
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Home Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Görseller"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Görsel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobil Görsel"
+    },
+    {
+      "type": "header",
+      "content": "Boyutlar"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Desktop Min Yükseklik",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "default": 650,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Mobil Min Yükseklik",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Overlay & Efektler"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Overlay Göster",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Rengi",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opaklık",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_gradient",
+      "label": "Mobil Alt Gradient Göster",
+      "default": true,
+      "info": "Mobilde altta karanlık gradient ekler"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "İçerik Konumu"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "İçerik Hizalama",
+      "options": [
+        { "value": "left", "label": "Sol" },
+        { "value": "center", "label": "Merkez" },
+        { "value": "right", "label": "Sağ" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "content_position_left",
+      "label": "Sol Pozisyon (Sol Hizalama için)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "content_position_right",
+      "label": "Sağ Pozisyon (Sağ Hizalama için)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Rozet (Badge)"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Rozet Metni",
+      "placeholder": "YENİ"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Rozet Arkaplan",
+      "default": "#D6F5E3"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Rozet Metin Rengi",
+      "default": "#0D1B2A"
+    },
+    {
+      "type": "header",
+      "content": "Başlık"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Genetik Testleriniz için"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Başlık Font",
+      "options": [
+        { "value": "Aesthet Nova Medium", "label": "Aesthet Nova Medium" },
+        { "value": "Garamond Premier Pro Italic", "label": "Garamond Premier Pro Italic" },
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica", "label": "Helvetica" }
+      ],
+      "default": "Aesthet Nova Medium"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Başlık Boyutu (Desktop)",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "default": 52,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Başlık Boyutu (Mobil)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Başlık Kalınlığı",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Başlık Rengi",
+      "default": "#0D1B2A"
+    },
+    {
+      "type": "header",
+      "content": "Alt Başlık"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Güvenilir Sonuçlar"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_font",
+      "label": "Alt Başlık Font",
+      "options": [
+        { "value": "Garamond Premier Pro Italic", "label": "Garamond Premier Pro Italic" },
+        { "value": "Aesthet Nova Medium", "label": "Aesthet Nova Medium" },
+        { "value": "Georgia", "label": "Georgia" }
+      ],
+      "default": "Garamond Premier Pro Italic"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "label": "Alt Başlık Boyutu (Desktop)",
+      "min": 20,
+      "max": 70,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "label": "Alt Başlık Boyutu (Mobil)",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Alt Başlık Rengi",
+      "default": "#0D1B2A"
+    },
+    {
+      "type": "header",
+      "content": "Açıklama"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Açıklama Metni"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#4a5568"
+    },
+    {
+      "type": "header",
+      "content": "Butonlar"
+    },
+    {
+      "type": "text",
+      "id": "button_primary_text",
+      "label": "Birincil Buton Metni",
+      "default": "Testleri İncele"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "Birincil Buton Linki"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Birincil Buton Arkaplan",
+      "default": "#0D1B2A"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_color",
+      "label": "Birincil Buton Metin Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_text",
+      "label": "İkincil Buton Metni"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "İkincil Buton Linki"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_color",
+      "label": "İkincil Buton Kenarlık Rengi",
+      "default": "#0D1B2A"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_color",
+      "label": "İkincil Buton Hover Metin Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Mobil Ayarlar"
+    },
+    {
+      "type": "url",
+      "id": "mobile_click_link",
+      "label": "Mobil Görsele Tıklanınca Gidilecek Link",
+      "info": "Mobilde tüm görsel tıklanabilir olur"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Banner"
+    }
+  ]
+}
+{% endschema %}
