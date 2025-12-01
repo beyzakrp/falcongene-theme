@@ -17,9 +17,9 @@
           "name": "t:names.heading",
           "settings": {
             "text": "<p>Genetiğini Anla, Yaşamını Şekillendir.</p>",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
+            "alignment": "right",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -29,7 +29,7 @@
             "wrap": "pretty",
             "color": "var(--color-foreground-heading)",
             "background": false,
-            "background_color": "#00000026",
+            "background_color": "#1d3686",
             "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -43,9 +43,9 @@
           "name": "t:names.text",
           "settings": {
             "text": "<p>Kapsamlı DNA analiziyle intoleranslarından spor potansiyeline, cilt sağlığından metabolizma yapına kadar tüm biyolojik yol haritanı ortaya çıkarıyoruz</p>",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "center",
+            "alignment": "right",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -88,8 +88,9 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/cells-hero.png",
+        "image_1": "shopify://shop_images/realBoxPhoto.jpg",
         "media_type_2": "image",
+        "image_2": "shopify://shop_images/realOpenedBox.jpg",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
@@ -128,6 +129,64 @@
         "button_text": "Genetik Yolculuğunu Başlat",
         "button_link": "shopify://collections/all",
         "color_scheme": ""
+      }
+    },
+    "custom_collection_list_abmbty": {
+      "type": "custom-collection-list",
+      "blocks": {
+        "featured_box_mDtYng": {
+          "type": "featured_box",
+          "settings": {
+            "background_color": "#1d3686",
+            "title_line_1": "Spread the",
+            "title_line_2": "Repeat.",
+            "description": "The holiday season is here, and it's time to spread the joy and repeat!"
+          }
+        },
+        "collection_card_rQFzEH": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Engagement Rings",
+            "link": "",
+            "size": "large"
+          }
+        },
+        "collection_card_KJLwzQ": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Personalized Gifts",
+            "link": "",
+            "size": "medium"
+          }
+        },
+        "collection_card_m6rFJR": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Charms",
+            "link": "",
+            "size": "medium"
+          }
+        },
+        "collection_card_zqMqrH": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Birthstone Jewelry",
+            "link": "",
+            "size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "featured_box_mDtYng",
+        "collection_card_rQFzEH",
+        "collection_card_KJLwzQ",
+        "collection_card_m6rFJR",
+        "collection_card_zqMqrH"
+      ],
+      "name": "Collection Grid Showcase",
+      "settings": {
+        "margin_top": 50,
+        "margin_bottom": 50
       }
     },
     "divider_GwqyMN": {
@@ -726,6 +785,7 @@
   "order": [
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
+    "custom_collection_list_abmbty",
     "divider_GwqyMN",
     "product_list_UCVANr",
     "stats_cards_4EUj9f",
