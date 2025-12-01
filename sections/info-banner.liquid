@@ -1,0 +1,369 @@
+{% comment %}
+  Info Banner - Promotional banner with image, text and optional link
+{% endcomment %}
+
+<section 
+  id="section-{{ section.id }}" 
+  class="info-banner"
+  style="background-color: {{ section.settings.background_color }};"
+>
+  <div class="info-banner__container">
+    {% if section.settings.image != blank %}
+      <span class="info-banner__image-wrapper">
+        <img
+          width="200"
+          height="150"
+          src="{{ section.settings.image | image_url: width: 400 }}"
+          srcset="{{ section.settings.image | image_url: width: 200 }} 200w,
+                  {{ section.settings.image | image_url: width: 400 }} 400w"
+          sizes="(max-width: 768px) 120px, 200px"
+          loading="lazy"
+          alt="{{ section.settings.image.alt | default: section.settings.title }}"
+          class="info-banner__image"
+        >
+      </span>
+    {% endif %}
+
+    <div class="info-banner__content">
+      {% if section.settings.title != blank %}
+        <h2 class="info-banner__title" style="color: {{ section.settings.title_color }};">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="info-banner__description" style="color: {{ section.settings.text_color }};">
+          {{ section.settings.description }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.link_text != blank and section.settings.link_url != blank %}
+        <a 
+          href="{{ section.settings.link_url }}" 
+          class="info-banner__link"
+          style="color: {{ section.settings.link_color }};"
+        >
+          {{ section.settings.link_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .info-banner {
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .info-banner__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: {{ section.settings.height_desktop }}px;
+    gap: 24px;
+  }
+
+  .info-banner__image-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-banner__image {
+    width: {{ section.settings.image_width_desktop }}px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .info-banner__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1;
+    position: relative;
+  }
+
+  .info-banner__title {
+    font-family: {{ section.settings.title_font }}, sans-serif;
+    font-size: {{ section.settings.title_size_desktop }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .info-banner__description {
+    font-family: {{ section.settings.text_font }}, sans-serif;
+    font-size: {{ section.settings.text_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .info-banner__link {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    font-size: 12px;
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+  }
+
+  .info-banner__link:hover {
+    opacity: 0.7;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .info-banner {
+      padding: 0 15px;
+    }
+
+    .info-banner__container {
+      height: {{ section.settings.height_mobile }}px;
+      gap: 16px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .info-banner__image {
+      width: {{ section.settings.image_width_mobile }}px;
+    }
+
+    .info-banner__title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+      margin-bottom: 8px;
+    }
+
+    .info-banner__description {
+      font-size: {{ section.settings.text_size_mobile }}px;
+      line-height: 1.4;
+    }
+
+    .info-banner__content {
+      white-space: pre-line;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-banner__container {
+      padding-right: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Info Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Görsel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Görseli",
+      "info": "Önerilen: 400 x 300px"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "label": "Görsel Genişliği (Desktop)",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "Görsel Genişliği (Mobil)",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Boyutlar"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Yükseklik (Desktop)",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "default": 170,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Yükseklik (Mobil)",
+      "min": 100,
+      "max": 250,
+      "step": 10,
+      "default": 160,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Renkler"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#F8F6EE"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Başlık Rengi",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Rengi",
+      "default": "#262626"
+    },
+    {
+      "type": "header",
+      "content": "Başlık"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Ücretsİz İade & Değİşİm!"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Başlık Font",
+      "options": [
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica", "label": "Helvetica" },
+        { "value": "Georgia", "label": "Georgia" },
+        { "value": "Times New Roman", "label": "Times New Roman" },
+        { "value": "Verdana", "label": "Verdana" }
+      ],
+      "default": "Arial"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Başlık Boyutu (Desktop)",
+      "min": 20,
+      "max": 48,
+      "step": 1,
+      "default": 35,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Başlık Boyutu (Mobil)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Başlık Kalınlığı",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Açıklama"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Açıklama Metni",
+      "default": "Ön ödemeli kargo etiketi ile 15 Ocak tarihine kadar ücretsiz iade ve değişim."
+    },
+    {
+      "type": "select",
+      "id": "text_font",
+      "label": "Metin Font",
+      "options": [
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica", "label": "Helvetica" },
+        { "value": "Georgia", "label": "Georgia" },
+        { "value": "Times New Roman", "label": "Times New Roman" },
+        { "value": "Verdana", "label": "Verdana" }
+      ],
+      "default": "Arial"
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Metin Boyutu (Desktop)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Metin Boyutu (Mobil)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Metni",
+      "default": "Şartları Gör"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL",
+      "info": "Opsiyonel - Boş bırakılırsa link gösterilmez"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info Banner"
+    }
+  ]
+}
+{% endschema %}
