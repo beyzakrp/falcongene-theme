@@ -1,0 +1,531 @@
+{% comment %}
+  About Us Section - Two column layout with image and content
+{% endcomment %}
+
+<section id="section-{{ section.id }}" class="about-us-section">
+  <div class="about-us-section__container">
+    {% comment %} Image Column {% endcomment %}
+    <div class="about-us-section__image-column">
+      {% if section.settings.image != blank %}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 900 }} 900w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 1030px) 100vw, 50vw"
+          alt="{{ section.settings.image.alt | default: section.settings.title }}"
+          loading="lazy"
+          width="810"
+          height="740"
+          class="about-us-section__image"
+        >
+      {% else %}
+        <div class="about-us-section__placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'about-us-section__placeholder-svg' }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Content Column {% endcomment %}
+    <div 
+      class="about-us-section__content-column"
+      style="background-color: {{ section.settings.content_background }};"
+    >
+      <div class="about-us-section__content-wrapper">
+        {% if section.settings.title != blank %}
+          <h2 
+            class="about-us-section__title"
+            style="color: {{ section.settings.title_color }};"
+          >
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div 
+            class="about-us-section__description"
+            style="color: {{ section.settings.text_color }};"
+          >
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <a 
+            href="{{ section.settings.button_link }}" 
+            class="about-us-section__button"
+            style="background-color: {{ section.settings.button_bg }}; 
+                   color: {{ section.settings.button_color }};
+                   border-color: {{ section.settings.button_border }};"
+          >
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.link_text != blank %}
+          <a 
+            href="{{ section.settings.link_url }}" 
+            class="about-us-section__link"
+            style="color: {{ section.settings.link_color }};"
+          >
+            {{ section.settings.link_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-us-section {
+    width: 100%;
+    margin: {{ section.settings.margin_top }}px 0 {{ section.settings.margin_bottom }}px 0;
+  }
+
+  .about-us-section__container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: {{ section.settings.gap_desktop }}px;
+    padding: 0 {{ section.settings.padding_horizontal }}px;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .about-us-section__image-column,
+  .about-us-section__content-column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-us-section__image-column {
+    overflow: hidden;
+  }
+
+  .about-us-section__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-us-section__placeholder {
+    width: 100%;
+    background: #f3f4f6;
+  }
+
+  .about-us-section__placeholder-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-us-section__content-column {
+    padding: 60px;
+  }
+
+  .about-us-section__content-wrapper {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .about-us-section__title {
+    font-family: {{ section.settings.title_font }}, sans-serif;
+    font-size: {{ section.settings.title_size_desktop }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .about-us-section__description {
+    font-size: {{ section.settings.text_size_desktop }}px;
+    line-height: 1.7;
+    margin-top: 24px;
+  }
+
+  .about-us-section__description p {
+    margin-bottom: 16px;
+  }
+
+  .about-us-section__description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-us-section__button {
+    display: inline-block;
+    padding: 14px 32px;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .about-us-section__button:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+
+  .about-us-section__link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+  }
+
+  .about-us-section__link:hover {
+    opacity: 0.7;
+  }
+
+  /* Reverse Layout Option */
+  .about-us-section--reverse .about-us-section__container {
+    flex-direction: row-reverse;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 1030px) {
+    .about-us-section {
+      margin: {{ section.settings.margin_top_mobile }}px 0 {{ section.settings.margin_bottom_mobile }}px 0;
+    }
+
+    .about-us-section__container {
+      flex-direction: column;
+      gap: {{ section.settings.gap_mobile }}px;
+      padding: 0 16px;
+    }
+
+    .about-us-section__content-column {
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .about-us-section__content-wrapper {
+      max-width: 100%;
+    }
+
+    .about-us-section__title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+      margin-bottom: 16px;
+    }
+
+    .about-us-section__description {
+      font-size: {{ section.settings.text_size_mobile }}px;
+      margin-top: 16px;
+    }
+
+    .about-us-section__button {
+      margin-top: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .about-us-section__link {
+      display: block;
+    }
+
+    /* Mobile always shows image first */
+    .about-us-section--reverse .about-us-section__container {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% if section.settings.reverse_layout %}
+  <style>
+    #section-{{ section.id }} {
+      .about-us-section__container {
+        flex-direction: row-reverse;
+      }
+    }
+
+    @media (max-width: 1030px) {
+      #section-{{ section.id }} {
+        .about-us-section__container {
+          flex-direction: column;
+        }
+      }
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "About Us Bölümü",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Düzen"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Sıralamayı Ters Çevir",
+      "default": false,
+      "info": "İçeriği sola, görseli sağa al"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maksimum Genişlik",
+      "min": 1200,
+      "max": 1800,
+      "step": 100,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Sütunlar Arası Boşluk (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 46,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Sütunlar Arası Boşluk (Mobil)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Yatay Padding (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Boşluklar"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Üst Boşluk (Desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Alt Boşluk (Desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "label": "Üst Boşluk (Mobil)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "label": "Alt Boşluk (Mobil)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Görsel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bölüm Görseli",
+      "info": "Önerilen: 810 x 740px"
+    },
+    {
+      "type": "header",
+      "content": "İçerik Arkaplan"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Arkaplan Rengi",
+      "default": "#FAF7F0"
+    },
+    {
+      "type": "header",
+      "content": "Başlık"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Hakkımızda"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Başlık Font",
+      "options": [
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica", "label": "Helvetica" },
+        { "value": "Georgia", "label": "Georgia" },
+        { "value": "Times New Roman", "label": "Times New Roman" }
+      ],
+      "default": "Arial"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Başlık Boyutu (Desktop)",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "default": 44,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Başlık Boyutu (Mobil)",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Başlık Kalınlığı",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Başlık Rengi",
+      "default": "#50122E"
+    },
+    {
+      "type": "header",
+      "content": "Açıklama"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Açıklama Metni",
+      "default": "<p>FalconGene olarak, anılarınıza ömür boyu ve ötesinde eşlik etmek için buradayız. Gelecek nesillere aktarılacak miras niteliğinde, etik ve lüks genetik test hizmetleri sunuyoruz.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Metin Boyutu (Desktop)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Metin Boyutu (Mobil)",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#50122E"
+    },
+    {
+      "type": "header",
+      "content": "Buton (Opsiyonel)"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Buton Metni"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Buton Linki"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Buton Arkaplan",
+      "default": "#50122E"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Buton Metin Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border",
+      "label": "Buton Kenarlık",
+      "default": "#50122E"
+    },
+    {
+      "type": "header",
+      "content": "Link (Opsiyonel)"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Metni",
+      "info": "Altı çizili link"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Rengi",
+      "default": "#50122E"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us Bölümü"
+    }
+  ]
+}
+{% endschema %}
