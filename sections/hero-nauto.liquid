@@ -65,12 +65,7 @@
     </div>
 
     <div class="hero-nauto__media">
-            {% comment %}
-      <div class="hero-nauto__grid">
-        {% for block in section.blocks %}
-          {% case block.type %}
-          {% when 'image_large' %}
-              <div class="hero-nauto__grid-item hero-nauto__grid-item--large" {{ block.shopify_attributes }}>
+         <div class="hero-nauto__grid-item hero-nauto__grid-item--large" {{ block.shopify_attributes }}>
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 800 | image_tag: 
                     loading: 'lazy',
@@ -80,6 +75,12 @@
                   <div class="hero-nauto__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
                 {% endif %}
               </div>
+            {% comment %}
+      <div class="hero-nauto__grid">
+        {% for block in section.blocks %}
+          {% case block.type %}
+          {% when 'image_large' %}
+             
             
             {% when 'image_medium' %}
               <div class="hero-nauto__grid-item hero-nauto__grid-item--medium" {{ block.shopify_attributes }}>
