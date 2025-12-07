@@ -1,0 +1,309 @@
+{% liquid
+  assign title = section.settings.title
+  assign subtitle = section.settings.subtitle
+%}
+
+<div class="fg-quiz-wrapper">
+  <div class="fg-quiz-inner">
+    <h1 class="fg-quiz-title">{{ title }}</h1>
+    <p class="fg-quiz-subtitle">{{ subtitle }}</p>
+
+    <form id="fg-quiz-form" class="fg-quiz-form" onsubmit="return false;">
+      <!-- Soru 1 -->
+      <div class="fg-quiz-question">
+        <h2>1. Öncelikli hedefin ne?</h2>
+        <label>
+          <input type="radio" name="focus" value="sport">
+          Spor performansımı ve antrenman planımı optimize etmek
+        </label>
+        <label>
+          <input type="radio" name="focus" value="health">
+          Genel sağlık, kilo yönetimi ve beslenme
+        </label>
+        <label>
+          <input type="radio" name="focus" value="skin">
+          Cilt sağlığı ve bakım rutinim
+        </label>
+        <label>
+          <input type="radio" name="focus" value="drug">
+          İlaçlara vereceğim genetik yanıtı bilmek
+        </label>
+        <label>
+          <input type="radio" name="focus" value="intolerance">
+          Hangi gıdaların bana dokunduğunu öğrenmek
+        </label>
+      </div>
+
+      <!-- Soru 2 -->
+      <div class="fg-quiz-question">
+        <h2>2. Detay seviyesi nasıl olsun?</h2>
+        <label>
+          <input type="radio" name="detail" value="starter">
+          Başlangıç – uygun fiyatlı, temel bir profil istiyorum
+        </label>
+        <label>
+          <input type="radio" name="detail" value="advanced">
+          Daha detaylı, geniş kapsamlı analiz istiyorum
+        </label>
+        <label>
+          <input type="radio" name="detail" value="pro">
+          Tek seferde her şeyi (tüm genlerimi) öğrenmek istiyorum
+        </label>
+      </div>
+
+      <!-- Soru 3 -->
+      <div class="fg-quiz-question">
+        <h2>3. Bütçe beklentin hangi aralıkta?</h2>
+        <label>
+          <input type="radio" name="budget" value="low">
+          Daha ulaşılabilir bütçe
+        </label>
+        <label>
+          <input type="radio" name="budget" value="mid">
+          Orta seviye – fiyat/performans odaklı
+        </label>
+        <label>
+          <input type="radio" name="budget" value="high">
+          En kapsamlı çözüm olabilir, önemli olan doğru analiz
+        </label>
+      </div>
+
+      <button type="button" id="fg-quiz-submit" class="fg-quiz-btn">
+        Sonucumu Göster
+      </button>
+    </form>
+
+    <div id="fg-quiz-result" class="fg-quiz-result fg-hidden">
+      <p class="fg-quiz-result-label">Senin için en uygun FalconGene testi:</p>
+      <h2 id="fg-quiz-result-title"></h2>
+      <p id="fg-quiz-result-text"></p>
+      <a id="fg-quiz-result-link" href="#" class="fg-quiz-btn fg-quiz-btn--secondary">
+        Önerilen testi incele
+      </a>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .fg-quiz-wrapper {
+    padding: 60px 16px 80px;
+    background: radial-gradient(circle at top left, rgba(74,185,216,0.08), transparent),
+                #050b14;
+    color: #f7fafc;
+  }
+
+  .fg-quiz-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .fg-quiz-title {
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .fg-quiz-subtitle {
+    color: #c4ccd6;
+    margin-bottom: 32px;
+  }
+
+  .fg-quiz-question {
+    margin-bottom: 28px;
+  }
+
+  .fg-quiz-question h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .fg-quiz-question label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .fg-quiz-question label:hover {
+    background-color: rgba(74,185,216,0.1);
+  }
+
+  .fg-quiz-question input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #4ab9d8;
+  }
+
+  .fg-quiz-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 242, 255, 0.6);
+    background: radial-gradient(circle at 0% 0%, rgba(74,185,216,0.25), transparent),
+                rgba(9, 18, 33, 0.9);
+    color: #e6f8ff;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .fg-quiz-btn--secondary {
+    margin-top: 16px;
+  }
+
+  .fg-quiz-btn:hover {
+    box-shadow: 0 0 18px rgba(74,185,216,0.55);
+  }
+
+  .fg-quiz-result {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .fg-quiz-result-label {
+    font-size: 13px;
+    color: #c4ccd6;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 6px;
+  }
+
+  .fg-quiz-result h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #4ab9d8;
+  }
+
+  .fg-quiz-result p {
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .fg-hidden {
+    display: none;
+  }
+
+  @media (max-width: 749px) {
+    .fg-quiz-wrapper {
+      padding: 40px 16px 60px;
+    }
+
+    .fg-quiz-title {
+      font-size: 22px;
+    }
+
+    .fg-quiz-question h2 {
+      font-size: 15px;
+    }
+
+    .fg-quiz-question label {
+      font-size: 13px;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('fg-quiz-form');
+    var submitBtn = document.getElementById('fg-quiz-submit');
+    var resultBox = document.getElementById('fg-quiz-result');
+    var resultTitle = document.getElementById('fg-quiz-result-title');
+    var resultText = document.getElementById('fg-quiz-result-text');
+    var resultLink = document.getElementById('fg-quiz-result-link');
+
+    submitBtn.addEventListener('click', function() {
+      var focus = form.querySelector('input[name="focus"]:checked');
+      var detail = form.querySelector('input[name="detail"]:checked');
+      var budget = form.querySelector('input[name="budget"]:checked');
+
+      if (!focus || !detail || !budget) {
+        alert('Lütfen tüm soruları cevapla 🙌');
+        return;
+      }
+
+      var reco = {};
+
+      // 4) İntolerans testi
+      if (focus.value === 'intolerance') {
+        reco = {
+          title: 'Gıda ve Gıda Dışı İntolerans Testi',
+          text: '400+ besin ve maddeye karşı vücudunun verdiği intolerans tepkilerini öğrenmen için en doğru test bu.',
+          url: '/products/gida-ve-gida-disi-intolerans-testi'
+        };
+      }
+      // 3) Premium NGS
+      else if (detail.value === 'pro' || budget.value === 'high') {
+        reco = {
+          title: 'Premium NGS Genetik Paneli (40+ Gen)',
+          text: 'Spor, beslenme, cilt ve ilaç genlerinin tamamını tek seferde görmek isteyenler için tasarlandı.',
+          url: '/products/premium-ngs-genetik-paneli'
+        };
+      }
+      // 2) 12 genlik geniş paket
+      else if (detail.value === 'advanced' || focus.value === 'sport') {
+        reco = {
+          title: '12 Genlik Geniş Kapsam Analiz Paketi',
+          text: 'Düzenli spor yapan, detaylı performans ve sağlık profili isteyenler için ideal.',
+          url: '/products/12-genlik-genis-kapsam-analiz-paketi'
+        };
+      }
+      // 1) 6 genlik temel paket
+      else {
+        reco = {
+          title: '6 Genlik Orta Kapsam Analiz Paketi',
+          text: 'Genetiğine göre spor, beslenme, cilt ve ilaç yanıtın hakkında giriş seviyesi ama güçlü bir özet sunar.',
+          url: '/products/6-genlik-orta-kapsam-analiz-paketi'
+        };
+      }
+
+      resultTitle.textContent = reco.title;
+      resultText.textContent = reco.text;
+      resultLink.href = reco.url;
+
+      resultBox.classList.remove('fg-hidden');
+
+      // Sonuca doğru hafif scroll
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "FalconGene Quiz",
+  "tag": "section",
+  "class": "section-quiz-falcongene",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Quiz Başlığı",
+      "default": "Hangi FalconGene testi sana uygun?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Aşağıdaki soruları cevapla, senin için en doğru testi önerelim."
+    }
+  ],
+  "presets": [
+    {
+      "name": "FalconGene Quiz",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
