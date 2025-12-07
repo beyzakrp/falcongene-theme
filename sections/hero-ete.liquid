@@ -25,6 +25,18 @@
           {{ 'lifestyle-1' | placeholder_svg_tag: 'hero-reference__img-placeholder' }}
         {% endif %}
       </div>
+      
+      {% if section.settings.show_modal_trigger %}
+        <button 
+          class="hero-reference__modal-trigger" 
+          data-modal-open="{{ section.id }}"
+          aria-label="Medya içeriğini görüntüle">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.9"/>
+            <path d="M32 28L52 40L32 52V28Z" fill="white"/>
+          </svg>
+        </button>
+      {% endif %}
     </div>
     
     <!-- Right Content -->
@@ -78,6 +90,97 @@
      
     </div>
   </div>
+  
+  <!-- Modal Structure -->
+  {% if section.settings.show_modal_trigger and section.blocks.size > 0 %}
+    <div class="hero-reference-modal" id="modal-{{ section.id }}" aria-hidden="true">
+      <div class="hero-reference-modal__overlay" data-modal-close="{{ section.id }}"></div>
+      <div class="hero-reference-modal__container">
+        <button 
+          class="hero-reference-modal__close" 
+          data-modal-close="{{ section.id }}"
+          aria-label="Kapat">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        
+        <div class="hero-reference-modal__content">
+          {% for block in section.blocks %}
+            <div class="hero-reference-modal__item" {{ block.shopify_attributes }}>
+              {% case block.type %}
+                {% when 'image' %}
+                  {% if block.settings.modal_image != blank %}
+                    <img 
+                      src="{{ block.settings.modal_image | image_url: width: 1920 }}"
+                      srcset="{{ block.settings.modal_image | image_url: width: 640 }} 640w,
+                              {{ block.settings.modal_image | image_url: width: 1024 }} 1024w,
+                              {{ block.settings.modal_image | image_url: width: 1920 }} 1920w"
+                      sizes="(max-width: 768px) 100vw, 90vw"
+                      alt="{{ block.settings.modal_image.alt | default: 'FalconGene Modal Görseli' }}"
+                      class="hero-reference-modal__image"
+                      loading="lazy">
+                    {% if block.settings.image_caption != blank %}
+                      <p class="hero-reference-modal__caption">{{ block.settings.image_caption }}</p>
+                    {% endif %}
+                  {% endif %}
+                  
+                {% when 'video' %}
+                  {% if block.settings.video_url != blank %}
+                    <div class="hero-reference-modal__video-wrapper">
+                      <video 
+                        class="hero-reference-modal__video"
+                        {% if block.settings.video_autoplay %}autoplay{% endif %}
+                        {% if block.settings.video_loop %}loop{% endif %}
+                        {% if block.settings.video_muted %}muted{% endif %}
+                        controls
+                        playsinline
+                        preload="metadata">
+                        <source src="{{ block.settings.video_url }}" type="video/mp4">
+                        Tarayıcınız video etiketini desteklemiyor.
+                      </video>
+                    </div>
+                    {% if block.settings.video_caption != blank %}
+                      <p class="hero-reference-modal__caption">{{ block.settings.video_caption }}</p>
+                    {% endif %}
+                  {% endif %}
+                  
+                {% when 'iframe' %}
+                  {% if block.settings.iframe_url != blank %}
+                    <div class="hero-reference-modal__iframe-wrapper">
+                      <iframe 
+                        src="{{ block.settings.iframe_url }}"
+                        class="hero-reference-modal__iframe"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                      </iframe>
+                    </div>
+                    {% if block.settings.iframe_caption != blank %}
+                      <p class="hero-reference-modal__caption">{{ block.settings.iframe_caption }}</p>
+                    {% endif %}
+                  {% endif %}
+              {% endcase %}
+            </div>
+          {% endfor %}
+        </div>
+        
+        {% if section.blocks.size > 1 %}
+          <button class="hero-reference-modal__nav hero-reference-modal__nav--prev" data-modal-nav="prev" aria-label="Önceki">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 8L12 16L20 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="hero-reference-modal__nav hero-reference-modal__nav--next" data-modal-nav="next" aria-label="Sonraki">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8L20 16L12 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
 </section>
 
 {% stylesheet %}
@@ -201,7 +304,7 @@
   .hero-reference__button--secondary {
     background: transparent;
     color: #FFFFFF;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
   }
 
   .hero-reference__button--secondary:hover {
@@ -212,19 +315,7 @@
 
   /* Badge Block */
   .hero-reference__block {
-   /* position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    border-radius: 16px;
-    background: rgba(199, 149, 109, 0.15);
-    border: 2px solid rgba(199, 149, 109, 0.3);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    */
-
+    display: none; /* Placeholder for future use */
   }
 
   .hero-reference__dna-animation {
@@ -276,6 +367,199 @@
     letter-spacing: -0.02em;
   }
 
+  /* Modal Trigger Button */
+  .hero-reference__modal-trigger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+
+  .hero-reference__modal-trigger:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-reference__modal-trigger svg {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Modal Styles */
+  .hero-reference-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero-reference-modal[aria-hidden="false"] {
+    display: flex;
+    opacity: 1;
+  }
+
+  .hero-reference-modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+  }
+
+  .hero-reference-modal__container {
+    position: relative;
+    width: 90%;
+    max-width: 1400px;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .hero-reference-modal__close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.3s ease;
+    z-index: 20;
+  }
+
+  .hero-reference-modal__close:hover {
+    transform: rotate(90deg);
+  }
+
+  .hero-reference-modal__content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .hero-reference-modal__item {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    animation: modalFadeIn 0.4s ease;
+  }
+
+  .hero-reference-modal__item.is-active {
+    display: flex;
+  }
+
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .hero-reference-modal__image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .hero-reference-modal__video-wrapper,
+  .hero-reference-modal__iframe-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero-reference-modal__video {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .hero-reference-modal__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .hero-reference-modal__caption {
+    margin-top: 20px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .hero-reference-modal__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 20;
+  }
+
+  .hero-reference-modal__nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .hero-reference-modal__nav--prev {
+    left: -70px;
+  }
+
+  .hero-reference-modal__nav--next {
+    right: -70px;
+  }
+
+  .hero-reference-modal__nav.is-hidden {
+    display: none;
+  }
+
   /* Responsive */
   @media screen and (max-width: 1024px) {
     .hero-reference__container {
@@ -292,6 +576,14 @@
 
     .hero-reference__title {
       font-size: clamp(2rem, 4vw, 3rem);
+    }
+    
+    .hero-reference-modal__nav--prev {
+      left: 10px;
+    }
+    
+    .hero-reference-modal__nav--next {
+      right: 10px;
     }
   }
 
@@ -336,8 +628,166 @@
     .hero-reference__block-title {
       font-size: 3rem;
     }
+    
+    .hero-reference__modal-trigger {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .hero-reference__modal-trigger svg {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .hero-reference-modal__container {
+      width: 95%;
+      max-height: 85vh;
+    }
+    
+    .hero-reference-modal__close {
+      top: -40px;
+    }
+    
+    .hero-reference-modal__nav {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .hero-reference-modal__nav--prev {
+      left: 5px;
+    }
+    
+    .hero-reference-modal__nav--next {
+      right: 5px;
+    }
+    
+    .hero-reference-modal__image {
+      max-height: 70vh;
+    }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  class HeroReferenceModal {
+    constructor(sectionId) {
+      this.sectionId = sectionId;
+      this.modal = document.getElementById(`modal-${sectionId}`);
+      if (!this.modal) return;
+      
+      this.currentIndex = 0;
+      this.items = this.modal.querySelectorAll('.hero-reference-modal__item');
+      this.prevBtn = this.modal.querySelector('[data-modal-nav="prev"]');
+      this.nextBtn = this.modal.querySelector('[data-modal-nav="next"]');
+      
+      this.init();
+    }
+    
+    init() {
+      // Open modal
+      const trigger = document.querySelector(`[data-modal-open="${this.sectionId}"]`);
+      if (trigger) {
+        trigger.addEventListener('click', () => this.open());
+      }
+      
+      // Close modal
+      const closeButtons = this.modal.querySelectorAll(`[data-modal-close="${this.sectionId}"]`);
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => this.close());
+      });
+      
+      // Navigation
+      if (this.prevBtn) {
+        this.prevBtn.addEventListener('click', () => this.prev());
+      }
+      if (this.nextBtn) {
+        this.nextBtn.addEventListener('click', () => this.next());
+      }
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (this.modal.getAttribute('aria-hidden') === 'false') {
+          if (e.key === 'Escape') this.close();
+          if (e.key === 'ArrowLeft') this.prev();
+          if (e.key === 'ArrowRight') this.next();
+        }
+      });
+      
+      // Show first item
+      this.showItem(0);
+    }
+    
+    open() {
+      this.modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      
+      // Pause all videos initially
+      this.pauseAllVideos();
+      
+      // Play video if current item is video
+      const currentItem = this.items[this.currentIndex];
+      const video = currentItem?.querySelector('video');
+      if (video) video.play();
+    }
+    
+    close() {
+      this.modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      
+      // Pause all videos
+      this.pauseAllVideos();
+    }
+    
+    showItem(index) {
+      this.items.forEach((item, i) => {
+        item.classList.toggle('is-active', i === index);
+      });
+      
+      this.currentIndex = index;
+      this.updateNavButtons();
+      
+      // Pause all videos
+      this.pauseAllVideos();
+      
+      // Play video if current item is video
+      const currentItem = this.items[this.currentIndex];
+      const video = currentItem?.querySelector('video');
+      if (video && this.modal.getAttribute('aria-hidden') === 'false') {
+        video.play();
+      }
+    }
+    
+    prev() {
+      const newIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.items.length - 1;
+      this.showItem(newIndex);
+    }
+    
+    next() {
+      const newIndex = this.currentIndex < this.items.length - 1 ? this.currentIndex + 1 : 0;
+      this.showItem(newIndex);
+    }
+    
+    updateNavButtons() {
+      if (this.items.length <= 1) {
+        if (this.prevBtn) this.prevBtn.classList.add('is-hidden');
+        if (this.nextBtn) this.nextBtn.classList.add('is-hidden');
+      }
+    }
+    
+    pauseAllVideos() {
+      this.modal.querySelectorAll('video').forEach(video => {
+        video.pause();
+      });
+    }
+  }
+  
+  // Initialize modal
+  document.addEventListener('DOMContentLoaded', () => {
+    const sectionId = document.querySelector('.hero-reference-modal')?.id.replace('modal-', '');
+    if (sectionId) {
+      new HeroReferenceModal(sectionId);
+    }
+  });
+{% endjavascript %}
 
 {% schema %}
 {
@@ -354,6 +804,13 @@
       "id": "image",
       "label": "Model Image",
       "info": "Recommended: 1200x1600px portrait photo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_modal_trigger",
+      "label": "Show Modal Trigger Button",
+      "default": false,
+      "info": "Görselin üzerinde modal açma butonu gösterir"
     },
     {
       "type": "text",
@@ -426,6 +883,81 @@
       "id": "show_dna_animation",
       "label": "Show DNA Animation",
       "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Modal Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "modal_image",
+          "label": "Image",
+          "info": "Modal'da gösterilecek görsel"
+        },
+        {
+          "type": "text",
+          "id": "image_caption",
+          "label": "Caption (Optional)",
+          "info": "Görselin altında gösterilecek açıklama"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Modal Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "MP4 formatında video URL'i (Shopify Files'dan)"
+        },
+        {
+          "type": "checkbox",
+          "id": "video_autoplay",
+          "label": "Autoplay",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "video_loop",
+          "label": "Loop",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "video_muted",
+          "label": "Muted",
+          "default": false,
+          "info": "Autoplay için muted gerekli olabilir"
+        },
+        {
+          "type": "text",
+          "id": "video_caption",
+          "label": "Caption (Optional)",
+          "info": "Videonun altında gösterilecek açıklama"
+        }
+      ]
+    },
+    {
+      "type": "iframe",
+      "name": "Modal Iframe (YouTube/Vimeo)",
+      "settings": [
+        {
+          "type": "url",
+          "id": "iframe_url",
+          "label": "Iframe URL",
+          "info": "YouTube, Vimeo veya diğer embed URL'leri. Örnek: https://www.youtube.com/embed/VIDEO_ID"
+        },
+        {
+          "type": "text",
+          "id": "iframe_caption",
+          "label": "Caption (Optional)",
+          "info": "İframe'in altında gösterilecek açıklama"
+        }
+      ]
     }
   ],
   "presets": [
