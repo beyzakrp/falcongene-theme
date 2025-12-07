@@ -289,18 +289,19 @@
   .hero-nauto__media {
    position: relative;
     height: 100%;
-    min-height: 650px;
-    background: #1a4d3a;
+    min-height: 600px;
+    background: #0d1b2a;
     border-radius: 0 0 0 24px;
     padding: 2rem;
     overflow: visible;
   }
 
   .hero-nauto__grid {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto auto;
-    gap: 1.25rem;
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: auto;
+    gap: 1.5rem;
     height: 100%;
   }
 
@@ -316,12 +317,15 @@
   }
 
   .hero-nauto__grid-item--large {
-    grid-row: span 2;
-    background: #064e3b;
+   grid-row: 1 / span 2;
+    align-self: start;
+    background: #16314eff;
     min-height: 320px;
   }
 
   .hero-nauto__grid-item--medium {
+    align-self: start;
+    margin-top: 32px;
     grid-row: span 1;
     min-height: 200px;
   }
@@ -331,8 +335,8 @@
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-    background: #86efac;
-    color: #064e3b;
+    background: #4a9df5ff;
+    color: #0d1b2a;
     grid-column: span 1;
   }
 
@@ -377,7 +381,7 @@
     font-weight: 700;
     margin: 0;
     line-height: 1.3;
-    color: #064e3b;
+    color: #0d1b2a;
   }
 
   .hero-nauto__card-avatars {
@@ -389,8 +393,8 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #064e3b, #10b981);
-    border: 2px solid #86efac;
+    background: linear-gradient(135deg, #0d1b2a, #014185ff);
+    border: 2px solid #90c6ffff;
     margin-left: -10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -402,7 +406,7 @@
   .hero-nauto__card-arrow {
     font-size: 1.75rem;
     font-weight: 400;
-    color: #064e3b;
+    color: #0d1b2a;
     flex-shrink: 0;
     margin-left: auto;
   }
