@@ -16,13 +16,11 @@
     <div class="benefits-grid__cards">
       {% for block in section.blocks %}
         <div class="benefits-grid__card" {{ block.shopify_attributes }}>
-          {% if block.settings.icon_svg != blank %}
-            <div class="benefits-grid__icon">
-              {{ block.settings.icon_svg }}
-            </div>
-          {% elsif block.settings.icon_emoji != blank %}
-            <div class="benefits-grid__icon benefits-grid__icon--emoji">
-              {{ block.settings.icon_emoji }}
+          {% if block.settings.card_image != blank %}
+            <div class="benefits-grid__image">
+              {{ block.settings.card_image | image_url: width: 120 | image_tag: 
+                loading: 'lazy',
+                alt: block.settings.card_title }}
             </div>
           {% endif %}
 
@@ -111,27 +109,23 @@
     border-color: #e2e8f0;
   }
 
-  /* Icon */
-  .benefits-grid__icon {
-    width: 56px;
-    height: 56px;
+  /* Image */
+  .benefits-grid__image {
+    width: 72px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f1f5f9;
   }
 
-  .benefits-grid__icon svg {
-    width: 32px;
-    height: 32px;
-    color: #0a0a0a;
-  }
-
-  .benefits-grid__icon--emoji {
-    font-size: 2rem;
-    background: transparent;
+  .benefits-grid__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Card Title */
@@ -189,15 +183,10 @@
       padding: 36px 28px;
     }
 
-    .benefits-grid__icon {
-      width: 52px;
-      height: 52px;
+    .benefits-grid__image {
+      width: 64px;
+      height: 64px;
       margin-bottom: 20px;
-    }
-
-    .benefits-grid__icon svg {
-      width: 28px;
-      height: 28px;
     }
 
     .benefits-grid__card-title {
@@ -247,9 +236,9 @@
       padding: 32px 28px;
     }
 
-    .benefits-grid__icon {
-      width: 52px;
-      height: 52px;
+    .benefits-grid__image {
+      width: 64px;
+      height: 64px;
       margin-bottom: 20px;
     }
 
@@ -288,17 +277,10 @@
       "name": "Benefit Card",
       "settings": [
         {
-          "type": "textarea",
-          "id": "icon_svg",
-          "label": "Icon SVG Code",
-          "info": "SVG kod yapıştırın (opsiyonel)"
-        },
-        {
-          "type": "text",
-          "id": "icon_emoji",
-          "label": "Icon Emoji",
-          "default": "🏋️",
-          "info": "SVG yoksa emoji kullanılır"
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Kart Görseli",
+          "info": "Önerilen: 120x120px"
         },
         {
           "type": "text",
@@ -341,7 +323,6 @@
         {
           "type": "benefit_card",
           "settings": {
-            "icon_emoji": "🏋️",
             "card_title": "Spor",
             "benefit_1": "Hangi spora yatkınsın?",
             "benefit_2": "Güç / dayanıklılık profili",
@@ -352,7 +333,6 @@
         {
           "type": "benefit_card",
           "settings": {
-            "icon_emoji": "🍏",
             "card_title": "Beslenme",
             "benefit_1": "Kilo yönetimi",
             "benefit_2": "Makro metabolizma (Y/K/P)",
@@ -363,7 +343,6 @@
         {
           "type": "benefit_card",
           "settings": {
-            "icon_emoji": "✨",
             "card_title": "Cilt",
             "benefit_1": "Yaşlanma hızı",
             "benefit_2": "Kolajen yapısı",
@@ -374,7 +353,6 @@
         {
           "type": "benefit_card",
           "settings": {
-            "icon_emoji": "💊",
             "card_title": "İlaç",
             "benefit_1": "Yan etki yatkınlığı",
             "benefit_2": "Doz tepkisi",
