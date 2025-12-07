@@ -9,8 +9,71 @@
  */
 {
   "sections": {
+    "hero_nauto_modern": {
+      "type": "hero-nauto",
+      "blocks": {
+        "image_large_1": {
+          "type": "image_large",
+          "settings": {
+            "image": "shopify://shop_images/labPhoto.avif"
+          }
+        },
+        "image_medium_1": {
+          "type": "image_medium",
+          "settings": {
+            "image": "shopify://shop_images/labAnalysisPhoto.avif"
+          }
+        },
+        "info_card_1": {
+          "type": "info_card",
+          "settings": {
+            "icon": "📦",
+            "title": "Hızlı & Güvenilir Teslimat",
+            "background_color": "#86efac",
+            "show_avatars": true
+          }
+        },
+        "image_medium_2": {
+          "type": "image_medium",
+          "settings": {
+            "image": "shopify://shop_images/test.jpg"
+          }
+        },
+        "badge_card_1": {
+          "type": "badge_card",
+          "settings": {
+            "image": "shopify://shop_images/variant.jpg",
+            "badge_text": "Laboratuvar Onaylı, Kapınıza Teslim."
+          }
+        }
+      },
+      "block_order": [
+        "image_large_1",
+        "image_medium_1",
+        "info_card_1",
+        "image_medium_2",
+        "badge_card_1"
+      ],
+      "settings": {
+        "subheading": "GÜVENİLİR TEST KİTLERİ",
+        "heading": "Genetiğini Anla <em>Yaşamını Şekillendir</em>",
+        "description": "<p>Tıbbi sınıf test kitlerini sipariş edin, posta ile gönderin ve hızlı, doğru, güvenli sonuçları çevrimiçi alın — her zaman, her yerde, sorunsuz.</p>",
+        "button_text": "Test Kitini Sipariş Et",
+        "button_link": "shopify://collections/all",
+        "secondary_link_text": "Nasıl Çalışır?",
+        "stat_1_value": "99.8%",
+        "stat_1_label": "Güvenli & Gizli Sonuçlar",
+        "stat_2_value": "98%",
+        "stat_2_label": "Memnuniyet Oranı",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
+      "disabled": true,
       "blocks": {
         "text_YLPk4p": {
           "type": "text",
@@ -783,6 +846,7 @@
     }
   },
   "order": [
+    "hero_nauto_modern",
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
     "custom_collection_list_abmbty",
