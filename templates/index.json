@@ -75,7 +75,8 @@
       "type": "hero-ete",
       "name": "Hero Reference Style",
       "settings": {
-        "image": "shopify://shop_images/cells-hero.png",
+        "image": "shopify://shop_images/marketing_belenus_Close-up_of_a_man_and_a_woman_side_by_side_ca_0c6c993c-6822-4183-9db8-53ed5ce617c1.png",
+        "show_modal_trigger": false,
         "heading_italic": "Geleceğiniz DNA'nızda yazılı",
         "heading_main": "Genetik Kodunuzu\nKeşfedin",
         "description": "<p>Laboratuvar onaylı DNA testlerimizle beslenme, spor, cilt sağlığı ve metabolizma profilinizi keşfedin.</p>",
@@ -83,10 +84,10 @@
         "button_primary_link": "",
         "button_secondary_text": "Hangi Test Bana Uygun?",
         "button_secondary_link": "",
-        "right_block_color": "#1d3686",
+        "right_block_color": "#3d1b1f",
         "right_block_badge": "CYBER WEEK",
         "right_block_text": "up to\n30%",
-        "show_dna_animation": true
+        "show_dna_animation": false
       }
     },
     "hero_jVaWmY": {
