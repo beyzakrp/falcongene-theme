@@ -63,8 +63,9 @@
         {% endif %}
       </div>
     </div>
-    {% comment %}
+
     <div class="hero-nauto__media">
+            {% comment %}
       <div class="hero-nauto__grid">
         {% for block in section.blocks %}
           {% case block.type %}
@@ -122,9 +123,9 @@
           {% endcase %}
         {% endfor %}
       </div>
-      
+       {% endcomment %}
     </div>
-    {% endcomment %}
+   
   </div>
 </div>
 
