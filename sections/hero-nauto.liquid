@@ -63,12 +63,12 @@
         {% endif %}
       </div>
     </div>
-    
+    {% comment %}
     <div class="hero-nauto__media">
       <div class="hero-nauto__grid">
         {% for block in section.blocks %}
           {% case block.type %}
-            {% when 'image_large' %}
+          {% when 'image_large' %}
               <div class="hero-nauto__grid-item hero-nauto__grid-item--large" {{ block.shopify_attributes }}>
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 800 | image_tag: 
@@ -122,7 +122,9 @@
           {% endcase %}
         {% endfor %}
       </div>
+      
     </div>
+    {% endcomment %}
   </div>
 </div>
 
