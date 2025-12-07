@@ -6,15 +6,14 @@
   assign button_primary_link = section.settings.button_primary_link
   assign button_secondary_text = section.settings.button_secondary_text
   assign button_secondary_link = section.settings.button_secondary_link
-  assign right_block_color = section.settings.right_block_color
   assign right_block_badge = section.settings.right_block_badge
   assign right_block_text = section.settings.right_block_text
 %}
 
 <section class="hero-reference">
   <div class="hero-reference__container">
-    <!-- Left Content -->
-    <div class="hero-reference__content">
+    <!-- Left Image Only -->
+    <div class="hero-reference__image-wrapper">
       <div class="hero-reference__image">
         {% if section.settings.image != blank %}
           {{ section.settings.image | image_url: width: 1200 | image_tag: 
@@ -26,7 +25,10 @@
           {{ 'lifestyle-1' | placeholder_svg_tag: 'hero-reference__img-placeholder' }}
         {% endif %}
       </div>
-      
+    </div>
+    
+    <!-- Right Content -->
+    <div class="hero-reference__content">
       <div class="hero-reference__text">
         {% if heading_italic != blank %}
           <p class="hero-reference__subtitle">{{ heading_italic }}</p>
@@ -54,10 +56,7 @@
           {% endif %}
         </div>
       </div>
-    </div>
-    
-    <!-- Right Block -->
-    <div class="hero-reference__block" style="background: {{ right_block_color }};">
+      
       {% if section.settings.show_dna_animation %}
         <div class="hero-reference__dna-animation">
           <svg viewBox="0 0 200 400" class="dna-helix">
@@ -66,7 +65,7 @@
         </div>
       {% endif %}
       
-      <div class="hero-reference__block-content">
+      <div class="hero-reference__block">
         {% if right_block_badge != blank %}
           <span class="hero-reference__badge">{{ right_block_badge }}</span>
         {% endif %}
@@ -96,12 +95,12 @@
     min-height: 90vh;
   }
 
-  /* Left Content */
-  .hero-reference__content {
+  /* Left Image Only */
+  .hero-reference__image-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-    padding: 60px 80px 60px 120px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   .hero-reference__image {
@@ -110,7 +109,6 @@
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
   }
 
   .hero-reference__img {
@@ -120,15 +118,21 @@
     object-position: center 20%;
   }
 
+  /* Right Content */
+  .hero-reference__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    background: linear-gradient(135deg, #3D1B1F 0%, #2A1215 100%);
+    overflow: hidden;
+  }
+
   .hero-reference__text {
     position: relative;
     z-index: 2;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 60px;
-    border-radius: 16px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(20px);
+    margin-bottom: 60px;
   }
 
   .hero-reference__subtitle {
@@ -136,17 +140,17 @@
     font-style: italic;
     font-size: 1.125rem;
     font-weight: 400;
-    color: #78716C;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0 0 16px 0;
     letter-spacing: 0.02em;
   }
 
   .hero-reference__title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
-    color: #1C1917;
+    color: #FFFFFF;
     margin: 0 0 32px 0;
     letter-spacing: -0.02em;
   }
@@ -155,7 +159,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     line-height: 1.75;
-    color: #57534E;
+    color: rgba(255, 255, 255, 0.85);
     margin: 0 0 48px 0;
   }
 
@@ -182,35 +186,40 @@
   .hero-reference__button--primary {
     background: linear-gradient(135deg, #C7956D 0%, #B8865E 100%);
     color: #FFFFFF;
-    box-shadow: 0 8px 24px rgba(199, 149, 109, 0.35);
+    box-shadow: 0 8px 24px rgba(199, 149, 109, 0.5);
   }
 
   .hero-reference__button--primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(199, 149, 109, 0.45);
+    box-shadow: 0 12px 32px rgba(199, 149, 109, 0.6);
     background: linear-gradient(135deg, #D4A778 0%, #C7956D 100%);
   }
 
   .hero-reference__button--secondary {
     background: transparent;
-    color: #1C1917;
-    border: 2px solid #1C1917;
+    color: #FFFFFF;
+    border: 2px solid rgba(255, 255, 255, 0.4);
   }
 
   .hero-reference__button--secondary:hover {
-    background: rgba(28, 25, 23, 0.05);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
     transform: translateY(-2px);
   }
 
-  /* Right Block */
+  /* Badge Block */
   .hero-reference__block {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 80px;
-    background: linear-gradient(135deg, #3D1B1F 0%, #2A1215 100%);
-    overflow: hidden;
+    padding: 40px;
+    border-radius: 16px;
+    background: rgba(199, 149, 109, 0.15);
+    border: 2px solid rgba(199, 149, 109, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
   }
 
   .hero-reference__dna-animation {
@@ -219,7 +228,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.08;
+    opacity: 0.05;
+    z-index: 1;
   }
 
   .dna-helix {
@@ -240,13 +250,6 @@
     }
   }
 
-  .hero-reference__block-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #FFFFFF;
-  }
-
   .hero-reference__badge {
     display: inline-block;
     font-family: 'Inter', sans-serif;
@@ -254,15 +257,16 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 24px;
+    color: #C7956D;
+    margin-bottom: 16px;
   }
 
   .hero-reference__block-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 6vw, 6rem);
+    font-size: clamp(2.5rem, 5vw, 5rem);
     font-weight: 700;
     line-height: 0.9;
+    color: #FFFFFF;
     margin: 0;
     letter-spacing: -0.02em;
   }
@@ -274,11 +278,11 @@
     }
 
     .hero-reference__content {
-      padding: 40px 40px 40px 60px;
+      padding: 60px 40px;
     }
 
     .hero-reference__text {
-      padding: 40px;
+      margin-bottom: 40px;
     }
 
     .hero-reference__title {
@@ -289,17 +293,16 @@
   @media screen and (max-width: 768px) {
     .hero-reference__container {
       grid-template-columns: 1fr;
-      grid-template-rows: 60vh 40vh;
+      grid-template-rows: 50vh auto;
       min-height: 100vh;
     }
 
     .hero-reference__content {
-      padding: 32px;
+      padding: 40px 32px;
     }
 
     .hero-reference__text {
-      padding: 32px;
-      max-width: 100%;
+      margin-bottom: 40px;
     }
 
     .hero-reference__title {
@@ -322,7 +325,7 @@
     }
 
     .hero-reference__block {
-      padding: 40px 32px;
+      padding: 32px;
     }
 
     .hero-reference__block-title {
