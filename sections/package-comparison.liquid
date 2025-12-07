@@ -189,191 +189,239 @@
 </section>
 
 {% stylesheet %}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
   .package-comparison {
     padding: 80px 20px;
     background: #FAFAF9;
   }
 
   .package-comparison__container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 
   .package-comparison__title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 700;
     text-align: center;
     color: #0d1b2a;
     margin-bottom: 12px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   .package-comparison__subtitle {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
+    font-weight: 400;
     text-align: center;
     color: #5a6c7d;
-    margin-bottom: 48px;
+    margin-bottom: 56px;
   }
 
-  /* Desktop Table */
+  /* Desktop Table - Grid Layout */
   .package-comparison__table-wrapper {
     display: none;
-    overflow-x: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    gap: 0;
   }
 
   .package-comparison__table {
+    display: grid;
+    grid-template-columns: 30.67% 38.66% 30.67%;
+    gap: 0;
     width: 100%;
-    border-collapse: collapse;
-    background: white;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   }
 
-  .package-comparison__table thead {
-    background: #0d1b2a;
-    color: white;
+  .package-comparison__table thead,
+  .package-comparison__table tbody {
+    display: contents;
   }
 
-  .package-comparison__table th {
-    padding: 24px 16px;
+  .package-comparison__table th,
+  .package-comparison__table td {
+    padding: 24px 20px;
+    font-family: 'Inter', sans-serif;
     text-align: center;
-    font-weight: 600;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background: white;
+    border-right: 1px solid #e5e7eb;
   }
 
-  .package-comparison__table th:last-child {
+  .package-comparison__table th:last-child,
+  .package-comparison__table td:last-child {
     border-right: none;
   }
 
   .package-comparison__feature-col {
-    text-align: left !important;
-    width: 200px;
-    background: #0d1b2a;
+    display: none;
   }
 
   .package-comparison__package-col {
+    padding: 32px 20px 24px;
     position: relative;
-    width: 33.33%;
   }
 
   .package-comparison__package-col--recommended {
-    background: linear-gradient(180deg, #1a4d5e 0%, #0d1b2a 100%);
+    background: #E9FCEB;
+    border-left: 1px solid #d1f4d4;
+    border-right: 1px solid #d1f4d4;
   }
 
   .package-comparison__badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    background: rgba(255, 215, 0, 0.2);
-    color: #ffd700;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-bottom: 8px;
+    background: #10b981;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 24px;
+    margin-bottom: 12px;
   }
 
   .package-comparison__package-header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
   }
 
   .package-comparison__package-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.375rem;
     font-weight: 700;
     margin: 0;
-    color: white;
+    color: #0d1b2a;
+    line-height: 1.3;
   }
 
   .package-comparison__package-subtitle {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 4px 0 0 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #5a6c7d;
+    margin: 0;
   }
 
   .package-comparison__table tbody tr {
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .package-comparison__table tbody tr:last-child {
-    border-bottom: none;
+    display: contents;
   }
 
   .package-comparison__table td {
-    padding: 16px;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
+    padding: 18px 20px;
     font-size: 0.9375rem;
+    color: #374151;
+    border-top: 1px solid #f3f4f6;
   }
 
   .package-comparison__feature-name {
-    text-align: left !important;
-    font-weight: 600;
-    color: #0d1b2a;
-    background: #f9fafb;
+    display: none;
   }
 
   .package-comparison__feature-value {
-    color: #374151;
+    font-weight: 500;
   }
 
-  .package-comparison__package-col--recommended + td {
-    background: rgba(26, 77, 94, 0.02);
+  .package-comparison__package-col--recommended ~ .package-comparison__feature-value {
+    background: #E9FCEB;
   }
 
-  .package-comparison__price-row {
-    background: #f9fafb;
-  }
-
-  .package-comparison__price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
+  /* Specific row styling */
+  .package-comparison__table tbody tr:first-child td {
+    padding-top: 24px;
+    font-weight: 600;
     color: #0d1b2a;
   }
 
+  .package-comparison__price-row td {
+    padding: 28px 20px;
+    background: #f9fafb;
+    border-top: 2px solid #e5e7eb;
+  }
+
+  .package-comparison__package-col--recommended ~ td.package-comparison__feature-value {
+    background: #E9FCEB;
+  }
+
+  .package-comparison__price-row .package-comparison__package-col--recommended ~ td {
+    background: #E9FCEB;
+  }
+
+  .package-comparison__price {
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0d1b2a;
+    letter-spacing: -0.02em;
+  }
+
   .package-comparison__cta-row td {
-    padding: 24px 16px;
+    padding: 32px 20px;
+    border-top: none;
+  }
+
+  .package-comparison__package-col--recommended ~ .package-comparison__cta-cell {
+    background: #E9FCEB;
   }
 
   .package-comparison__cta-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 32px;
-    border-radius: 6px;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 24px;
+    border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 0.9375rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid #0d1b2a;
     background: white;
     color: #0d1b2a;
+  }
+
+  .package-comparison__cta-btn::after {
+    content: '→';
+    font-size: 1.125rem;
+    transition: transform 0.3s ease;
   }
 
   .package-comparison__cta-btn:hover {
     background: #0d1b2a;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(13, 27, 42, 0.2);
+    box-shadow: 0 8px 20px rgba(13, 27, 42, 0.25);
+  }
+
+  .package-comparison__cta-btn:hover::after {
+    transform: translateX(4px);
   }
 
   .package-comparison__cta-btn--recommended {
+    padding: 18px 32px;
     background: #0d1b2a;
     color: white;
     border-color: #0d1b2a;
-    box-shadow: 0 4px 16px rgba(13, 27, 42, 0.3);
+    font-size: 1.0625rem;
+    box-shadow: 0 8px 24px rgba(13, 27, 42, 0.35);
   }
 
   .package-comparison__cta-btn--recommended:hover {
     background: #1a4d5e;
     border-color: #1a4d5e;
-    box-shadow: 0 6px 20px rgba(26, 77, 94, 0.4);
+    box-shadow: 0 12px 32px rgba(26, 77, 94, 0.45);
+    transform: translateY(-3px);
   }
 
   /* Mobile Cards */
@@ -384,34 +432,53 @@
 
   .package-comparison__mobile-card {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     border: 2px solid transparent;
     transition: all 0.3s ease;
   }
 
   .package-comparison__mobile-card--recommended {
-    border-color: #1a4d5e;
-    box-shadow: 0 4px 20px rgba(26, 77, 94, 0.15);
+    background: #E9FCEB;
+    border-color: #10b981;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
   }
 
   .package-comparison__mobile-header {
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
     border-bottom: 2px solid #e5e7eb;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+  }
+
+  .package-comparison__mobile-card--recommended .package-comparison__mobile-header {
+    border-bottom-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .package-comparison__mobile-card .package-comparison__package-name {
+    font-size: 1.25rem;
+    margin-top: 8px;
+  }
+
+  .package-comparison__mobile-card .package-comparison__package-subtitle {
+    margin-top: 6px;
   }
 
   .package-comparison__mobile-features {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .package-comparison__mobile-feature {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
+    align-items: center;
+    padding: 14px 0;
     border-bottom: 1px solid #f3f4f6;
+  }
+
+  .package-comparison__mobile-card--recommended .package-comparison__mobile-feature {
+    border-bottom-color: rgba(16, 185, 129, 0.1);
   }
 
   .package-comparison__mobile-feature:last-child {
@@ -419,27 +486,34 @@
   }
 
   .package-comparison__mobile-feature-label {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     color: #0d1b2a;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   .package-comparison__mobile-feature-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     color: #374151;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   .package-comparison__mobile-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    padding-top: 20px;
+    gap: 20px;
+    padding-top: 24px;
     border-top: 2px solid #e5e7eb;
   }
 
+  .package-comparison__mobile-card--recommended .package-comparison__mobile-footer {
+    border-top-color: rgba(16, 185, 129, 0.2);
+  }
+
   .package-comparison__mobile-footer .package-comparison__price {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .package-comparison__mobile-footer .package-comparison__cta-btn {
@@ -469,7 +543,11 @@
 
     .package-comparison__subtitle {
       font-size: 1rem;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
+    }
+
+    .package-comparison__mobile-card {
+      padding: 24px 20px;
     }
   }
 {% endstylesheet %}
