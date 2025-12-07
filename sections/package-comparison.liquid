@@ -13,172 +13,66 @@
       <p class="package-comparison__subtitle">{{ subtitle }}</p>
     {% endif %}
 
-    <div class="package-comparison__table-wrapper">
-      <table class="package-comparison__table">
-        <thead>
-          <tr>
-            <th class="package-comparison__feature-col">Özellikler</th>
-            {% for block in section.blocks %}
-              <th class="package-comparison__package-col {% if block.settings.is_recommended %}package-comparison__package-col--recommended{% endif %}">
-                <div class="package-comparison__package-header">
-                  {% if block.settings.is_recommended %}
-                    <span class="package-comparison__badge">⭐ Önerilen</span>
-                  {% endif %}
-                  <h3 class="package-comparison__package-name">{{ block.settings.package_name }}</h3>
-                  {% if block.settings.package_subtitle != blank %}
-                    <p class="package-comparison__package-subtitle">{{ block.settings.package_subtitle }}</p>
-                  {% endif %}
-                </div>
-              </th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Kapsam -->
-          <tr>
-            <td class="package-comparison__feature-name">Kapsam</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.scope }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Gen Sayısı -->
-          <tr>
-            <td class="package-comparison__feature-name">Gen Sayısı</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.gene_count }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Spor Analizi -->
-          <tr>
-            <td class="package-comparison__feature-name">Spor Analizi</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.sport_analysis }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Beslenme -->
-          <tr>
-            <td class="package-comparison__feature-name">Beslenme</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.nutrition }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Cilt -->
-          <tr>
-            <td class="package-comparison__feature-name">Cilt</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.skin }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- İlaç Metabolizması -->
-          <tr>
-            <td class="package-comparison__feature-name">İlaç Metabolizması</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.drug_metabolism }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Teknoloji -->
-          <tr>
-            <td class="package-comparison__feature-name">Teknoloji</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.technology }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Teslim Süresi -->
-          <tr>
-            <td class="package-comparison__feature-name">Teslim Süresi</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">{{ block.settings.delivery_time }}</td>
-            {% endfor %}
-          </tr>
-
-          <!-- Fiyat -->
-          <tr class="package-comparison__price-row">
-            <td class="package-comparison__feature-name">Fiyat</td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__feature-value">
-                <strong class="package-comparison__price">{{ block.settings.price }}</strong>
-              </td>
-            {% endfor %}
-          </tr>
-
-          <!-- CTA Buttons -->
-          <tr class="package-comparison__cta-row">
-            <td></td>
-            {% for block in section.blocks %}
-              <td class="package-comparison__cta-cell">
-                {% if block.settings.product_url != blank %}
-                  <a href="{{ block.settings.product_url }}" class="package-comparison__cta-btn {% if block.settings.is_recommended %}package-comparison__cta-btn--recommended{% endif %}">
-                    {{ block.settings.cta_text | default: 'Satın Al' }}
-                  </a>
-                {% endif %}
-              </td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Mobile Cards -->
-    <div class="package-comparison__mobile-cards">
+    <!-- Desktop Grid Layout -->
+    <div class="package-comparison__grid">
       {% for block in section.blocks %}
-        <div class="package-comparison__mobile-card {% if block.settings.is_recommended %}package-comparison__mobile-card--recommended{% endif %}">
-          <div class="package-comparison__mobile-header">
+        <div class="package-comparison__card {% if block.settings.is_recommended %}package-comparison__card--recommended{% endif %}">
+          <!-- Header -->
+          <div class="package-comparison__card-header">
             {% if block.settings.is_recommended %}
-              <span class="package-comparison__badge">⭐ Önerilen</span>
+              <span class="package-comparison__badge">ÖNERİLEN</span>
             {% endif %}
-            <h3 class="package-comparison__package-name">{{ block.settings.package_name }}</h3>
-            {% if block.settings.package_subtitle != blank %}
-              <p class="package-comparison__package-subtitle">{{ block.settings.package_subtitle }}</p>
-            {% endif %}
+            <h3 class="package-comparison__card-title">{{ block.settings.package_name }}</h3>
+            <p class="package-comparison__card-scope">{{ block.settings.scope }}</p>
           </div>
 
-          <div class="package-comparison__mobile-features">
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Kapsam:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.scope }}</span>
+          <!-- Features List -->
+          <div class="package-comparison__features">
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">En kapsamlı</span>
+              <span class="package-comparison__feature-value">{{ block.settings.gene_count }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Gen Sayısı:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.gene_count }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">Spor</span>
+              <span class="package-comparison__feature-value">{{ block.settings.sport_analysis }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Spor Analizi:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.sport_analysis }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">Beslenme</span>
+              <span class="package-comparison__feature-value">{{ block.settings.nutrition }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Beslenme:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.nutrition }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">Cilt</span>
+              <span class="package-comparison__feature-value">{{ block.settings.skin }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Cilt:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.skin }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">İlaç Metabolizması</span>
+              <span class="package-comparison__feature-value">{{ block.settings.drug_metabolism }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">İlaç Metabolizması:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.drug_metabolism }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">Teknoloji</span>
+              <span class="package-comparison__feature-value">{{ block.settings.technology }}</span>
             </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Teknoloji:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.technology }}</span>
-            </div>
-            <div class="package-comparison__mobile-feature">
-              <span class="package-comparison__mobile-feature-label">Teslim Süresi:</span>
-              <span class="package-comparison__mobile-feature-value">{{ block.settings.delivery_time }}</span>
+            
+            <div class="package-comparison__feature">
+              <span class="package-comparison__feature-label">Teslim Süresi</span>
+              <span class="package-comparison__feature-value">{{ block.settings.delivery_time }}</span>
             </div>
           </div>
 
-          <div class="package-comparison__mobile-footer">
-            <strong class="package-comparison__price">{{ block.settings.price }}</strong>
+          <!-- Price & CTA -->
+          <div class="package-comparison__card-footer">
+            <div class="package-comparison__price">{{ block.settings.price }}</div>
             {% if block.settings.product_url != blank %}
-              <a href="{{ block.settings.product_url }}" class="package-comparison__cta-btn {% if block.settings.is_recommended %}package-comparison__cta-btn--recommended{% endif %}">
+              <a href="{{ block.settings.product_url }}" class="package-comparison__cta">
                 {{ block.settings.cta_text | default: 'Satın Al' }}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </a>
             {% endif %}
           </div>
@@ -192,362 +86,260 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   .package-comparison {
-    padding: 80px 20px;
-    background: #FAFAF9;
+    padding: 80px 20px 100px;
+    background: #f8f9fa;
   }
 
   .package-comparison__container {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .package-comparison__title {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
     text-align: center;
     color: #0d1b2a;
-    margin-bottom: 12px;
-    letter-spacing: -0.03em;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   .package-comparison__subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 400;
     text-align: center;
-    color: #5a6c7d;
-    margin-bottom: 56px;
+    color: #64748b;
+    margin: 0 0 56px 0;
+    line-height: 1.5;
   }
 
-  /* Desktop Table - Grid Layout */
-  .package-comparison__table-wrapper {
-    display: none;
-    gap: 0;
-  }
-
-  .package-comparison__table {
+  /* Grid Layout */
+  .package-comparison__grid {
     display: grid;
-    grid-template-columns: 30.67% 38.66% 30.67%;
-    gap: 0;
-    width: 100%;
-    max-width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1140px;
     margin: 0 auto;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   }
 
-  .package-comparison__table thead,
-  .package-comparison__table tbody {
-    display: contents;
-  }
-
-  .package-comparison__table th,
-  .package-comparison__table td {
-    padding: 24px 20px;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
+  /* Card Styling */
+  .package-comparison__card {
     background: white;
-    border-right: 1px solid #e5e7eb;
-  }
-
-  .package-comparison__table th:last-child,
-  .package-comparison__table td:last-child {
-    border-right: none;
-  }
-
-  .package-comparison__feature-col {
-    display: none;
-  }
-
-  .package-comparison__package-col {
-    padding: 32px 20px 24px;
+    border-radius: 16px;
+    border: 2px solid #e2e8f0;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
   }
 
-  .package-comparison__package-col--recommended {
-    background: #E9FCEB;
-    border-left: 1px solid #d1f4d4;
-    border-right: 1px solid #d1f4d4;
+  .package-comparison__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .package-comparison__card--recommended {
+    background: linear-gradient(to bottom, #f0fdf4, #ffffff);
+    border-color: #10b981;
+    border-width: 2px;
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+    z-index: 2;
+  }
+
+  .package-comparison__card--recommended:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 16px 40px rgba(16, 185, 129, 0.2);
+  }
+
+  /* Card Header */
+  .package-comparison__card-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .package-comparison__card--recommended .package-comparison__card-header {
+    border-bottom-color: rgba(16, 185, 129, 0.2);
   }
 
   .package-comparison__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    display: inline-block;
     font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     background: #10b981;
     color: white;
     padding: 6px 14px;
-    border-radius: 24px;
-    margin-bottom: 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
   }
 
-  .package-comparison__package-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .package-comparison__package-name {
+  .package-comparison__card-title {
     font-family: 'Inter', sans-serif;
     font-size: 1.375rem;
     font-weight: 700;
-    margin: 0;
     color: #0d1b2a;
+    margin: 0 0 8px 0;
     line-height: 1.3;
   }
 
-  .package-comparison__package-subtitle {
+  .package-comparison__card-scope {
     font-family: 'Inter', sans-serif;
     font-size: 0.9375rem;
     font-weight: 500;
-    color: #5a6c7d;
+    color: #64748b;
     margin: 0;
   }
 
-  .package-comparison__table tbody tr {
-    display: contents;
+  /* Features List */
+  .package-comparison__features {
+    flex: 1;
+    margin-bottom: 28px;
   }
 
-  .package-comparison__table td {
-    padding: 18px 20px;
-    font-size: 0.9375rem;
-    color: #374151;
-    border-top: 1px solid #f3f4f6;
+  .package-comparison__feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
   }
 
-  .package-comparison__feature-name {
-    display: none;
+  .package-comparison__feature:last-child {
+    border-bottom: none;
+  }
+
+  .package-comparison__feature-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
   }
 
   .package-comparison__feature-value {
-    font-weight: 500;
-  }
-
-  .package-comparison__package-col--recommended ~ .package-comparison__feature-value {
-    background: #E9FCEB;
-  }
-
-  /* Specific row styling */
-  .package-comparison__table tbody tr:first-child td {
-    padding-top: 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
     font-weight: 600;
     color: #0d1b2a;
   }
 
-  .package-comparison__price-row td {
-    padding: 28px 20px;
-    background: #f9fafb;
-    border-top: 2px solid #e5e7eb;
+  /* Card Footer */
+  .package-comparison__card-footer {
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
   }
 
-  .package-comparison__package-col--recommended ~ td.package-comparison__feature-value {
-    background: #E9FCEB;
-  }
-
-  .package-comparison__price-row .package-comparison__package-col--recommended ~ td {
-    background: #E9FCEB;
+  .package-comparison__card--recommended .package-comparison__card-footer {
+    border-top-color: rgba(16, 185, 129, 0.2);
   }
 
   .package-comparison__price {
     font-family: 'Inter', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.25rem;
+    font-weight: 800;
     color: #0d1b2a;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
   }
 
-  .package-comparison__cta-row td {
-    padding: 32px 20px;
-    border-top: none;
-  }
-
-  .package-comparison__package-col--recommended ~ .package-comparison__cta-cell {
-    background: #E9FCEB;
-  }
-
-  .package-comparison__cta-btn {
-    display: inline-flex;
+  .package-comparison__cta {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     width: 100%;
     padding: 14px 24px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-family: 'Inter', sans-serif;
     font-size: 0.9375rem;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid #0d1b2a;
     background: white;
+    border: 2px solid #0d1b2a;
     color: #0d1b2a;
   }
 
-  .package-comparison__cta-btn::after {
-    content: '→';
-    font-size: 1.125rem;
+  .package-comparison__cta svg {
     transition: transform 0.3s ease;
   }
 
-  .package-comparison__cta-btn:hover {
+  .package-comparison__cta:hover {
     background: #0d1b2a;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(13, 27, 42, 0.25);
+    box-shadow: 0 8px 16px rgba(13, 27, 42, 0.2);
   }
 
-  .package-comparison__cta-btn:hover::after {
+  .package-comparison__cta:hover svg {
     transform: translateX(4px);
   }
 
-  .package-comparison__cta-btn--recommended {
-    padding: 18px 32px;
+  .package-comparison__card--recommended .package-comparison__cta {
     background: #0d1b2a;
     color: white;
     border-color: #0d1b2a;
-    font-size: 1.0625rem;
-    box-shadow: 0 8px 24px rgba(13, 27, 42, 0.35);
+    padding: 16px 28px;
+    font-size: 1rem;
+    box-shadow: 0 4px 16px rgba(13, 27, 42, 0.3);
   }
 
-  .package-comparison__cta-btn--recommended:hover {
+  .package-comparison__card--recommended .package-comparison__cta:hover {
     background: #1a4d5e;
     border-color: #1a4d5e;
-    box-shadow: 0 12px 32px rgba(26, 77, 94, 0.45);
-    transform: translateY(-3px);
-  }
-
-  /* Mobile Cards */
-  .package-comparison__mobile-cards {
-    display: grid;
-    gap: 24px;
-  }
-
-  .package-comparison__mobile-card {
-    background: white;
-    border-radius: 16px;
-    padding: 28px 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-  }
-
-  .package-comparison__mobile-card--recommended {
-    background: #E9FCEB;
-    border-color: #10b981;
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
-  }
-
-  .package-comparison__mobile-header {
-    text-align: center;
-    padding-bottom: 24px;
-    border-bottom: 2px solid #e5e7eb;
-    margin-bottom: 24px;
-  }
-
-  .package-comparison__mobile-card--recommended .package-comparison__mobile-header {
-    border-bottom-color: rgba(16, 185, 129, 0.2);
-  }
-
-  .package-comparison__mobile-card .package-comparison__package-name {
-    font-size: 1.25rem;
-    margin-top: 8px;
-  }
-
-  .package-comparison__mobile-card .package-comparison__package-subtitle {
-    margin-top: 6px;
-  }
-
-  .package-comparison__mobile-features {
-    margin-bottom: 28px;
-  }
-
-  .package-comparison__mobile-feature {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid #f3f4f6;
-  }
-
-  .package-comparison__mobile-card--recommended .package-comparison__mobile-feature {
-    border-bottom-color: rgba(16, 185, 129, 0.1);
-  }
-
-  .package-comparison__mobile-feature:last-child {
-    border-bottom: none;
-  }
-
-  .package-comparison__mobile-feature-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    color: #0d1b2a;
-    font-size: 0.9375rem;
-  }
-
-  .package-comparison__mobile-feature-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    color: #374151;
-    font-size: 0.9375rem;
-  }
-
-  .package-comparison__mobile-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding-top: 24px;
-    border-top: 2px solid #e5e7eb;
-  }
-
-  .package-comparison__mobile-card--recommended .package-comparison__mobile-footer {
-    border-top-color: rgba(16, 185, 129, 0.2);
-  }
-
-  .package-comparison__mobile-footer .package-comparison__price {
-    font-size: 2rem;
-  }
-
-  .package-comparison__mobile-footer .package-comparison__cta-btn {
-    width: 100%;
+    box-shadow: 0 8px 24px rgba(26, 77, 94, 0.4);
   }
 
   /* Responsive */
-  @media screen and (min-width: 1024px) {
-    .package-comparison__table-wrapper {
-      display: block;
+  @media screen and (max-width: 1024px) {
+    .package-comparison__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
 
-    .package-comparison__mobile-cards {
-      display: none;
+    .package-comparison__card--recommended {
+      transform: scale(1);
+    }
+
+    .package-comparison__card--recommended:hover {
+      transform: translateY(-4px);
     }
   }
 
   @media screen and (max-width: 768px) {
     .package-comparison {
-      padding: 60px 16px;
+      padding: 60px 16px 80px;
     }
 
     .package-comparison__title {
-      font-size: 1.75rem;
-      margin-bottom: 8px;
+      font-size: 1.5rem;
     }
 
     .package-comparison__subtitle {
-      font-size: 1rem;
+      font-size: 0.9375rem;
       margin-bottom: 40px;
     }
 
-    .package-comparison__mobile-card {
+    .package-comparison__card {
       padding: 24px 20px;
+    }
+
+    .package-comparison__card-title {
+      font-size: 1.25rem;
+    }
+
+    .package-comparison__price {
+      font-size: 2rem;
     }
   }
 {% endstylesheet %}
