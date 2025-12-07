@@ -1,6 +1,5 @@
 {% liquid
   assign heading = section.settings.heading
-  assign subheading = section.settings.subheading
   assign description = section.settings.description
   assign button_text = section.settings.button_text
   assign button_link = section.settings.button_link
@@ -13,10 +12,6 @@
 <div class="hero-nauto color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="hero-nauto__container {{ section.settings.section_width }}">
     <div class="hero-nauto__content">
-      {% if subheading != blank %}
-        <p class="hero-nauto__subheading">{{ subheading }}</p>
-      {% endif %}
-      
       {% if heading != blank %}
         <h1 class="hero-nauto__heading">{{ heading }}</h1>
       {% endif %}
@@ -25,18 +20,27 @@
         <div class="hero-nauto__description">{{ description }}</div>
       {% endif %}
       
-      {% if button_text != blank %}
-        <a href="{{ button_link }}" class="hero-nauto__button button button-primary">
-          <span class="button__icon">🧬</span>
-          {{ button_text }}
-        </a>
-        <a href="#how-it-works" class="hero-nauto__link">{{ section.settings.secondary_link_text }}</a>
-      {% endif %}
+      <div class="hero-nauto__buttons">
+        {% if button_text != blank %}
+          <a href="{{ button_link }}" class="hero-nauto__button">
+            <svg class="hero-nauto__button-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2ZM10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16Z" fill="currentColor"/>
+              <path d="M10 6C7.79086 6 6 7.79086 6 10C6 12.2091 7.79086 14 10 14C12.2091 14 14 12.2091 14 10C14 7.79086 12.2091 6 10 6Z" fill="currentColor"/>
+            </svg>
+            {{ button_text }}
+          </a>
+          <a href="#how-it-works" class="hero-nauto__link">{{ section.settings.secondary_link_text }}</a>
+        {% endif %}
+      </div>
       
       <div class="hero-nauto__stats">
         {% if stat_1_value != blank %}
           <div class="hero-nauto__stat">
-            <div class="hero-nauto__stat-icon">✓</div>
+            <div class="hero-nauto__stat-icon hero-nauto__stat-icon--check">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div class="hero-nauto__stat-content">
               <div class="hero-nauto__stat-value">{{ stat_1_value }}</div>
               <div class="hero-nauto__stat-label">{{ stat_1_label }}</div>
@@ -46,7 +50,11 @@
         
         {% if stat_2_value != blank %}
           <div class="hero-nauto__stat">
-            <div class="hero-nauto__stat-icon">❤️</div>
+            <div class="hero-nauto__stat-icon hero-nauto__stat-icon--heart">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 14S2 10 2 5.5C2 3.5 3.5 2 5.5 2C6.5 2 7.5 2.5 8 3.5C8.5 2.5 9.5 2 10.5 2C12.5 2 14 3.5 14 5.5C14 10 8 14 8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div class="hero-nauto__stat-content">
               <div class="hero-nauto__stat-value">{{ stat_2_value }}</div>
               <div class="hero-nauto__stat-label">{{ stat_2_label }}</div>
@@ -122,102 +130,150 @@
   .hero-nauto {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #e8f5f0 0%, #f0f9ff 100%);
+    background: #ffffff;
   }
 
   .hero-nauto__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: center;
-    min-height: 90vh;
+    min-height: 95vh;
+    padding: 2rem 0;
   }
 
   .hero-nauto__content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     padding: 2rem 0;
   }
 
-  .hero-nauto__subheading {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #10b981;
-    margin: 0;
-  }
-
   .hero-nauto__heading {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
     font-weight: 400;
     line-height: 1.1;
     color: #1f2937;
     margin: 0;
+    position: relative;
+  }
+
+  .hero-nauto__heading::before {
+    content: '';
+    position: absolute;
+    left: -60px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23f59e0b"/><circle cx="50" cy="50" r="35" fill="%23fbbf24"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .hero-nauto__heading em {
+    font-style: normal;
+    font-weight: 700;
+    color: #111827;
+    display: block;
+  }
+
+  .hero-nauto__heading strong {
     font-style: italic;
-    color: #059669;
+    font-weight: 400;
+    color: #9ca3af;
   }
 
   .hero-nauto__description {
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
     color: #6b7280;
-    max-width: 500px;
+    max-width: 520px;
+    border-left: 3px solid #e5e7eb;
+    padding-left: 1.25rem;
+  }
+
+  .hero-nauto__buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .hero-nauto__button {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    background: #a3e635;
+    color: #1f2937;
     border-radius: 50px;
     font-weight: 600;
+    font-size: 0.95rem;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    width: fit-content;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(163, 230, 53, 0.3);
   }
 
   .hero-nauto__button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 6px 20px rgba(163, 230, 53, 0.4);
+    background: #bef264;
   }
 
-  .hero-nauto__button .button__icon {
-    font-size: 1.25rem;
+  .hero-nauto__button-icon {
+    width: 20px;
+    height: 20px;
   }
 
   .hero-nauto__link {
-    color: #059669;
+    color: #1f2937;
     text-decoration: underline;
     font-size: 0.95rem;
-    margin-top: -0.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .hero-nauto__link:hover {
+    color: #84cc16;
   }
 
   .hero-nauto__stats {
     display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
+    gap: 3rem;
+    margin-top: 1.5rem;
   }
 
   .hero-nauto__stat {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
   }
 
   .hero-nauto__stat-icon {
-    font-size: 1.5rem;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .hero-nauto__stat-icon--check {
+    color: #1f2937;
+  }
+
+  .hero-nauto__stat-icon--heart {
+    color: #1f2937;
+  }
+
+  .hero-nauto__stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
   }
 
   .hero-nauto__stat-value {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.25rem;
+    font-weight: 400;
     color: #1f2937;
     line-height: 1;
   }
@@ -225,68 +281,68 @@
   .hero-nauto__stat-label {
     font-size: 0.75rem;
     color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    line-height: 1.4;
+    max-width: 140px;
   }
 
   /* Bento Grid Media Section */
   .hero-nauto__media {
     position: relative;
     height: 100%;
-    min-height: 600px;
+    min-height: 650px;
+    background: #1a4d3a;
+    border-radius: 32px;
+    padding: 2rem;
+    overflow: visible;
   }
 
   .hero-nauto__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-rows: auto auto auto;
+    gap: 1.25rem;
     height: 100%;
-    transform: perspective(1000px) rotateY(-5deg);
-    transition: transform 0.3s ease;
-  }
-
-  .hero-nauto__grid:hover {
-    transform: perspective(1000px) rotateY(0deg);
   }
 
   .hero-nauto__grid-item {
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease;
   }
 
   .hero-nauto__grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
   }
 
   .hero-nauto__grid-item--large {
     grid-row: span 2;
     background: #064e3b;
+    min-height: 320px;
   }
 
   .hero-nauto__grid-item--medium {
     grid-row: span 1;
+    min-height: 200px;
   }
 
   .hero-nauto__grid-item--card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
     padding: 1.5rem;
     background: #86efac;
     color: #064e3b;
+    grid-column: span 1;
   }
 
   .hero-nauto__grid-item--badge {
     position: relative;
     display: flex;
     align-items: flex-end;
-    padding: 1rem;
-    background: white;
+    padding: 1.25rem;
+    background: #f3f4f6;
+    grid-column: span 1;
   }
 
   .hero-nauto__image {
@@ -305,33 +361,38 @@
   }
 
   .hero-nauto__card-icon {
-    font-size: 2rem;
+    font-size: 2.25rem;
+    flex-shrink: 0;
   }
 
   .hero-nauto__card-content {
     flex: 1;
-    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .hero-nauto__card-title {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    margin: 0;
     line-height: 1.3;
+    color: #064e3b;
   }
 
   .hero-nauto__card-avatars {
     display: flex;
-    gap: -0.5rem;
+    margin-top: 0.25rem;
   }
 
   .hero-nauto__avatar {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: linear-gradient(135deg, #064e3b, #10b981);
-    border: 2px solid white;
-    margin-left: -8px;
+    border: 2px solid #86efac;
+    margin-left: -10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .hero-nauto__avatar:first-child {
@@ -339,8 +400,11 @@
   }
 
   .hero-nauto__card-arrow {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #064e3b;
+    flex-shrink: 0;
+    margin-left: auto;
   }
 
   .hero-nauto__badge-image {
@@ -349,24 +413,25 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3;
+    opacity: 1;
   }
 
   .hero-nauto__badge-content {
     position: relative;
     z-index: 1;
     background: white;
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.875rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    width: 100%;
   }
 
   .hero-nauto__badge-text {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: #1f2937;
-    line-height: 1.4;
+    color: #374151;
+    line-height: 1.5;
   }
 
   /* Responsive */
@@ -440,16 +505,11 @@
       "content": "Content"
     },
     {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "TRUSTED KITS"
-    },
-    {
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
-      "default": "Trusted Kits <em>Real Results</em>"
+      "default": "<strong>Trusted Kits</strong> <em>Real Results</em>",
+      "info": "Use <strong> for italic gray text, <em> for bold black text"
     },
     {
       "type": "richtext",
