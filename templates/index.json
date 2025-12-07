@@ -54,6 +54,7 @@
         "image_medium_2",
         "badge_card_1"
       ],
+      "disabled": true,
       "settings": {
         "heading": "<strong>Genetiğini Anla</strong> <em>Yaşamını Şekillendir</em>",
         "description": "<p>Tıbbi sınıf test kitlerini sipariş edin, posta ile gönderin ve hızlı, doğru, güvenli sonuçları çevrimiçi alın — her zaman, her yerde, sorunsuz.</p>",
@@ -85,7 +86,7 @@
         "right_block_color": "#0d1b2a",
         "right_block_badge": "CYBER WEEK",
         "right_block_text": "up to\n30%",
-        "show_dna_animation": false
+        "show_dna_animation": true
       }
     },
     "hero_jVaWmY": {
