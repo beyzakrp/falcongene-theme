@@ -213,6 +213,21 @@
         "color_scheme": ""
       }
     },
+    "divider_bebWMP": {
+      "type": "divider",
+      "custom_css": [],
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "thickness": 1,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "package_comparison_Uqzqaz": {
       "type": "package-comparison",
       "blocks": {
@@ -941,6 +956,7 @@
     "hero_ete_YYGcHG",
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
+    "divider_bebWMP",
     "package_comparison_Uqzqaz",
     "custom_collection_list_abmbty",
     "divider_GwqyMN",
