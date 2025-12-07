@@ -45,7 +45,7 @@
         {%- if country_selector -%}
           <div class="HorizontalList__Item">
             <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-            <span class="u-visually-hidden">{{ 'header.general.country' | t }}</span>
+            <span class="u-visually-hidden">Türkiye</span>
 
             <button type="button" class="SelectButton Link Link--primary u-h8" aria-haspopup="true" aria-expanded="false" aria-controls="header-currency-popover">
               {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%})
@@ -55,7 +55,7 @@
             <div id="header-currency-popover" class="Popover Popover--small Popover--noWrap" aria-hidden="true">
               <header class="Popover__Header">
                 <button type="button" class="Popover__Close Icon-Wrapper--clickable" data-action="close-popover">{% render 'icon' with 'close' %}</button>
-                <span class="Popover__Title Heading u-h4">{{ 'header.general.country' | t }}</span>
+                <span class="Popover__Title Heading u-h4">Country</span>
               </header>
 
               <div class="Popover__Content">
@@ -74,7 +74,7 @@
         {%- if locale_selector -%}
           <div class="HorizontalList__Item">
             <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
-            <span class="u-visually-hidden">{{ 'header.general.locale' | t }}</span>
+            <span class="u-visually-hidden">Locale</span>
 
             <button type="button" class="SelectButton Link Link--primary u-h8" aria-haspopup="true" aria-expanded="false" aria-controls="header-locale-popover">
               {{- localization.language.endonym_name | capitalize -}}
@@ -84,7 +84,7 @@
             <div id="header-locale-popover" class="Popover Popover--small Popover--noWrap" aria-hidden="true">
               <header class="Popover__Header">
                 <button type="button" class="Popover__Close Icon-Wrapper--clickable" data-action="close-popover">{% render 'icon' with 'close' %}</button>
-                <span class="Popover__Title Heading u-h4">{{ 'header.general.locale' | t }}</span>
+                <span class="Popover__Title Heading u-h4">Locale</span>
               </header>
 
               <div class="Popover__Content">
@@ -136,8 +136,8 @@
           autocomplete="off"
           autocorrect="off"
           autocapitalize="off"
-          aria-label="{{ 'search.general.input_placeholder' | t }}"
-          placeholder="{{ 'search.general.input_placeholder' | t }}"
+          aria-label="Search"
+          placeholder="Search"
           autofocus>
         <input
           type="hidden"
@@ -148,7 +148,7 @@
       <button
         class="Search__Close Link Link--primary"
         data-action="close-search"
-        aria-label="{{ 'header.navigation.close_search' | t }}">{% render 'icon' with 'close' %}</button>
+        aria-label="Close search">{% render 'icon' with 'close' %}</button>
     </div>
 
     <div class="Search__Results" aria-hidden="true">
@@ -189,7 +189,7 @@
         aria-expanded="false"
         data-action="open-drawer"
         data-drawer-id="sidebar-menu"
-        aria-label="{{ 'header.navigation.open_sidebar' | t }}">
+        aria-label="Open sidebar">
         <span class="hidden-tablet-and-up">{%- render 'icon' with 'nav' -%}</span>
         <span class="hidden-phone">{%- render 'icon' with 'nav-desktop' -%}</span>
       </button>
@@ -215,7 +215,7 @@
 
         {%- assign mega_menu_names = mega_menu_names | downcase | split: ',' | compact -%}
 
-        <nav class="Header__MainNav hidden-pocket hidden-lap" aria-label="{{ 'header.navigation.title' | t }}">
+        <nav class="Header__MainNav hidden-pocket hidden-lap" aria-label="Navigation">
           <ul class="HorizontalList HorizontalList--spacingExtraLoose">
             {%- for link in main_menu.links -%}
               {%- assign downcased_link_title = link.title | downcase | strip -%}
@@ -619,7 +619,7 @@
             {%- if shop.customer_accounts_enabled -%}
               <li class="HorizontalList__Item">
                 <a href="{{ routes.account_url }}" class="Heading Link Link--primary Text--subdued u-h8">
-                  {{- 'header.navigation.account' | t -}}
+                  Account
                 </a>
               </li>
             {%- endif -%}
@@ -628,7 +628,7 @@
               <a
                 href="{{ routes.search_url }}"
                 class="Heading Link Link--primary Text--subdued u-h8"
-                data-action="toggle-search">{{ 'header.navigation.search' | t }}</a>
+                data-action="toggle-search">Search</a>
             </li>
 
             <li class="HorizontalList__Item">
@@ -638,8 +638,8 @@
                 {% unless template == 'cart' or settings.cart_type == 'page' %}
                 data-action="open-drawer"
                 data-drawer-id="sidebar-cart"
-                aria-label="{{ 'header.navigation.open_cart' | t }}"
-                {% endunless %}>{{ 'header.navigation.cart' | t }} (<span class="Header__CartCount">{{ cart.item_count }}</span>)</a>
+                aria-label="Open cart"
+                {% endunless %}>Cart (<span class="Header__CartCount">{{ cart.item_count }}</span>)</a>
             </li>
           </ul>
         </nav>
@@ -662,7 +662,7 @@
         href="{{ routes.search_url }}"
         class="Header__Icon Icon-Wrapper Icon-Wrapper--clickable {% unless section.settings.show_icons or use_sidebar_menu %}hidden-desk{% endunless %}"
         data-action="toggle-search"
-        aria-label="{{ 'header.navigation.search' | t }}">
+        aria-label="Search">
         <span class="hidden-tablet-and-up">{%- render 'icon' with 'search' -%}</span>
         <span class="hidden-phone">{%- render 'icon' with 'search-desktop' -%}</span>
       </a>
@@ -681,7 +681,7 @@
         data-action="open-drawer"
         data-drawer-id="sidebar-cart"
         aria-expanded="false"
-        aria-label="{{ 'header.navigation.open_cart' | t }}"
+        aria-label="open cart"
         {% endif %}>
         <span class="hidden-tablet-and-up">{%- render 'icon' with 'cart' -%}</span>
         <span class="hidden-phone">{%- render 'icon' with 'cart-desktop' -%}</span>
