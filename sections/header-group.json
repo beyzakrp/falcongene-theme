@@ -42,10 +42,8 @@
         "padding-block-end": 15
       }
     },
-  
     "header_section": {
       "type": "header",
-      "disabled": true,
       "blocks": {
         "header-logo": {
           "type": "_header-logo",
