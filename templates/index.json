@@ -297,6 +297,20 @@
         "subtitle": "Test paketlerimizi karşılaştırın ve size en uygun olanı seçin."
       }
     },
+    "divider_LUtjfj": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "",
+        "section_width": "full-width",
+        "thickness": 1,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "benefits_grid_3LWiQ9": {
       "type": "benefits-grid",
       "blocks": {
@@ -1015,6 +1029,7 @@
     "hero_mission_ntPtGi",
     "divider_bebWMP",
     "pricing_cards_modern_n3wP4p",
+    "divider_LUtjfj",
     "benefits_grid_3LWiQ9",
     "custom_collection_list_abmbty",
     "divider_GwqyMN",
