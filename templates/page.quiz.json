@@ -1,7 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "hero_UfFCFK": {
+      "type": "hero",
+      "blocks": {
+        "spacer_rNFCJJ": {
+          "type": "spacer",
+          "settings": {
+            "size": "pixel",
+            "percent_size": 100,
+            "pixel_size": 24,
+            "custom_mobile_size": false,
+            "size_mobile": "percent",
+            "percent_size_mobile": 100,
+            "pixel_size_mobile": 120
+          },
+          "blocks": {}
+        },
+        "marquee_ThiUCJ": {
+          "type": "_marquee",
+          "settings": {
+            "movement_direction": "reverse",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "transparent_background": true,
+            "padding-block-start": 24,
+            "padding-block-end": 0,
+            "gap_between_elements": 100
+          },
+          "blocks": {
+            "text_zCyU8H": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Hangi Test Sizin için Uygun?</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "3.5rem",
+                "line_height": "loose",
+                "letter_spacing": "loose",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 100,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_zCyU8H"
+          ]
+        }
+      },
+      "block_order": [
+        "spacer_rNFCJJ",
+        "marquee_ThiUCJ"
+      ],
+      "name": "t:names.hero_marquee",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/u1183962482_A_bright_and_playful_close-up_of_a_cute_young_Europ_65d61467-502e-4945-8d21-86c51aa10ec3.png",
+        "media_type_2": "image",
+        "image_2": "shopify://shop_images/u4597283859_uomo_figura_intera_che_si_allena_con_dumbbell_bracc_167d9036-61e0-4ed5-9079-f6286f9ede63.png",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "space-between",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-5",
+        "toggle_overlay": true,
+        "overlay_color": "#00000045",
+        "overlay_style": "gradient",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 100,
+        "padding-block-start": 0,
+        "padding-block-end": 100
+      }
+    },
     "quiz_section": {
       "type": "quiz-falcongene",
+      "custom_css": [],
       "settings": {
         "title": "Hangi FalconGene testi sana uygun?",
         "subtitle": "Aşağıdaki soruları cevapla, senin için en doğru testi önerelim."
@@ -270,6 +377,7 @@
         "text_7riiJk",
         "accordion_kGeKaA"
       ],
+      "disabled": true,
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",
@@ -301,6 +409,7 @@
     }
   },
   "order": [
+    "hero_UfFCFK",
     "quiz_section",
     "section_jGGEm7"
   ]
