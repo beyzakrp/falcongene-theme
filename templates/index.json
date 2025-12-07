@@ -213,6 +213,78 @@
         "color_scheme": ""
       }
     },
+    "package_comparison_Uqzqaz": {
+      "type": "package-comparison",
+      "blocks": {
+        "package_EUhgNK": {
+          "type": "package",
+          "settings": {
+            "package_name": "6 Gen Orta Paket",
+            "package_subtitle": "",
+            "is_recommended": false,
+            "scope": "Temel",
+            "gene_count": "6",
+            "sport_analysis": "✔",
+            "nutrition": "✔",
+            "skin": "✔",
+            "drug_metabolism": "Temel",
+            "technology": "SANGER",
+            "delivery_time": "7–10 gün",
+            "price": "₺7.499",
+            "product_url": "shopify://collections/testlerimiz",
+            "cta_text": "Satın Al"
+          }
+        },
+        "package_pNLwJU": {
+          "type": "package",
+          "settings": {
+            "package_name": "12 Gen Geniş Paket",
+            "package_subtitle": "",
+            "is_recommended": true,
+            "scope": "Geniş",
+            "gene_count": "12",
+            "sport_analysis": "✔✔",
+            "nutrition": "✔✔",
+            "skin": "✔✔",
+            "drug_metabolism": "Orta",
+            "technology": "SANGER",
+            "delivery_time": "7–10 gün",
+            "price": "₺11.250",
+            "product_url": "shopify://pages/testlerimiz",
+            "cta_text": "Satın Al"
+          }
+        },
+        "package_RJn6py": {
+          "type": "package",
+          "settings": {
+            "package_name": "40+ Gen Premium NGS",
+            "package_subtitle": "",
+            "is_recommended": false,
+            "scope": "En kapsamlı",
+            "gene_count": "40+",
+            "sport_analysis": "✔✔✔",
+            "nutrition": "✔✔✔",
+            "skin": "✔✔✔",
+            "drug_metabolism": "Full Panel",
+            "technology": "NGS",
+            "delivery_time": "10–14 gün",
+            "price": "₺15.000",
+            "product_url": "shopify://collections/testlerimiz",
+            "cta_text": "Satın Al"
+          }
+        }
+      },
+      "block_order": [
+        "package_EUhgNK",
+        "package_pNLwJU",
+        "package_RJn6py"
+      ],
+      "name": "Paket Karşılaştırma",
+      "settings": {
+        "title": "Sizin için en doğru genetik test hangisi?",
+        "subtitle": "Test paketlerimizi karşılaştırın ve size en uygun olanı seçin."
+      }
+    },
     "custom_collection_list_abmbty": {
       "type": "custom-collection-list",
       "blocks": {
@@ -869,6 +941,7 @@
     "hero_ete_YYGcHG",
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
+    "package_comparison_Uqzqaz",
     "custom_collection_list_abmbty",
     "divider_GwqyMN",
     "product_list_UCVANr",
