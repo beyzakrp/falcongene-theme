@@ -44,7 +44,6 @@
     },
     "header_minimal_luxury": {
       "type": "header-minimal-luxury",
-      "disabled": true,
       "settings": {
         "logo_text": "FALCONGENE",
         "contact_text": "İLETİŞİM",
@@ -54,6 +53,7 @@
     },
     "header_section": {
       "type": "header",
+      "disabled": true,
       "blocks": {
         "header-logo": {
           "type": "_header-logo",
