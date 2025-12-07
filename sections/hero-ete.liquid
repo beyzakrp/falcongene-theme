@@ -10,6 +10,21 @@
   assign right_block_text = section.settings.right_block_text
 %}
 
+<style>
+  @font-face {
+    font-family: 'Garamond Premier Pro Italic';
+    src: url('https://cdn.shopify.com/s/files/1/0484/1429/4167/files/Garamond_Premier_Pro_Italic.ttf?v=1764160060') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Aesthet Nova Medium';
+    src: url('https://cdn.shopify.com/s/files/1/0484/1429/4167/files/fonnts.com-Aesthet-Nova-Medium.otf?v=1764160662') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+</style>
+
 <section class="hero-reference">
   <div class="hero-reference__container">
     <!-- Left Image Only -->
@@ -241,7 +256,7 @@
   }
 
   .hero-reference__subtitle {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Garamond Premier Pro Italic', serif;
     font-style: italic;
     font-size: 1.125rem;
     font-weight: 400;
@@ -251,7 +266,7 @@
   }
 
   .hero-reference__title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Aesthet Nova Medium', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
