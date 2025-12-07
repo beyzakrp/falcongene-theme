@@ -228,73 +228,70 @@
         "padding-block-end": 16
       }
     },
-    "package_comparison_Uqzqaz": {
-      "type": "package-comparison",
+    "pricing_cards_modern_n3wP4p": {
+      "type": "pricing-cards-modern",
       "blocks": {
-        "package_EUhgNK": {
-          "type": "package",
+        "pricing_card_YeaEJp": {
+          "type": "pricing_card",
           "settings": {
             "package_name": "6 Gen Orta Paket",
-            "package_subtitle": "",
-            "is_recommended": false,
-            "scope": "Temel",
-            "gene_count": "6",
-            "sport_analysis": "✔",
-            "nutrition": "✔",
-            "skin": "✔",
-            "drug_metabolism": "Temel",
-            "technology": "SANGER",
-            "delivery_time": "7–10 gün",
+            "description": "Temel analiz",
+            "is_featured": false,
             "price": "₺7.499",
+            "price_note": "Tek ödeme",
+            "feature_1": "6 gen analizi",
+            "feature_2": "Spor performansı",
+            "feature_3": "Beslenme profili",
+            "feature_4": "Cilt sağlığı",
+            "feature_5": "SANGER teknoloji",
+            "feature_6": "7-10 gün teslimat",
             "product_url": "shopify://collections/testlerimiz",
             "cta_text": "Satın Al"
           }
         },
-        "package_pNLwJU": {
-          "type": "package",
+        "pricing_card_PBnfPQ": {
+          "type": "pricing_card",
           "settings": {
             "package_name": "12 Gen Geniş Paket",
-            "package_subtitle": "",
-            "is_recommended": true,
-            "scope": "Geniş",
-            "gene_count": "12",
-            "sport_analysis": "✔✔",
-            "nutrition": "✔✔",
-            "skin": "✔✔",
-            "drug_metabolism": "Orta",
-            "technology": "SANGER",
-            "delivery_time": "7–10 gün",
+            "description": "Geniş analiz",
+            "is_featured": true,
             "price": "₺11.250",
-            "product_url": "shopify://pages/testlerimiz",
+            "price_note": "Tek ödeme",
+            "feature_1": "12 gen analizi",
+            "feature_2": "Gelişmiş spor profili",
+            "feature_3": "Detaylı beslenme",
+            "feature_4": "Cilt ve yaşlanma",
+            "feature_5": "SANGER teknoloji",
+            "feature_6": "7-10 gün teslimat",
+            "product_url": "shopify://collections/testlerimiz",
             "cta_text": "Satın Al"
           }
         },
-        "package_RJn6py": {
-          "type": "package",
+        "pricing_card_naVD9t": {
+          "type": "pricing_card",
           "settings": {
             "package_name": "40+ Gen Premium NGS",
-            "package_subtitle": "",
-            "is_recommended": false,
-            "scope": "En kapsamlı",
-            "gene_count": "40+",
-            "sport_analysis": "✔✔✔",
-            "nutrition": "✔✔✔",
-            "skin": "✔✔✔",
-            "drug_metabolism": "Full Panel",
-            "technology": "NGS",
-            "delivery_time": "10–14 gün",
+            "description": "Premium analiz",
+            "is_featured": false,
             "price": "₺15.000",
+            "price_note": "Tek ödeme",
+            "feature_1": "40+ gen analizi",
+            "feature_2": "Full spor paneli",
+            "feature_3": "Kapsamlı beslenme",
+            "feature_4": "İlaç metabolizması",
+            "feature_5": "NGS teknoloji",
+            "feature_6": "10-14 gün teslimat",
             "product_url": "shopify://collections/testlerimiz",
             "cta_text": "Satın Al"
           }
         }
       },
       "block_order": [
-        "package_EUhgNK",
-        "package_pNLwJU",
-        "package_RJn6py"
+        "pricing_card_YeaEJp",
+        "pricing_card_PBnfPQ",
+        "pricing_card_naVD9t"
       ],
-      "name": "Paket Karşılaştırma",
+      "name": "Pricing Cards Modern",
       "settings": {
         "title": "Sizin için en doğru genetik test hangisi?",
         "subtitle": "Test paketlerimizi karşılaştırın ve size en uygun olanı seçin."
@@ -957,7 +954,7 @@
     "hero_jVaWmY",
     "hero_mission_ntPtGi",
     "divider_bebWMP",
-    "package_comparison_Uqzqaz",
+    "pricing_cards_modern_n3wP4p",
     "custom_collection_list_abmbty",
     "divider_GwqyMN",
     "product_list_UCVANr",
