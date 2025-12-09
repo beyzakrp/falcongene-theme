@@ -1,0 +1,545 @@
+{% liquid
+  assign title = section.settings.title
+  assign subtitle = section.settings.subtitle
+%}
+
+<section class="pricing-table-compare">
+  <div class="pricing-table-compare__container">
+    {% if title != blank %}
+      <h2 class="pricing-table-compare__title">{{ title }}</h2>
+    {% endif %}
+    
+    {% if subtitle != blank %}
+      <p class="pricing-table-compare__subtitle">{{ subtitle }}</p>
+    {% endif %}
+
+    <div class="pricing-table-compare__wrapper">
+      <!-- Pricing Cards Header -->
+      <div class="pricing-table-compare__header">
+        <div class="pricing-table-compare__feature-label"></div>
+        {% for block in section.blocks limit: 10 %}
+          {% if block.type == 'package' %}
+            <div class="pricing-table-compare__package-header {% if block.settings.is_popular %}pricing-table-compare__package-header--popular{% endif %}">
+              {% if block.settings.is_popular %}
+                <span class="pricing-table-compare__popular-badge">{{ block.settings.popular_text | default: 'Popüler' }}</span>
+              {% endif %}
+              <h3 class="pricing-table-compare__package-name">{{ block.settings.package_name }}</h3>
+              <div class="pricing-table-compare__price">
+                <span class="pricing-table-compare__price-amount">{{ block.settings.price }}</span>
+                {% if block.settings.price_period != blank %}
+                  <span class="pricing-table-compare__price-period">{{ block.settings.price_period }}</span>
+                {% endif %}
+              </div>
+              {% if block.settings.description != blank %}
+                <p class="pricing-table-compare__description">{{ block.settings.description }}</p>
+              {% endif %}
+              {% if block.settings.product_url != blank %}
+                <a href="{{ block.settings.product_url }}" class="pricing-table-compare__cta-top">
+                  {{ block.settings.cta_text | default: 'Add To Cart' }}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2H3.30616C3.55218 2 3.67519 2 3.77418 2.04524C3.86142 2.08511 3.93535 2.14922 3.98715 2.22995C4.04593 2.32154 4.06333 2.44332 4.09812 2.68686L4.57143 6M4.57143 6L5.1632 10.4531C5.24989 11.0557 5.29323 11.357 5.43211 11.5815C5.55506 11.7791 5.73175 11.9362 5.94133 12.0334C6.17961 12.1429 6.48181 12.1429 7.08622 12.1429H12.6293C13.2139 12.1429 13.5062 12.1429 13.7398 12.0389C13.9459 11.9468 14.1202 11.7987 14.2409 11.6117C14.3776 11.3989 14.4233 11.1115 14.5145 10.5365L15.1333 6.61722C15.1711 6.38003 15.1899 6.26144 15.1609 6.17065C15.1356 6.09137 15.0838 6.02368 15.0143 5.97854C14.9352 5.92712 14.8162 5.92712 14.5782 5.92712H4.57143ZM7.14286 14.5714C7.14286 15.0947 6.71813 15.5195 6.19481 15.5195C5.67148 15.5195 5.24675 15.0947 5.24675 14.5714C5.24675 14.0481 5.67148 13.6234 6.19481 13.6234C6.71813 13.6234 7.14286 14.0481 7.14286 14.5714ZM12.6753 14.5714C12.6753 15.0947 12.2506 15.5195 11.7273 15.5195C11.2039 15.5195 10.7792 15.0947 10.7792 14.5714C10.7792 14.0481 11.2039 13.6234 11.7273 13.6234C12.2506 13.6234 12.6753 14.0481 12.6753 14.5714Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Features Comparison -->
+      {% for feature_block in section.blocks %}
+        {% if feature_block.type == 'feature_group' %}
+          <div class="pricing-table-compare__group">
+            <div class="pricing-table-compare__group-title">{{ feature_block.settings.group_title }}</div>
+          </div>
+        {% elsif feature_block.type == 'feature_row' %}
+          <div class="pricing-table-compare__row">
+            <div class="pricing-table-compare__feature-name">{{ feature_block.settings.feature_name }}</div>
+            {% for block in section.blocks limit: 10 %}
+              {% if block.type == 'package' %}
+                <div class="pricing-table-compare__feature-value {% if block.settings.is_popular %}pricing-table-compare__feature-value--popular{% endif %}">
+                  {% assign feature_key = 'feature_' | append: forloop.index %}
+                  {% assign feature_value = feature_block.settings[feature_key] %}
+                  
+                  {% if feature_value == 'check' %}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#10b981"/>
+                      <path d="M14 7L8.5 12.5L6 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {% elsif feature_value == 'cross' %}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#ef4444"/>
+                      <path d="M13 7L7 13M7 7L13 13" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {% else %}
+                    {{ feature_value }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Bottom CTA -->
+      <div class="pricing-table-compare__footer">
+        <div class="pricing-table-compare__feature-label"></div>
+        {% for block in section.blocks limit: 10 %}
+          {% if block.type == 'package' %}
+            <div class="pricing-table-compare__cta-cell">
+              {% if block.settings.product_url != blank %}
+                <a href="{{ block.settings.product_url }}" class="pricing-table-compare__cta-bottom {% if block.settings.is_popular %}pricing-table-compare__cta-bottom--popular{% endif %}">
+                  {{ block.settings.cta_text | default: 'Add To Cart' }}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2H3.30616C3.55218 2 3.67519 2 3.77418 2.04524C3.86142 2.08511 3.93535 2.14922 3.98715 2.22995C4.04593 2.32154 4.06333 2.44332 4.09812 2.68686L4.57143 6M4.57143 6L5.1632 10.4531C5.24989 11.0557 5.29323 11.357 5.43211 11.5815C5.55506 11.7791 5.73175 11.9362 5.94133 12.0334C6.17961 12.1429 6.48181 12.1429 7.08622 12.1429H12.6293C13.2139 12.1429 13.5062 12.1429 13.7398 12.0389C13.9459 11.9468 14.1202 11.7987 14.2409 11.6117C14.3776 11.3989 14.4233 11.1115 14.5145 10.5365L15.1333 6.61722C15.1711 6.38003 15.1899 6.26144 15.1609 6.17065C15.1356 6.09137 15.0838 6.02368 15.0143 5.97854C14.9352 5.92712 14.8162 5.92712 14.5782 5.92712H4.57143ZM7.14286 14.5714C7.14286 15.0947 6.71813 15.5195 6.19481 15.5195C5.67148 15.5195 5.24675 15.0947 5.24675 14.5714C5.24675 14.0481 5.67148 13.6234 6.19481 13.6234C6.71813 13.6234 7.14286 14.0481 7.14286 14.5714ZM12.6753 14.5714C12.6753 15.0947 12.2506 15.5195 11.7273 15.5195C11.2039 15.5195 10.7792 15.0947 10.7792 14.5714C10.7792 14.0481 11.2039 13.6234 11.7273 13.6234C12.2506 13.6234 12.6753 14.0481 12.6753 14.5714Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .pricing-table-compare {
+    padding: 100px 20px 120px;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  }
+
+  .pricing-table-compare__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .pricing-table-compare__title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    text-align: center;
+    color: #0a0a0a;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .pricing-table-compare__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: center;
+    color: #64748b;
+    margin: 0 0 64px 0;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Table Wrapper */
+  .pricing-table-compare__wrapper {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+  }
+
+  /* Header Section */
+  .pricing-table-compare__header {
+    display: grid;
+    grid-template-columns: 240px repeat(3, 1fr);
+    gap: 0;
+    background: #fafbfc;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .pricing-table-compare__feature-label {
+    padding: 32px 24px;
+  }
+
+  .pricing-table-compare__package-header {
+    padding: 32px 24px;
+    text-align: center;
+    border-left: 1px solid #e5e7eb;
+    position: relative;
+    background: white;
+  }
+
+  .pricing-table-compare__package-header--popular {
+    background: linear-gradient(180deg, #e8f7f0 0%, #ffffff 100%);
+    border-left: 2px solid #10b981;
+    border-right: 2px solid #10b981;
+  }
+
+  .pricing-table-compare__popular-badge {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #10b981;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .pricing-table-compare__package-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .pricing-table-compare__price {
+    margin-bottom: 12px;
+  }
+
+  .pricing-table-compare__price-amount {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #0a0a0a;
+    letter-spacing: -0.03em;
+    display: block;
+  }
+
+  .pricing-table-compare__price-period {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+
+  .pricing-table-compare__description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+  }
+
+  .pricing-table-compare__cta-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #e8f7f0;
+    color: #0a0a0a;
+    border: 2px solid transparent;
+  }
+
+  .pricing-table-compare__cta-top:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+  }
+
+  .pricing-table-compare__package-header--popular .pricing-table-compare__cta-top {
+    background: #10b981;
+    color: white;
+  }
+
+  .pricing-table-compare__package-header--popular .pricing-table-compare__cta-top:hover {
+    background: #059669;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  }
+
+  /* Feature Group */
+  .pricing-table-compare__group {
+    display: grid;
+    grid-template-columns: 240px repeat(3, 1fr);
+    gap: 0;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .pricing-table-compare__group-title {
+    grid-column: 1 / -1;
+    padding: 16px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+  }
+
+  /* Feature Row */
+  .pricing-table-compare__row {
+    display: grid;
+    grid-template-columns: 240px repeat(3, 1fr);
+    gap: 0;
+    border-bottom: 1px solid #f1f3f5;
+  }
+
+  .pricing-table-compare__row:last-child {
+    border-bottom: none;
+  }
+
+  .pricing-table-compare__feature-name {
+    padding: 20px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    background: white;
+  }
+
+  .pricing-table-compare__feature-value {
+    padding: 20px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #f1f3f5;
+    background: white;
+  }
+
+  .pricing-table-compare__feature-value--popular {
+    background: #fafffe;
+    border-left: 1px solid #e8f7f0;
+  }
+
+  /* Footer */
+  .pricing-table-compare__footer {
+    display: grid;
+    grid-template-columns: 240px repeat(3, 1fr);
+    gap: 0;
+    background: #fafbfc;
+    border-top: 2px solid #e5e7eb;
+    padding: 24px 0;
+  }
+
+  .pricing-table-compare__cta-cell {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #e5e7eb;
+  }
+
+  .pricing-table-compare__cta-bottom {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #e8f7f0;
+    color: #0a0a0a;
+    border: 2px solid transparent;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pricing-table-compare__cta-bottom:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+  }
+
+  .pricing-table-compare__cta-bottom--popular {
+    background: #10b981;
+    color: white;
+  }
+
+  .pricing-table-compare__cta-bottom--popular:hover {
+    background: #059669;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 1024px) {
+    .pricing-table-compare__header,
+    .pricing-table-compare__group,
+    .pricing-table-compare__row,
+    .pricing-table-compare__footer {
+      grid-template-columns: 180px repeat(3, 1fr);
+    }
+
+    .pricing-table-compare__package-header,
+    .pricing-table-compare__feature-name,
+    .pricing-table-compare__feature-value,
+    .pricing-table-compare__cta-cell {
+      padding: 16px 12px;
+    }
+
+    .pricing-table-compare__price-amount {
+      font-size: 1.75rem;
+    }
+
+    .pricing-table-compare__package-name {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .pricing-table-compare {
+      padding: 80px 16px 100px;
+    }
+
+    .pricing-table-compare__wrapper {
+      overflow-x: auto;
+    }
+
+    .pricing-table-compare__header,
+    .pricing-table-compare__group,
+    .pricing-table-compare__row,
+    .pricing-table-compare__footer {
+      min-width: 800px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pricing Table Compare",
+  "tag": "section",
+  "class": "section-pricing-table-compare",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Paketleri Karşılaştırın"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Size en uygun genetik test paketini seçin"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "package",
+      "name": "Package Column",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "package_name",
+          "label": "Paket Adı",
+          "default": "Basic"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_popular",
+          "label": "Popüler Paket",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "popular_text",
+          "label": "Popüler Badge Metni",
+          "default": "Popüler"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Fiyat",
+          "default": "₺12"
+        },
+        {
+          "type": "text",
+          "id": "price_period",
+          "label": "Fiyat Periyodu",
+          "default": "/year"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Açıklama"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Ürün Linki"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Buton Metni",
+          "default": "Add To Cart"
+        }
+      ]
+    },
+    {
+      "type": "feature_group",
+      "name": "Feature Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_title",
+          "label": "Grup Başlığı",
+          "default": "Overview"
+        }
+      ]
+    },
+    {
+      "type": "feature_row",
+      "name": "Feature Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Özellik Adı",
+          "default": "Total LLMs"
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "label": "Paket 1 Değeri",
+          "default": "check",
+          "info": "'check', 'cross' veya metin girin"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "label": "Paket 2 Değeri",
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Paket 3 Değeri",
+          "default": "check"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing Table Compare",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}
