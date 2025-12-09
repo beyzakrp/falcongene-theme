@@ -1,0 +1,437 @@
+{% liquid
+  assign heading = section.settings.heading
+  assign content = section.settings.content
+  assign button_1_text = section.settings.button_1_text
+  assign button_1_link = section.settings.button_1_link
+  assign button_2_text = section.settings.button_2_text
+  assign button_2_link = section.settings.button_2_link
+  assign glass_position = section.settings.glass_position
+  assign glass_shape = section.settings.glass_shape
+%}
+
+<section class="hero-glass">
+  <div class="hero-glass__background">
+    {% if section.settings.background_image != blank %}
+      {{ section.settings.background_image | image_url: width: 2400 | image_tag: 
+        loading: 'eager',
+        fetchpriority: 'high',
+        class: 'hero-glass__bg-image',
+        alt: section.settings.background_image.alt }}
+    {% else %}
+      <div class="hero-glass__bg-placeholder"></div>
+    {% endif %}
+    <div class="hero-glass__overlay"></div>
+  </div>
+
+  <div class="hero-glass__container">
+    <div class="hero-glass__content-wrapper hero-glass__content-wrapper--{{ glass_position }}">
+      <div class="hero-glass__glass-card hero-glass__glass-card--{{ glass_shape }}">
+        {% if heading != blank %}
+          <h1 class="hero-glass__heading">{{ heading }}</h1>
+        {% endif %}
+
+        {% if content != blank %}
+          <div class="hero-glass__text">{{ content }}</div>
+        {% endif %}
+
+        <div class="hero-glass__buttons">
+          {% if button_1_text != blank and button_1_link != blank %}
+            <a href="{{ button_1_link }}" class="hero-glass__button hero-glass__button--primary">
+              {{ button_1_text }}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+
+          {% if button_2_text != blank and button_2_link != blank %}
+            <a href="{{ button_2_link }}" class="hero-glass__button hero-glass__button--secondary">
+              {{ button_2_text }}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  .hero-glass {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Background */
+  .hero-glass__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-glass__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-glass__bg-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .hero-glass__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+
+  /* Container */
+  .hero-glass__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  /* Content Wrapper - Position */
+  .hero-glass__content-wrapper {
+    display: flex;
+  }
+
+  .hero-glass__content-wrapper--left {
+    justify-content: flex-start;
+  }
+
+  .hero-glass__content-wrapper--center {
+    justify-content: center;
+  }
+
+  .hero-glass__content-wrapper--right {
+    justify-content: flex-end;
+  }
+
+  /* Glass Card - Glassmorphism */
+  .hero-glass__glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                0 0 1px rgba(255, 255, 255, 0.5) inset;
+    padding: 56px 48px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glass__glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  }
+
+  /* Shape Variants */
+  .hero-glass__glass-card--square {
+    border-radius: 24px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 540px;
+  }
+
+  .hero-glass__glass-card--rectangle {
+    border-radius: 24px;
+  }
+
+  .hero-glass__glass-card--rounded {
+    border-radius: 32px;
+  }
+
+  /* Typography */
+  .hero-glass__heading {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-glass__text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.7;
+    margin: 0 0 36px 0;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-glass__text p {
+    margin: 0 0 12px 0;
+  }
+
+  .hero-glass__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Buttons */
+  .hero-glass__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero-glass__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .hero-glass__button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .hero-glass__button:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Primary Button - Solid */
+  .hero-glass__button--primary {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0a0a0a;
+    border: 2px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-glass__button--primary:hover {
+    background: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+  }
+
+  /* Secondary Button - Glass */
+  .hero-glass__button--secondary {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .hero-glass__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 1024px) {
+    .hero-glass__container {
+      padding: 60px 20px;
+    }
+
+    .hero-glass__glass-card {
+      padding: 48px 40px;
+      max-width: 560px;
+    }
+
+    .hero-glass__glass-card--square {
+      aspect-ratio: auto;
+      max-width: 560px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .hero-glass {
+      min-height: 100svh;
+    }
+
+    .hero-glass__container {
+      padding: 40px 16px;
+    }
+
+    .hero-glass__content-wrapper--left,
+    .hero-glass__content-wrapper--right {
+      justify-content: center;
+    }
+
+    .hero-glass__glass-card {
+      padding: 40px 32px;
+      max-width: 100%;
+      border-radius: 20px;
+    }
+
+    .hero-glass__glass-card--square {
+      border-radius: 20px;
+    }
+
+    .hero-glass__glass-card--rounded {
+      border-radius: 24px;
+    }
+
+    .hero-glass__heading {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-glass__text {
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-glass__buttons {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-glass__button {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 28px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Glass",
+  "tag": "section",
+  "class": "section-hero-glass",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Arka Plan"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Arka Plan Görseli",
+      "info": "Önerilen: 2400x1600px, yüksek kalite"
+    },
+    {
+      "type": "header",
+      "content": "Glass Card Pozisyon & Şekil"
+    },
+    {
+      "type": "select",
+      "id": "glass_position",
+      "label": "Card Pozisyonu",
+      "options": [
+        {
+          "value": "left",
+          "label": "Sol"
+        },
+        {
+          "value": "center",
+          "label": "Orta"
+        },
+        {
+          "value": "right",
+          "label": "Sağ"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "glass_shape",
+      "label": "Card Şekli",
+      "options": [
+        {
+          "value": "rectangle",
+          "label": "Dikdörtgen"
+        },
+        {
+          "value": "square",
+          "label": "Kare"
+        },
+        {
+          "value": "rounded",
+          "label": "Yuvarlak Köşeli"
+        }
+      ],
+      "default": "rectangle"
+    },
+    {
+      "type": "header",
+      "content": "İçerik"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Başlık",
+      "default": "Genetiğini keşfet. Yaşamını optimize et."
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "İçerik",
+      "default": "<p>Kişiselleştirilmiş genetik testlerimizle spor, beslenme, cilt ve sağlık profilinizi keşfedin.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Butonlar"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Birinci Buton Metni",
+      "default": "Testleri İncele"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Birinci Buton Linki"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "İkinci Buton Metni",
+      "default": "Daha Fazla Bilgi"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "İkinci Buton Linki"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Glass",
+      "category": "Banners"
+    }
+  ]
+}
+{% endschema %}
